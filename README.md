@@ -1,6 +1,6 @@
 # Pennyglass Diner
 
-A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations, with a spacious, minimal visual style.
+A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations, with a clean product-page layout, large system typography, and simple blue order controls.
 
 **Design claim:** My site makes people feel the satisfying anticipation of a diner meal when they build their perfect order.
 
