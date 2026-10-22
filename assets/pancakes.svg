@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 350" role="img" aria-labelledby="title">
+  <title id="title">Illustrated pancakes with syrup and butter</title>
+  <defs><linearGradient id="cake" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f5cd82"/><stop offset="1" stop-color="#ba7232"/></linearGradient><linearGradient id="syrup" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#9f4d23"/><stop offset="1" stop-color="#6d321e"/></linearGradient><radialGradient id="plate"><stop stop-color="#fffdf3"/><stop offset=".75" stop-color="#f4f2e8"/><stop offset="1" stop-color="#d4d8ce"/></radialGradient></defs>
+  <ellipse cx="210" cy="286" rx="168" ry="43" fill="url(#plate)" stroke="#c5c7bc" stroke-width="4"/>
+  <ellipse cx="210" cy="283" rx="138" ry="29" fill="#fffdf5" stroke="#e0dfd3" stroke-width="2"/>
+  <g stroke="#a8622c" stroke-width="3">
+    <path d="M90 242c12-19 49-27 119-28 80-1 111 10 121 29 8 23-30 39-122 39-93 0-130-16-118-40Z" fill="url(#cake)"/>
+    <path d="M97 239c33 21 191 25 225 2" fill="none" stroke="#ffe1a1" stroke-width="7" opacity=".75"/>
+    <path d="M98 209c13-18 54-25 113-25 66 0 107 8 116 26 11 22-31 37-118 37-85 0-125-16-111-38Z" fill="url(#cake)"/>
+    <path d="M104 205c41 21 177 22 216 1" fill="none" stroke="#ffe1a1" stroke-width="7" opacity=".8"/>
+    <path d="M106 177c12-18 49-24 104-24 62 0 100 8 106 26 8 21-30 35-107 35-79 0-114-15-103-37Z" fill="url(#cake)"/>
+    <path d="M112 174c42 19 160 22 198 2" fill="none" stroke="#ffe1a1" stroke-width="7" opacity=".8"/>
+    <path d="M117 146c17-21 51-28 91-28 51 0 87 9 96 28 9 20-28 33-94 33-67 0-103-13-93-33Z" fill="url(#cake)"/>
+  </g>
+  <path d="M129 141c28 12 128 17 160 2 2 8-7 13-17 15l-10 17c-2 5-11 3-12-1l-4-15-29 2-6 31c-1 6-11 8-13 1l-6-32-27-3-4 13c-2 6-12 7-14 1l-2-16c-12-3-17-7-16-15Z" fill="url(#syrup)" opacity=".9"/>
+  <path d="M182 113c13-7 36-11 57-2 7 5 6 19-2 22-16 7-41 7-54 0-9-5-8-16-1-20Z" fill="#ffdf80" stroke="#d8a447" stroke-width="3"/>
+  <path d="M190 116c12-5 31-7 43-2" fill="none" stroke="#fff2b8" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#7f3a29"><circle cx="118" cy="268" r="8"/><circle cx="298" cy="272" r="8"/><circle cx="323" cy="260" r="6"/></g>
+  <g fill="#a34732"><circle cx="111" cy="264" r="3"/><circle cx="294" cy="268" r="3"/></g>
+</svg>

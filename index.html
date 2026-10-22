@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta name="description" content="Build the diner order you're dreaming about at Pennyglass Diner. Just the good feeling of choosing." />
+    <title>Pennyglass Diner — The good part starts here.</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Pennyglass Diner, back to top">
+          <span class="brand-mark" aria-hidden="true">P<span class="brand-dot">.</span></span>
+          <span>Pennyglass</span>
+        </a>
+        <div class="nav-links">
+          <a href="#menu">The menu</a>
+          <a href="#about">Our story</a>
+        </div>
+        <button class="bag-button" id="open-cart" type="button" aria-label="Open your order, 0 items" aria-controls="cart-drawer" aria-haspopup="dialog">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 8.5h14l-1.1 11H6.1L5 8.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="bag-count" id="bag-count">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> The diner in your daydream</p>
+          <h1 id="hero-title">The good part<br />starts <em>here.</em></h1>
+          <p class="hero-description">That moment before the first bite? We made a whole place for it. Build your perfect diner order and enjoy the anticipation.</p>
+          <a class="primary-button" href="#menu">Explore the menu <span aria-hidden="true">↗</span></a>
+          <p class="hero-note">A little taste of possibility. No real orders, no checkout.</p>
+        </div>
+        <div class="hero-art" role="img" aria-label="Illustration of a diner burger on a pale blue plate">
+          <div class="hero-halo"></div>
+          <img src="./assets/burger.svg" alt="" width="660" height="540" />
+          <div class="hero-stamp" aria-hidden="true"><span>MADE FOR</span><strong>THE<br />MOMENT</strong></div>
+        </div>
+        <div class="hero-index" aria-hidden="true">01 / 03 &nbsp;—&nbsp; THE GOOD STUFF</div>
+      </section>
+
+      <section class="intro" id="about" aria-labelledby="intro-title">
+        <div class="shell intro-inner">
+          <p class="section-kicker">Welcome to Pennyglass</p>
+          <h2 id="intro-title">A seat for every craving.</h2>
+          <p>All the ritual of picking your favorites. None of the waiting for a table. Settle in, look around, and make this order entirely yours.</p>
+        </div>
+      </section>
+
+      <section class="menu shell" id="menu" aria-labelledby="menu-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">The menu</p>
+            <h2 id="menu-title">Worth dreaming about.</h2>
+          </div>
+          <p>Three classics. An infinite number of cravings.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card" data-item-id="midnight-stack">
+            <div class="menu-image image-burger"><img src="./assets/burger.svg" alt="Illustrated double burger with lettuce, cheese, and a toasted bun" width="420" height="350" /></div>
+            <div class="menu-card-content">
+              <div class="menu-card-heading"><h3>The Midnight Stack</h3><span>$14</span></div>
+              <p>Two golden patties, melty cheese, crisp greens, and the kind of sauce you think about later.</p>
+              <button class="add-button" type="button" data-add="midnight-stack" aria-label="Add The Midnight Stack to your order">Add to order <span aria-hidden="true">+</span></button>
+            </div>
+          </article>
+          <article class="menu-card" data-item-id="sunrise-flapjacks">
+            <div class="menu-image image-pancakes"><img src="./assets/pancakes.svg" alt="Illustrated stack of pancakes with butter and syrup" width="420" height="350" /></div>
+            <div class="menu-card-content">
+              <div class="menu-card-heading"><h3>Sunrise Flapjacks</h3><span>$11</span></div>
+              <p>Fluffy, buttery, and stacked just high enough to make the whole morning feel different.</p>
+              <button class="add-button" type="button" data-add="sunrise-flapjacks" aria-label="Add Sunrise Flapjacks to your order">Add to order <span aria-hidden="true">+</span></button>
+            </div>
+          </article>
+          <article class="menu-card" data-item-id="cherry-cloud-shake">
+            <div class="menu-image image-shake"><img src="./assets/shake.svg" alt="Illustrated pink cherry milkshake with whipped cream" width="420" height="350" /></div>
+            <div class="menu-card-content">
+              <div class="menu-card-heading"><h3>Cherry Cloud Shake</h3><span>$8</span></div>
+              <p>Cold, creamy, cherry pink, and topped with a little cloud of whipped cream.</p>
+              <button class="add-button" type="button" data-add="cherry-cloud-shake" aria-label="Add Cherry Cloud Shake to your order">Add to order <span aria-hidden="true">+</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="closing shell" aria-labelledby="closing-title">
+        <div class="closing-card">
+          <p class="section-kicker">Stay a while</p>
+          <h2 id="closing-title">There’s no rush<br />at Pennyglass.</h2>
+          <p>Your order is saved right here in this browser, so you can come back to the good part whenever you like.</p>
+          <a href="#menu">One more look at the menu <span aria-hidden="true">↗</span></a>
+          <span class="closing-sun" aria-hidden="true"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer shell">
+      <span class="footer-brand">Pennyglass<span>.</span></span>
+      <span>Made for the moment.</span>
+      <span>A fictional diner experience. Nothing is purchased or delivered.</span>
+    </footer>
+
+    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+      <div class="cart-topline">
+        <div><p class="section-kicker">Pennyglass Diner</p><h2 id="cart-title">Your order<span class="cart-title-dot">.</span></h2></div>
+        <button class="icon-button" id="close-cart" type="button" aria-label="Close your order">×</button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-bottom">
+        <div class="cart-total"><span>Total</span><strong id="cart-total">$0</strong></div>
+        <p>Just for the feeling. No payment, no delivery, no personal details.</p>
+        <button class="cart-continue" id="continue-browsing" type="button">Keep dreaming <span aria-hidden="true">↗</span></button>
+      </div>
+    </aside>
+    <p class="sr-only" id="cart-announcement" role="status" aria-live="polite"></p>
+  </body>
+</html>
