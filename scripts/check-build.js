@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, mkdirSync, copyFileSync, cpSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,5 +10,11 @@ if (missing.length) {
   console.error(`Missing site assets: ${missing.join(", ")}`);
   process.exitCode = 1;
 } else {
-  console.log(`Static site ready: ${references.length} local references resolved.`);
+  const outputDir = resolve(projectRoot, "public");
+  mkdirSync(outputDir, { recursive: true });
+  for (const filename of ["index.html", "styles.css", "app.js", "cart.js"]) {
+    copyFileSync(resolve(projectRoot, filename), resolve(outputDir, filename));
+  }
+  cpSync(resolve(projectRoot, "assets"), resolve(outputDir, "assets"), { recursive: true });
+  console.log(`Static site ready: ${references.length} local references resolved and public/ generated.`);
 }
