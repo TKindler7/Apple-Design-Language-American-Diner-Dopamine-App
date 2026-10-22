@@ -18,7 +18,7 @@ function renderCart() {
   document.querySelector("#cart-total").textContent = currency.format(totalPrice(cart));
 
   if (count === 0) {
-    itemsElement.innerHTML = '<div class="cart-empty"><span aria-hidden="true">✳</span><h3>A little room for possibility.</h3><p>Your order is empty. Find something you love on the menu.</p></div>';
+    itemsElement.innerHTML = '<div class="cart-empty"><span aria-hidden="true">◷</span><h3>Something good starts here.</h3><p>Your order is empty. Take a look at the menu.</p></div>';
     return;
   }
 

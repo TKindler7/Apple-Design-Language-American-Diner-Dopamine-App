@@ -11,4 +11,4 @@ Acceptance check performed in the browser:
 3. Reloaded the page and reopened the cart; both items and the $25 total remained.
 4. Removed The Midnight Stack and confirmed the total changed to $11.
 
-Automated checks: `npm test` (3 passing) and `npm run build` (all 7 local asset references found).
+Automated checks at CP1: `npm test` (3 passing) and `npm run build` (all local asset references found). The diner was subsequently renamed Good Hour; cart contents migrate without being lost.

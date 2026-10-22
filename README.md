@@ -1,6 +1,8 @@
-# Pennyglass Diner
+# Good Hour Diner
 
-A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations, with a clean product-page layout, large system typography, and simple blue order controls.
+A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations. The website pairs restrained product-page layout with a diner identity; it does not use Apple's marks or pretend to be an Apple product.
+
+Live site: https://appledesignlanguageamericandinerdop.vercel.app/
 
 **Design claim:** My site makes people feel the satisfying anticipation of a diner meal when they build their perfect order.
 
@@ -10,4 +12,4 @@ The menu has three items. Visitors can add, increase, decrease, or remove items;
 
 To run locally, serve this folder with any static server, for example `python3 -m http.server 4173`, then visit `http://localhost:4173`. Run `npm test` for cart behavior checks and `npm run build` to check local asset references and generate `public/`. Vercel publishes that generated folder.
 
-The design claim and final concept will be revisited for the CP2 planning checkpoint.
+The visual system is documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). The design claim and final concept will be revisited for the CP2 planning checkpoint.

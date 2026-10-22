@@ -38,3 +38,10 @@ test("damaged or outdated saved data cannot add unknown items", () => {
   assert.deepEqual(loadCart(browserStorage), { "midnight-stack": 2 });
   assert.deepEqual(normalizeCart(["midnight-stack"]), {});
 });
+
+test("a Pennyglass order survives the Good Hour rebrand", () => {
+  const browserStorage = storage();
+  browserStorage.setItem("pennyglass-cart-v1", JSON.stringify({ "midnight-stack": 1, "sunrise-flapjacks": 1 }));
+  assert.deepEqual(loadCart(browserStorage), { "midnight-stack": 1, "sunrise-flapjacks": 1 });
+  assert.equal(browserStorage.getItem(STORAGE_KEY), JSON.stringify({ "midnight-stack": 1, "sunrise-flapjacks": 1 }));
+});

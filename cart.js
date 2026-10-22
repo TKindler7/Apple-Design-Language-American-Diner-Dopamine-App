@@ -1,4 +1,5 @@
-export const STORAGE_KEY = "pennyglass-cart-v1";
+export const STORAGE_KEY = "good-hour-cart-v1";
+const LEGACY_STORAGE_KEY = "pennyglass-cart-v1";
 
 export const MENU = Object.freeze({
   "midnight-stack": { name: "The Midnight Stack", price: 14, image: "./assets/burger.svg" },
@@ -19,7 +20,13 @@ export function normalizeCart(value) {
 
 export function loadCart(storage) {
   try {
-    return normalizeCart(JSON.parse(storage.getItem(STORAGE_KEY)));
+    const saved = storage.getItem(STORAGE_KEY);
+    if (saved !== null) return normalizeCart(JSON.parse(saved));
+    const previous = storage.getItem(LEGACY_STORAGE_KEY);
+    if (previous === null) return {};
+    const cart = normalizeCart(JSON.parse(previous));
+    saveCart(storage, cart);
+    return cart;
   } catch {
     return {};
   }
