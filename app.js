@@ -6,14 +6,29 @@ const openButton = document.querySelector("#open-cart");
 const closeButton = document.querySelector("#close-cart");
 const itemsElement = document.querySelector("#cart-items");
 const announcement = document.querySelector("#cart-announcement");
+const bagCount = document.querySelector("#bag-count");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 let cart = loadCart(window.localStorage);
 let focusBeforeDrawer = null;
+let lastRenderedCount = countItems(cart);
+let cartMotion = null;
+let backdropMotion = null;
+let cartTransition = 0;
+
+function playBagFeedback() {
+  if (reducedMotion.matches) return;
+  bagCount.classList.remove("is-bouncing");
+  void bagCount.offsetWidth;
+  bagCount.classList.add("is-bouncing");
+}
 
 function renderCart() {
   const count = countItems(cart);
-  document.querySelector("#bag-count").textContent = count;
+  bagCount.textContent = count;
+  if (count !== lastRenderedCount) playBagFeedback();
+  lastRenderedCount = count;
   openButton.setAttribute("aria-label", `Open your order, ${count} ${count === 1 ? "item" : "items"}`);
   document.querySelector("#cart-total").textContent = currency.format(totalPrice(cart));
 
@@ -51,18 +66,73 @@ function changeCart(next, message) {
 }
 
 function openCart() {
-  focusBeforeDrawer = document.activeElement;
+  const wasHidden = drawer.hidden;
+  if (wasHidden) focusBeforeDrawer = document.activeElement;
+  cartTransition += 1;
+  cartMotion?.cancel();
+  backdropMotion?.cancel();
   backdrop.hidden = false;
   drawer.hidden = false;
   document.body.classList.add("cart-open");
+  if (!reducedMotion.matches && drawer.animate && wasHidden) {
+    cartMotion = drawer.animate(
+      [{ transform: "translate3d(100%, 0, 0)", opacity: .88 }, { transform: "translate3d(0, 0, 0)", opacity: 1 }],
+      { duration: 520, easing: "cubic-bezier(.22, 1, .36, 1)" },
+    );
+    backdropMotion = backdrop.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: "ease-out" });
+  }
   closeButton.focus();
 }
 
 function closeCart() {
-  backdrop.hidden = true;
-  drawer.hidden = true;
-  document.body.classList.remove("cart-open");
-  focusBeforeDrawer?.focus();
+  if (drawer.hidden) return;
+  const transition = ++cartTransition;
+  cartMotion?.cancel();
+  backdropMotion?.cancel();
+  const finish = () => {
+    if (transition !== cartTransition) return;
+    backdrop.hidden = true;
+    drawer.hidden = true;
+    cartMotion?.cancel();
+    backdropMotion?.cancel();
+    document.body.classList.remove("cart-open");
+    focusBeforeDrawer?.focus();
+  };
+  if (reducedMotion.matches || !drawer.animate) {
+    finish();
+    return;
+  }
+  cartMotion = drawer.animate(
+    [{ transform: "translate3d(0, 0, 0)", opacity: 1 }, { transform: "translate3d(100%, 0, 0)", opacity: .88 }],
+    { duration: 330, easing: "cubic-bezier(.55, 0, .85, .36)", fill: "forwards" },
+  );
+  backdropMotion = backdrop.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: "ease-in", fill: "forwards" });
+  cartMotion.finished.then(finish, () => {});
+}
+
+function setupScrollReveals() {
+  if (reducedMotion.matches || !("IntersectionObserver" in window)) return;
+  const targets = [...document.querySelectorAll("[data-reveal]")];
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const target = entry.target;
+      target.addEventListener("transitionend", () => target.classList.remove("will-reveal", "is-visible"), { once: true });
+      target.classList.add("is-visible");
+      observer.unobserve(target);
+    }
+  }, { rootMargin: "0px 0px -12% 0px", threshold: .08 });
+
+  for (const target of targets) {
+    if (target.getBoundingClientRect().top < window.innerHeight * .88) continue;
+    target.classList.add("will-reveal");
+    observer.observe(target);
+  }
+  reducedMotion.addEventListener("change", () => {
+    if (!reducedMotion.matches) return;
+    observer.disconnect();
+    for (const target of targets) target.classList.remove("will-reveal", "is-visible");
+  });
 }
 
 document.addEventListener("click", (event) => {
@@ -116,3 +186,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderCart();
+setupScrollReveals();

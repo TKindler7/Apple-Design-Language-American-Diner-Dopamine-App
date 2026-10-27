@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-27 — Diner motion pass
+
+- Added a one-time ingredient-by-ingredient hero animation, timed with the headline and plate light.
+- Added once-only scroll reveals for the menu and food spotlights, with static content when JavaScript or IntersectionObserver is unavailable.
+- Refined order-drawer open and close motion, item entrances, and bag-count feedback.
+- Kept animations optional for reduced-motion visitors and limited motion to opacity and transforms.
+
 ## 2026-10-22 — Good Hour redesign
 
 - Renamed Pennyglass Diner to Good Hour Diner across the site, favicon, and project documentation.

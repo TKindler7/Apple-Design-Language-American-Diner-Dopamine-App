@@ -1,6 +1,6 @@
 # Good Hour Diner
 
-A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations. The website pairs restrained product-page layout with a diner identity; it does not use Apple's marks or pretend to be an Apple product.
+A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations. The website pairs restrained product-page layout and a one-time food assembly animation with a diner identity; it does not use Apple's marks or pretend to be an Apple product.
 
 Live site: https://appledesignlanguageamericandinerdop.vercel.app/
 

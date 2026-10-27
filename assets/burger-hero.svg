@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 80 520 430" role="img" aria-labelledby="title">
+  <title id="title">The Midnight Stack cheeseburger arriving on a diner plate</title>
+  <defs>
+    <radialGradient id="plate" cx="48%" cy="42%"><stop stop-color="#fbfbf5"/><stop offset=".73" stop-color="#d8e5e2"/><stop offset=".9" stop-color="#b1c9c4"/><stop offset="1" stop-color="#8da9a2"/></radialGradient>
+    <linearGradient id="bun" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f6bf70"/><stop offset=".55" stop-color="#da8b3d"/><stop offset="1" stop-color="#ac632f"/></linearGradient>
+    <linearGradient id="bunBottom" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#e6a151"/><stop offset="1" stop-color="#b96c35"/></linearGradient>
+    <linearGradient id="patty" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#6b3422"/><stop offset=".55" stop-color="#874126"/><stop offset="1" stop-color="#47251d"/></linearGradient>
+    <linearGradient id="cheese" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ffcf52"/><stop offset="1" stop-color="#e6a72b"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+    <style>
+      .plate, .layer { transform-box: fill-box; transform-origin: center; }
+      @media (prefers-reduced-motion: no-preference) {
+        .plate { animation: plate-arrive .62s cubic-bezier(.2,.8,.2,1) .08s both; }
+        .base { animation: stack-arrive .62s cubic-bezier(.2,.8,.2,1) .2s both; }
+        .patty { animation: stack-arrive .62s cubic-bezier(.2,.8,.2,1) .34s both; }
+        .cheese { animation: stack-arrive .62s cubic-bezier(.2,.8,.2,1) .47s both; }
+        .tomato { animation: stack-arrive .62s cubic-bezier(.2,.8,.2,1) .6s both; }
+        .greens { animation: stack-arrive .62s cubic-bezier(.2,.8,.2,1) .72s both; }
+        .top { animation: bun-arrive .82s cubic-bezier(.22,1,.36,1) .82s both; }
+      }
+      @keyframes plate-arrive {
+        from { opacity: 0; transform: translateY(26px) scale(.92); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes stack-arrive {
+        0% { opacity: 0; transform: translateY(-42px) scale(.97); }
+        73% { opacity: 1; transform: translateY(4px) scale(1.01); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes bun-arrive {
+        0% { opacity: 0; transform: translateY(-85px) rotate(-2deg); }
+        70% { opacity: 1; transform: translateY(6px) rotate(.5deg); }
+        100% { opacity: 1; transform: translateY(0) rotate(0); }
+      }
+    </style>
+  </defs>
+  <g class="plate">
+    <ellipse cx="337" cy="442" rx="226" ry="38" fill="#6d6656" opacity=".14" filter="url(#shadow)"/>
+    <ellipse cx="332" cy="417" rx="251" ry="76" fill="url(#plate)" stroke="#9bb8b1" stroke-width="5"/>
+    <ellipse cx="332" cy="411" rx="210" ry="53" fill="#eef4f0" opacity=".8" stroke="#b9d0c8" stroke-width="3"/>
+  </g>
+  <g transform="rotate(-3 330 305)">
+    <g class="layer base">
+      <path d="M155 368c25-20 305-24 354 0 8 22-6 41-30 46-85 19-227 18-301-1-23-6-36-26-23-45Z" fill="url(#bunBottom)" stroke="#9f5b2d" stroke-width="5"/>
+      <path d="M161 369c90 22 262 22 344-1" fill="none" stroke="#ffce80" stroke-width="9" stroke-linecap="round" opacity=".65"/>
+    </g>
+    <g class="layer patty">
+      <path d="M139 329c25-17 48-5 72-15 25-10 34-2 58-8 35-9 52-4 74-4 35 0 50 6 76 8 38 2 58 4 95 18 10 12 3 25-14 27-51 8-116-7-167-7-65 0-122 17-176 7-17-3-25-15-18-26Z" fill="#69a047" stroke="#3f7c3b" stroke-width="5"/>
+      <path d="M161 327c15 21 20 22 33 3 18 27 33 27 45 2 16 18 29 26 46 2 11 16 27 23 41 2 13 19 27 23 40 0 16 17 28 21 43 0 16 22 29 18 42-1 14 18 23 20 40 1" fill="none" stroke="#9acd6c" stroke-width="8" stroke-linecap="round"/>
+      <path d="M154 320c50-23 289-27 353 3 14 6 14 23-2 29-55 23-289 22-352-1-21-8-21-23 1-31Z" fill="url(#patty)" stroke="#4c281d" stroke-width="5"/>
+      <path d="M158 336c55 9 103 9 149 7m28 1c78 0 131-3 166-12" fill="none" stroke="#b36d3a" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+    </g>
+    <g class="layer cheese">
+      <path d="M160 293c38-19 273-23 338 1 7 4 11 12 9 19l-36 8-11 25-32-15-31 22-37-16-48 20-35-26-40 16-28-30-40 7-12-31Z" fill="url(#cheese)" stroke="#c99026" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M169 290c82 18 248 21 319 0" fill="none" stroke="#ffe17e" stroke-width="8" opacity=".8"/>
+    </g>
+    <g class="layer tomato">
+      <path d="M151 270c30-14 65-15 95-7 18 5 53 3 83-1 36-4 55 4 80 3 46-2 77 2 103 12 4 13-3 22-14 24-100 13-249 13-339 0-14-2-20-18-8-31Z" fill="#c64839" stroke="#9c332c" stroke-width="4"/>
+      <path d="M157 277c66 12 272 17 348 2" fill="none" stroke="#ee8170" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <g class="layer greens">
+      <path d="M156 264c49-14 108-17 165-17 67 0 147 7 188 18" fill="none" stroke="#4e9348" stroke-width="14" stroke-linecap="round"/>
+      <path d="M181 253c81 14 222 12 300 1" fill="none" stroke="#94c15c" stroke-width="7" stroke-linecap="round"/>
+    </g>
+    <g class="layer top">
+      <path d="M151 246c6-75 56-130 178-135 120-6 172 56 182 137-44 22-120 26-183 26-76 0-136-7-177-28Z" fill="url(#bun)" stroke="#a66330" stroke-width="6"/>
+      <path d="M175 233c58 25 247 37 312 2" fill="none" stroke="#ffd28b" stroke-width="11" stroke-linecap="round" opacity=".8"/>
+      <path d="M190 205c18-49 62-76 128-81" fill="none" stroke="#ffd18e" stroke-width="9" stroke-linecap="round" opacity=".47"/>
+      <g fill="#fff1d1" stroke="#d6aa68" stroke-width="1.5" opacity=".94">
+        <ellipse cx="218" cy="194" rx="5" ry="2.5" transform="rotate(-24 218 194)"/><ellipse cx="252" cy="160" rx="5" ry="2.5" transform="rotate(24 252 160)"/><ellipse cx="290" cy="193" rx="5" ry="2.5" transform="rotate(18 290 193)"/><ellipse cx="328" cy="150" rx="5" ry="2.5" transform="rotate(-20 328 150)"/><ellipse cx="364" cy="180" rx="5" ry="2.5" transform="rotate(22 364 180)"/><ellipse cx="406" cy="161" rx="5" ry="2.5" transform="rotate(-15 406 161)"/><ellipse cx="451" cy="197" rx="5" ry="2.5" transform="rotate(18 451 197)"/><ellipse cx="237" cy="224" rx="5" ry="2.5" transform="rotate(21 237 224)"/><ellipse cx="314" cy="220" rx="5" ry="2.5" transform="rotate(-17 314 220)"/><ellipse cx="391" cy="220" rx="5" ry="2.5" transform="rotate(22 391 220)"/>
+      </g>
+    </g>
+  </g>
+</svg>
