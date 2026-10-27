@@ -41,7 +41,7 @@ Do not replace observations with guesses about motivation. Keep quotations exact
 
 ## Technical verification record
 
-The implementing agent should add dated, observed outcomes here after each check. Required checks: all 23 items and category counts; configured prices and combo rules; cart reload/migration; one-time checkout; history and cumulative totals after refresh; kitchen completion and skip; no-WebGL fallback; keyboard operation and focus return; reduced motion; sound preference; mobile layout; and a live Vercel smoke test.
+This record distinguishes observed results from checks still pending. Required checks: all 23 items and category counts; configured prices and combo rules; cart reload/migration; one-time checkout; history and cumulative totals after refresh; kitchen completion and skip; no-WebGL fallback; keyboard operation and focus return; reduced motion; sound preference; mobile layout; and a live Vercel smoke test.
 
 | Date | Check | Evidence and result |
 | --- | --- | --- |
@@ -55,7 +55,9 @@ The implementing agent should add dated, observed outcomes here after each check
 - An isolated 3D harness switched through all 23 models without runtime errors. Representative burger, pancakes, shake, pie, and brownie renders were inspected; selected ingredient changes and keyboard rotation/zoom/reset were exercised. Final chocolate/vegetable refinements have only a static check so far.
 - Source review found and corrected an Undo path that could replace later cart changes, handling of storage-clear events, and simultaneous-checkout risk. Checkout now reloads and compares the reviewed cart inside a Web Lock where supported. These integration fixes still require browser confirmation.
 - The special now runs from local 08:00 until midnight, becomes inactive overnight, and preserves discounts already added to the cart. Its clock boundaries are tested independently.
-- **Integrated browser checks pending:** the saved browser permission currently blocks the local preview. The user approved testing, but the permission setting still needs to allow the origin. Desktop/mobile visual inspection, real cart-to-receipt interaction, fallback failure, reduced motion, sound, focus return, and production smoke checks are not yet claimed as passed.
+- Three.js initialization failure injection (Node-only): simulated missing motion/resize APIs returned the photo fallback and released the renderer/canvas/listeners; syntax and whitespace checks passed. This does not establish real GPU context-loss behavior.
+- **Publication verified:** implementation commit `a7517f72ff4b9a45bfc77d9fd8ab95ab60bd4545` is on GitHub `main`. Vercel serves HTTP 200 with byte-identical HTML, CSS, all app modules, both Three.js modules, and all 24 display images. Live URL: https://appledesignlanguageamericandinerdop.vercel.app/
+- **Integrated browser checks pending:** the saved or managed browser permission continued to block the local preview after the user explicitly approved access and reported changing the setting. Desktop/mobile visual inspection, real cart-to-receipt interaction, real WebGL failure, reduced motion, sound, focus return, and a production interaction smoke test are not claimed as passed. Static deployment-file verification is not a substitute for these checks.
 
 ## Revisions after human testing
 
