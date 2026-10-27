@@ -1,0 +1,311 @@
+{
+  "created": "2026-10-27",
+  "source": "Original AI-generated food imagery preserved in ../food-drafts/",
+  "images": {
+    "hero": {
+      "path": "./assets/food/hero.webp",
+      "source": "hero.png",
+      "width": 1672,
+      "height": 941
+    },
+    "midnight-stack": {
+      "path": "./assets/food/midnight-stack.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 1,
+      "crop": {
+        "left": 2,
+        "top": 2,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "classic-chrome": {
+      "path": "./assets/food/classic-chrome.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 2,
+      "crop": {
+        "left": 514,
+        "top": 2,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "route-66-melt": {
+      "path": "./assets/food/route-66-melt.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 3,
+      "crop": {
+        "left": 1026,
+        "top": 2,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "maple-bacon": {
+      "path": "./assets/food/maple-bacon.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 4,
+      "crop": {
+        "left": 2,
+        "top": 514,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "crispy-chicken-club": {
+      "path": "./assets/food/crispy-chicken-club.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 5,
+      "crop": {
+        "left": 514,
+        "top": 514,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "garden-state-melt": {
+      "path": "./assets/food/garden-state-melt.webp",
+      "source": "burgers-contact-sheet.png",
+      "cell": 6,
+      "crop": {
+        "left": 1026,
+        "top": 514,
+        "width": 508,
+        "height": 508
+      },
+      "width": 508,
+      "height": 508
+    },
+    "sunrise-flapjacks": {
+      "path": "./assets/food/sunrise-flapjacks.webp",
+      "source": "breakfast-contact-sheet.png",
+      "cell": 1,
+      "crop": {
+        "left": 2,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "blueberry-griddle": {
+      "path": "./assets/food/blueberry-griddle.webp",
+      "source": "breakfast-contact-sheet.png",
+      "cell": 2,
+      "crop": {
+        "left": 770,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "all-day-breakfast": {
+      "path": "./assets/food/all-day-breakfast.webp",
+      "source": "breakfast-contact-sheet.png",
+      "cell": 3,
+      "crop": {
+        "left": 2,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "cinnamon-french-toast": {
+      "path": "./assets/food/cinnamon-french-toast.webp",
+      "source": "breakfast-contact-sheet.png",
+      "cell": 4,
+      "crop": {
+        "left": 770,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "golden-fries": {
+      "path": "./assets/food/golden-fries.webp",
+      "source": "sides-contact-sheet.png",
+      "cell": 1,
+      "crop": {
+        "left": 2,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "chili-cheese-fries": {
+      "path": "./assets/food/chili-cheese-fries.webp",
+      "source": "sides-contact-sheet.png",
+      "cell": 2,
+      "crop": {
+        "left": 770,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "pickle-spears": {
+      "path": "./assets/food/pickle-spears.webp",
+      "source": "sides-contact-sheet.png",
+      "cell": 3,
+      "crop": {
+        "left": 2,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "mac-cheese": {
+      "path": "./assets/food/mac-cheese.webp",
+      "source": "sides-contact-sheet.png",
+      "cell": 4,
+      "crop": {
+        "left": 770,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "cherry-cloud-shake": {
+      "path": "./assets/food/cherry-cloud-shake.webp",
+      "source": "drinks-contact-sheet.png",
+      "cell": 1,
+      "crop": {
+        "left": 5,
+        "top": 5,
+        "width": 502,
+        "height": 502
+      },
+      "width": 502,
+      "height": 502
+    },
+    "vanilla-malt": {
+      "path": "./assets/food/vanilla-malt.webp",
+      "source": "drinks-contact-sheet.png",
+      "cell": 2,
+      "crop": {
+        "left": 517,
+        "top": 5,
+        "width": 502,
+        "height": 502
+      },
+      "width": 502,
+      "height": 502
+    },
+    "chocolate-shake": {
+      "path": "./assets/food/chocolate-shake.webp",
+      "source": "drinks-contact-sheet.png",
+      "cell": 3,
+      "crop": {
+        "left": 1029,
+        "top": 5,
+        "width": 502,
+        "height": 502
+      },
+      "width": 502,
+      "height": 502
+    },
+    "strawberry-soda": {
+      "path": "./assets/food/strawberry-soda.webp",
+      "source": "drinks-contact-sheet.png",
+      "cell": 4,
+      "crop": {
+        "left": 5,
+        "top": 517,
+        "width": 502,
+        "height": 502
+      },
+      "width": 502,
+      "height": 502
+    },
+    "cold-brew-float": {
+      "path": "./assets/food/cold-brew-float.webp",
+      "source": "drinks-contact-sheet.png",
+      "cell": 5,
+      "crop": {
+        "left": 517,
+        "top": 517,
+        "width": 502,
+        "height": 502
+      },
+      "width": 502,
+      "height": 502
+    },
+    "apple-pie": {
+      "path": "./assets/food/apple-pie.webp",
+      "source": "desserts-contact-sheet.png",
+      "cell": 1,
+      "crop": {
+        "left": 2,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "hot-fudge-sundae": {
+      "path": "./assets/food/hot-fudge-sundae.webp",
+      "source": "desserts-contact-sheet.png",
+      "cell": 2,
+      "crop": {
+        "left": 770,
+        "top": 2,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "cherry-cheesecake": {
+      "path": "./assets/food/cherry-cheesecake.webp",
+      "source": "desserts-contact-sheet.png",
+      "cell": 3,
+      "crop": {
+        "left": 2,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    },
+    "brownie-skillet": {
+      "path": "./assets/food/brownie-skillet.webp",
+      "source": "desserts-contact-sheet.png",
+      "cell": 4,
+      "crop": {
+        "left": 770,
+        "top": 514,
+        "width": 764,
+        "height": 508
+      },
+      "width": 764,
+      "height": 508
+    }
+  }
+}
