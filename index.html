@@ -52,7 +52,7 @@
     <div class="storage-warning shell" id="storage-warning" role="status" hidden>Your changes are available in this tab, but this browser could not save them for your next visit.</div>
     <section class="special-section shell" aria-labelledby="special-title">
       <div class="special-art"><img src="./assets/food/midnight-stack.webp" alt="" width="508" height="508" loading="lazy"></div>
-      <div class="special-copy"><p class="eyebrow">Tonight’s fictional special</p><h2 id="special-title">A very good hour.</h2><p>The Midnight Stack. <s>$14</s> <strong>$12</strong> on your pretend bill.</p><p class="special-fine">Daily offer ends at local midnight and resets each day. The full menu stays available.</p></div>
+      <div class="special-copy"><p class="eyebrow">Today’s fictional special</p><h2 id="special-title">A very good hour.</h2><p>The Midnight Stack. <s id="special-original-price">$14</s> <strong id="special-price">$12</strong> on your pretend bill.</p><p class="special-fine">Available daily from 8 a.m. to midnight, your local time. The full menu stays available.</p></div>
       <div class="special-action"><div class="special-timer"><svg class="icon"><use href="#i-clock"/></svg><span id="special-countdown" aria-label="Time remaining in today's fictional special">Ends at midnight</span></div><button class="button light" type="button" data-item="midnight-stack" data-special="true">Make it yours <span aria-hidden="true">↗</span></button></div>
     </section>
     <section class="menu-section shell" id="menu" aria-labelledby="menu-title">
@@ -75,7 +75,7 @@
   </main>
   <footer class="footer shell"><a class="brand" href="#top"><svg class="icon"><use href="#i-clock"/></svg>Good Hour Diner</a><p>A fictional diner experience. No payment, personal details, preparation, or delivery.<br>Original AI-generated food imagery. Your orders stay in this browser.</p></footer>
   <dialog id="builder-dialog" class="builder-dialog" aria-labelledby="builder-title">
-    <header class="dialog-bar"><span class="dialog-kicker">Made your way</span><button class="icon-button" type="button" data-action="close" aria-label="Close customization"><svg class="icon"><use href="#i-close"/></svg></button></header>
+    <header class="dialog-bar"><span class="dialog-kicker">Made your way</span><div class="dialog-tools"><button class="icon-button sound-toggle" type="button" data-action="sound" aria-label="Turn sound on"><svg class="icon"><use href="#i-muted"/></svg></button><button class="icon-button" type="button" data-action="close" aria-label="Close customization"><svg class="icon"><use href="#i-close"/></svg></button></div></header>
     <div class="builder-layout">
       <div class="builder-visual">
         <div class="preview-tabs" role="group" aria-label="Food preview"><button type="button" data-preview="3d" aria-pressed="true">3D preview</button><button type="button" data-preview="photo" aria-pressed="false">Photo</button></div>
@@ -85,7 +85,7 @@
       </div>
       <div class="builder-form" id="builder-form"></div>
     </div>
-    <footer class="builder-footer"><div><span id="builder-price-label">Your creation</span><strong id="builder-total">$14</strong><small id="builder-discount"></small></div><button class="button primary" id="add-configured" data-action="add-configured" type="button">Add to order <svg class="icon"><use href="#i-plus"/></svg></button></footer>
+    <footer class="builder-footer"><div><span id="builder-price-label">Your creation</span><strong id="builder-total" aria-live="polite" aria-atomic="true">$14</strong><small id="builder-discount"></small></div><button class="button primary" id="add-configured" data-action="add-configured" type="button">Add to order <svg class="icon"><use href="#i-plus"/></svg></button></footer>
   </dialog>
   <dialog id="cart-dialog" class="drawer-dialog" aria-labelledby="cart-title"><div id="cart-content"></div></dialog>
   <dialog id="journey-dialog" class="journey-dialog" aria-labelledby="journey-title"><div id="journey-content"></div></dialog>

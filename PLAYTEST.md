@@ -47,6 +47,16 @@ The implementing agent should add dated, observed outcomes here after each check
 | --- | --- | --- |
 | October 27, 2026 | Original food asset preparation | Inspected a contact sheet of all 23 item crops and the hero. Each crop maps to the intended dish; drink grid seams are excluded. 24 WebP files total 1,287,164 bytes. Original PNGs preserved. |
 
+## Implementation verification — October 27, 2026
+
+- `npm test`: **19 passing**. Coverage includes all category counts, option normalization, exact cents pricing, combo eligibility, special discounts, distinct configurations, quantity bounds, saved state and legacy migrations, damaged/unavailable storage, idempotent completion, immutable receipt prices, duplicate saved IDs, and daily-special boundaries.
+- `npm run build`: **passed**, resolving 33 HTML/catalog asset references and packaging the app plus local Three.js modules. Output is approximately 4.2 MB; draft source images are excluded.
+- JavaScript syntax and Git whitespace checks passed.
+- An isolated 3D harness switched through all 23 models without runtime errors. Representative burger, pancakes, shake, pie, and brownie renders were inspected; selected ingredient changes and keyboard rotation/zoom/reset were exercised. Final chocolate/vegetable refinements have only a static check so far.
+- Source review found and corrected an Undo path that could replace later cart changes, handling of storage-clear events, and simultaneous-checkout risk. Checkout now reloads and compares the reviewed cart inside a Web Lock where supported. These integration fixes still require browser confirmation.
+- The special now runs from local 08:00 until midnight, becomes inactive overnight, and preserves discounts already added to the cart. Its clock boundaries are tested independently.
+- **Integrated browser checks pending:** the saved browser permission currently blocks the local preview. The user approved testing, but the permission setting still needs to allow the origin. Desktop/mobile visual inspection, real cart-to-receipt interaction, fallback failure, reduced motion, sound, focus return, and production smoke checks are not yet claimed as passed.
+
 ## Revisions after human testing
 
 | Date | Evidence from session | Change made | Follow-up result |

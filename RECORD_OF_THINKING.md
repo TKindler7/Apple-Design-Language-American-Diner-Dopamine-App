@@ -31,3 +31,13 @@ Prices use integer cents so option and combo arithmetic stays exact. Configured 
 ## What evidence is still needed
 
 Automated and browser checks can verify feature behavior, arithmetic, persistence, and access. They cannot establish the design claim that people feel excited and rewarded. Human reactions are still pending and will be recorded in `PLAYTEST.md` by November 3. Do not represent generated imagery review or agent QA as a human playtest. Use observed confusion and exact reactions to decide what changes before the November 4 submission.
+
+## Implementation review and tradeoffs
+
+The completed menu uses realistic food photos for browsing and a deliberately stylized procedural preview for customization. Combo previews explicitly identify the entrée and show the chosen side and drink as supporting photos. The kitchen features one configured dish while listing every ordered dish below, so the visual never implies that a single model is the entire order.
+
+A review caught that a countdown with a permanently renewed discount would not create an actual time boundary. The daily special now opens at 8 a.m. and closes at midnight in the visitor's local time. It is inactive overnight, while the full-price menu remains available. Prices already added to the cart stay locked. This makes the school mechanic observable without introducing a real purchase.
+
+The ordering model protects exact prices and completed receipts. A later review also added Undo invalidation after subsequent cart changes, storage-clear handling across tabs, and a guarded checkout that reloads and compares the reviewed cart before recording the order. Browsers with Web Locks serialize concurrent checkouts; other browsers retain the fresh-state comparison and stable order identifier.
+
+Human testing will still need to establish whether the ready reveal and receipt create the intended feeling. The current technical record distinguishes automated/data checks, isolated 3D observations, and integrated browser checks that remain pending rather than treating them as interchangeable evidence.

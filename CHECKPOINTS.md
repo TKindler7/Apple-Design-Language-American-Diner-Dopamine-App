@@ -12,3 +12,11 @@ Acceptance check performed in the browser:
 4. Removed The Midnight Stack and confirmed the total changed to $11.
 
 Automated checks at CP1: `npm test` (3 passing) and `npm run build` (all local asset references found). The diner was subsequently renamed Good Hour; cart contents migrate without being lost.
+
+## CP2 — 2026-10-27: full PRD implementation
+
+Expanded the prototype to 23 configurable items and meals, original food imagery and procedural 3D, fictional checkout/kitchen/receipt, completed-order history, sound preference, and both behavioral mechanics. The daily special is available from local 08:00 to midnight; money not spent is calculated from completed fictional orders only.
+
+The production build and 19 automated checks pass. The PRD, playtest protocol, design system, and Record of Thinking are present. Integrated browser and deployment verification are pending the saved local-preview browser permission; see `PLAYTEST.md` for exact evidence and remaining checks.
+
+Next school milestones: both mechanics live by October 29; real participant playtests by November 3; final submission November 4. Agent checks do not substitute for human playtesting.
