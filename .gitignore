@@ -14,3 +14,6 @@ coverage/
 # Operating-system and editor files
 .DS_Store
 .vscode/
+
+# Local design guidance (intentionally not versioned)
+.design-rules/
