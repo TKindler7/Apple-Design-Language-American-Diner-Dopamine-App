@@ -1,4 +1,4 @@
-> Implementation status — October 27, 2026: the takeover below has been carried out and published in code commit `a7517f7`. The build and 19 automated checks pass. Production files match the local build. See `PLAYTEST.md` for the remaining integrated browser checks (blocked by browser permission) and pending human playtesting. The original plan remains below as a historical record.
+> Implementation status — October 29, 2026: the takeover below has been carried out and is recorded in the `CP3: my store` checkpoint. The build and 19 automated checks pass. Production files match the local build. See `PLAYTEST.md` for the remaining integrated browser checks (blocked by browser permission) and pending human playtesting. The original plan remains below as a historical record.
 
 # Good Hour Diner — Astra Ultra implementation plan
 
