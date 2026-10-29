@@ -24,3 +24,7 @@ Next school milestones: both mechanics live by October 29; real participant play
 ## CP3 — 2026-10-29: my store
 
 Good Hour Diner is live as an original fictional diner with 23 original menu items, its own identity, original food imagery, and no real-brand or starter-cart presentation. The ordering flow remains explicitly fictional: it collects no personal information and never takes a payment.
+
+## CP4 — 2026-10-29: two mechanics
+
+The openly fictional time-limited special provides the purchasing-pressure mechanic. The completed-order receipt and cumulative money-not-spent total provide the self-binding feature. Their behavior is covered by the automated verification recorded in `PLAYTEST.md`; human reactions are still pending.
