@@ -49,3 +49,12 @@
 - Added shared seamless fine/coarse surface detail and roughness variation throughout the food models, plus slight organic irregularity on curved food geometry.
 - Added a warm rim light and reduced ambient/exposure washout to make ingredient depth clearer; moist surfaces receive a restrained clearcoat highlight.
 - Build and 27 tests pass. The isolated 3D harness passes all 23 recipes, option changes, interrupted animation, reduced motion, and disposal. Browser visual assessment remains pending; this is a procedural realism improvement, not a claim of photographic fidelity.
+
+## 2026-10-29 — Corrections from the live 3D review
+
+- Inspected all 23 existing food previews on the production site and identified excessive highlights, stretched surface detail, rigid ingredient shapes, intersecting drink surfaces, and overly geometric desserts.
+- Reworked food textures and lighting, kept bread and fried surfaces matte, softened patties and chicken, and gave lettuce finer, gentler folds.
+- Replaced pancake rims and disc-shaped syrup with uneven edges and thin pools; improved eggs, potatoes, cheese drizzle, and the fullness of macaroni.
+- Matched drink contents to the curved inner glass, added a meniscus and rim, and tapered the whipped cream.
+- Added apple filling, pastry edges, cheesecake crumbs and compote, brownie cracks, irregular ice-cream scoops, and thin chocolate ribbons.
+- Build, 27 tests, JavaScript syntax, whitespace, and the all-23-model lifecycle harness pass. The updated production visuals are being checked separately.
