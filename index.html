@@ -1,116 +1,97 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#fbfbfd" />
-    <meta name="theme-color" content="#111216" media="(prefers-color-scheme: dark)" />
-    <meta name="description" content="Good Hour Diner. Build the American diner order you've been craving, just for the joy of choosing." />
-    <title>Good Hour Diner — Make room for the good stuff.</title>
-    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./app.js"></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="nav shell" aria-label="Main navigation">
-        <a class="brand" href="#top" aria-label="Good Hour Diner, back to top">
-          <svg class="brand-mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <circle cx="14" cy="14" r="11.25" stroke="currentColor" stroke-width="1.5" />
-            <path d="M14 6.7v7.4l4.7 2.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="14" cy="14" r="1.6" fill="#b92e32" />
-          </svg>
-          <span>Good Hour</span>
-        </a>
-        <div class="nav-links">
-          <a href="#menu">Menu</a>
-          <a href="#about">The idea</a>
-        </div>
-        <button class="bag-button" id="open-cart" type="button" aria-label="Open your order, 0 items" aria-controls="cart-drawer" aria-haspopup="dialog">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 8.5h14l-1.1 11H6.1L5 8.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span class="bag-count" id="bag-count">0</span>
-        </button>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy shell">
-          <p class="eyebrow">Good Hour Diner</p>
-          <h1 id="hero-title">The Midnight Stack.</h1>
-          <p class="hero-description">A diner classic. A very good decision.</p>
-          <div class="hero-actions">
-            <button class="primary-button" type="button" data-add="midnight-stack" aria-label="Add The Midnight Stack to your order">Add to order</button>
-            <a class="secondary-button" href="#menu">Explore menu</a>
-          </div>
-          <p class="hero-price">The Midnight Stack · $14</p>
-        </div>
-        <div class="hero-stage">
-          <div class="hero-glow" aria-hidden="true"></div>
-          <img src="./assets/burger-hero.svg" alt="Illustration of The Midnight Stack cheeseburger on a diner plate" width="660" height="540" fetchpriority="high" />
-        </div>
-      </section>
-
-      <section class="menu-intro" id="menu" aria-labelledby="menu-title">
-        <div class="shell" data-reveal>
-          <p class="eyebrow">All day, your way</p>
-          <h2 id="menu-title">Make room for<br />the good stuff.</h2>
-          <p>Three diner favorites. One order that’s all yours.</p>
-        </div>
-      </section>
-
-      <section class="product-panel pancakes" aria-labelledby="pancakes-title">
-        <div class="product-inner shell">
-          <div class="product-copy" data-reveal>
-            <p class="eyebrow">Breakfast, whenever.</p>
-            <h2 id="pancakes-title">Sunrise<br />Flapjacks.</h2>
-            <p class="product-description">Golden pancakes, butter, and syrup. The morning can start now.</p>
-            <div class="product-actions"><button class="primary-button" type="button" data-add="sunrise-flapjacks" aria-label="Add Sunrise Flapjacks to your order">Add to order</button><span>$11</span></div>
-          </div>
-          <div class="product-art" data-reveal><img src="./assets/pancakes.svg" alt="Illustration of Sunrise Flapjacks with butter and syrup" width="420" height="350" loading="lazy" /></div>
-        </div>
-      </section>
-
-      <section class="product-panel shake" aria-labelledby="shake-title">
-        <div class="product-inner shell">
-          <div class="product-copy" data-reveal>
-            <p class="eyebrow">A sweet finish.</p>
-            <h2 id="shake-title">Cherry Cloud<br />Shake.</h2>
-            <p class="product-description">Cold, creamy, cherry pink. Save the best sip for last.</p>
-            <div class="product-actions"><button class="primary-button" type="button" data-add="cherry-cloud-shake" aria-label="Add Cherry Cloud Shake to your order">Add to order</button><span>$8</span></div>
-          </div>
-          <div class="product-art" data-reveal><img src="./assets/shake.svg" alt="Illustration of Cherry Cloud Shake with whipped cream" width="420" height="350" loading="lazy" /></div>
-        </div>
-      </section>
-
-      <section class="about" id="about" aria-labelledby="about-title">
-        <div class="shell about-inner" data-reveal>
-          <p class="eyebrow">The idea</p>
-          <h2 id="about-title">Just for the joy<br />of choosing.</h2>
-          <p>Build the order you’re craving. It stays here for your next visit—no checkout, delivery, or personal details.</p>
-          <a class="text-link" href="#top">Back to the top <span aria-hidden="true">›</span></a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer shell">
-      <span>Good Hour Diner</span>
-      <span>A fictional diner experience. Nothing is purchased or delivered.</span>
-    </footer>
-
-    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
-    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
-      <div class="cart-topline">
-        <div><p class="eyebrow">Good Hour Diner</p><h2 id="cart-title">Your order.</h2></div>
-        <button class="icon-button" id="close-cart" type="button" aria-label="Close your order">×</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAF7F0">
+  <meta name="description" content="Your diner favorites. Entirely your way. Browse 23 original dishes, build a meal, and place a fictional order at Good Hour Diner. Nothing is charged or delivered.">
+  <title>Good Hour Diner — Your kind of good.</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="preload" as="image" href="./assets/food/hero.webp" fetchpriority="high">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6v6l4 2.5"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.2 7M3 4v7h7m2-5v6l4 2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 9M4 3v6h6"/></symbol>
+  </svg>
+  <a class="skip-link" href="#menu">Skip to the menu</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Good Hour Diner, back to top"><svg class="icon"><use href="#i-clock"/></svg><span>Good Hour<span class="brand-diner"> Diner</span></span></a>
+      <div class="nav-links"><a href="#menu">Menu</a><button type="button" data-action="combo">Build a meal</button><button type="button" data-action="history">Your visits</button></div>
+      <div class="nav-actions">
+        <button class="icon-button sound-toggle" data-action="sound" type="button" aria-label="Turn sound on" aria-pressed="false"><svg class="icon"><use href="#i-muted"/></svg></button>
+        <button class="icon-button mobile-history" data-action="history" type="button" aria-label="View order history"><svg class="icon"><use href="#i-history"/></svg></button>
+        <button class="bag-button" id="open-cart" data-action="cart" type="button" aria-label="Open your order, 0 items"><svg class="icon"><use href="#i-bag"/></svg><span id="bag-count">0</span></button>
       </div>
-      <div class="cart-items" id="cart-items"></div>
-      <div class="cart-bottom">
-        <div class="cart-total"><span>Total</span><strong id="cart-total">$0</strong></div>
-        <p>Just for the feeling. No payment, no delivery, no personal details.</p>
-        <button class="cart-continue" id="continue-browsing" type="button">Continue exploring</button>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">All day. All yours.</p>
+        <h1 id="hero-title">Good food.<br><span>Great feeling.</span></h1>
+        <p class="hero-description">Your diner favorites. Entirely your way.</p>
+        <div class="hero-actions"><a class="button primary" href="#menu">Explore the menu</a><button class="text-button" data-action="combo" type="button">Build a meal <span aria-hidden="true">›</span></button></div>
       </div>
-    </aside>
-    <p class="sr-only" id="cart-announcement" role="status" aria-live="polite"></p>
-  </body>
+      <div class="hero-photo"><img src="./assets/food/hero.webp" alt="The Midnight Stack cheeseburger on a ceramic diner plate" width="1672" height="941" fetchpriority="high"></div>
+      <p class="hero-note"><span class="tiny-dot"></span>A fictional diner. Zero dollars charged. Always.</p>
+    </section>
+    <div class="welcome-strip shell" id="welcome-strip" hidden></div>
+    <div class="storage-warning shell" id="storage-warning" role="status" hidden>Your changes are available in this tab, but this browser could not save them for your next visit.</div>
+    <section class="special-section shell" aria-labelledby="special-title">
+      <div class="special-art"><img src="./assets/food/midnight-stack.webp" alt="" width="508" height="508" loading="lazy"></div>
+      <div class="special-copy"><p class="eyebrow">Tonight’s fictional special</p><h2 id="special-title">A very good hour.</h2><p>The Midnight Stack. <s>$14</s> <strong>$12</strong> on your pretend bill.</p><p class="special-fine">Daily offer ends at local midnight and resets each day. The full menu stays available.</p></div>
+      <div class="special-action"><div class="special-timer"><svg class="icon"><use href="#i-clock"/></svg><span id="special-countdown" aria-label="Time remaining in today's fictional special">Ends at midnight</span></div><button class="button light" type="button" data-item="midnight-stack" data-special="true">Make it yours <span aria-hidden="true">↗</span></button></div>
+    </section>
+    <section class="menu-section shell" id="menu" aria-labelledby="menu-title">
+      <div class="section-heading"><div><p class="eyebrow">23 reasons to stay a while</p><h2 id="menu-title">Find your good thing.</h2></div><p>Pick a favorite.<br>Make every detail yours.</p></div>
+      <div class="category-bar" id="category-bar" role="group" aria-label="Menu categories"></div>
+      <p class="sr-only" id="menu-status" role="status"></p>
+      <div class="menu-grid" id="menu-grid"></div>
+      <noscript><p class="no-script">Turn on JavaScript to browse the menu and build a fictional order. Nothing is charged or delivered.</p></noscript>
+    </section>
+    <section class="meal-section" id="meals" aria-labelledby="meal-title">
+      <div class="meal-inner shell">
+        <div class="meal-copy" data-reveal><p class="eyebrow">The whole good thing</p><h2 id="meal-title">Your kind<br>of complete.</h2><p>Your entrée. Your side. Your drink.<br>One meal that’s unmistakably you.</p><button class="button primary" type="button" data-action="combo">Build your meal <svg class="icon"><use href="#i-arrow"/></svg></button><span class="meal-caption">$3 off the fictional à la carte total.</span></div>
+        <div class="meal-art" aria-hidden="true" data-reveal><img class="meal-burger" src="./assets/food/midnight-stack.webp" alt="" loading="lazy"><img class="meal-fries" src="./assets/food/golden-fries.webp" alt="" loading="lazy"><img class="meal-shake" src="./assets/food/cherry-cloud-shake.webp" alt="" loading="lazy"><span class="meal-orbit"></span></div>
+      </div>
+    </section>
+    <section class="savings-section shell" id="the-idea" aria-labelledby="savings-title">
+      <div data-reveal><p class="eyebrow">The best part is what you keep.</p><h2 id="savings-title">All the anticipation.<br>None of the bill.</h2><p>Build it. Order it. Enjoy the reveal.<br>Then leave with every real dollar still yours.</p></div>
+      <div class="savings-card" data-reveal><svg class="icon"><use href="#i-spark"/></svg><p>Your fictional orders add up to</p><strong id="savings-total">$0</strong><span>money not spent</span><button class="text-button" data-action="history" type="button">See your visits <span aria-hidden="true">›</span></button><small>A reflection on pretend orders, not a claim of real savings.</small></div>
+    </section>
+  </main>
+  <footer class="footer shell"><a class="brand" href="#top"><svg class="icon"><use href="#i-clock"/></svg>Good Hour Diner</a><p>A fictional diner experience. No payment, personal details, preparation, or delivery.<br>Original AI-generated food imagery. Your orders stay in this browser.</p></footer>
+  <dialog id="builder-dialog" class="builder-dialog" aria-labelledby="builder-title">
+    <header class="dialog-bar"><span class="dialog-kicker">Made your way</span><button class="icon-button" type="button" data-action="close" aria-label="Close customization"><svg class="icon"><use href="#i-close"/></svg></button></header>
+    <div class="builder-layout">
+      <div class="builder-visual">
+        <div class="preview-tabs" role="group" aria-label="Food preview"><button type="button" data-preview="3d" aria-pressed="true">3D preview</button><button type="button" data-preview="photo" aria-pressed="false">Photo</button></div>
+        <div class="preview-stage"><img id="builder-photo" src="./assets/food/midnight-stack.webp" alt="Original dish before customization"><div id="food-scene"></div><div class="preview-loading" id="preview-loading">Preparing your preview<span></span></div></div>
+        <div class="preview-controls" id="preview-controls"><button type="button" data-view="left" aria-label="Rotate food left">↶</button><button type="button" data-view="right" aria-label="Rotate food right">↷</button><button type="button" data-view="out" aria-label="Zoom out">−</button><button type="button" data-view="in" aria-label="Zoom in">+</button><button type="button" data-view="reset" aria-label="Reset food view"><svg class="icon"><use href="#i-rotate"/></svg></button><button class="replay" type="button" data-view="assemble">Replay assembly</button></div>
+        <p class="preview-caption" id="preview-caption">Drag to turn. Scroll to get closer.</p>
+      </div>
+      <div class="builder-form" id="builder-form"></div>
+    </div>
+    <footer class="builder-footer"><div><span id="builder-price-label">Your creation</span><strong id="builder-total">$14</strong><small id="builder-discount"></small></div><button class="button primary" id="add-configured" data-action="add-configured" type="button">Add to order <svg class="icon"><use href="#i-plus"/></svg></button></footer>
+  </dialog>
+  <dialog id="cart-dialog" class="drawer-dialog" aria-labelledby="cart-title"><div id="cart-content"></div></dialog>
+  <dialog id="journey-dialog" class="journey-dialog" aria-labelledby="journey-title"><div id="journey-content"></div></dialog>
+  <dialog id="history-dialog" class="history-dialog" aria-labelledby="history-title"><div id="history-content"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <div class="confetti-layer" id="confetti" aria-hidden="true"></div>
+  <p class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+</body>
 </html>

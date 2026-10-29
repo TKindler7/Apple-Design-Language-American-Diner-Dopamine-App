@@ -12,3 +12,7 @@ Acceptance check performed in the browser:
 4. Removed The Midnight Stack and confirmed the total changed to $11.
 
 Automated checks at CP1: `npm test` (3 passing) and `npm run build` (all local asset references found). The diner was subsequently renamed Good Hour; cart contents migrate without being lost.
+
+## CP2 — 2026-10-29: PRD-lite
+
+`PRD.md` records the design claim, three must-haves, and out-of-scope work for Good Hour Diner. It also defines the original menu, fictional checkout, persistence, behavioral mechanics, and accessibility goals.
