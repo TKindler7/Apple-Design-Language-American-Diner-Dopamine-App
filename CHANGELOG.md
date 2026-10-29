@@ -58,4 +58,5 @@
 - Matched drink contents to the curved inner glass, added a meniscus and rim, and tapered the whipped cream.
 - Added apple filling, pastry edges, cheesecake crumbs and compote, brownie cracks, irregular ice-cream scoops, and thin chocolate ribbons.
 - A second live inspection prompted supported cheese geometry, contact-based sandwich spacing, visible French-toast syrup, flatter grill marks and chocolate ribbons, warmer pie filling, visible soda ice, and less regular fried-food shapes.
+- Final refinements give eggs continuous browned edges and project melted cheese onto the actual fries, while keeping chocolate visible on scoops and on brownies when ice cream is removed.
 - Build, 27 tests, JavaScript syntax, whitespace, and the all-23-model lifecycle harness pass. Production visual results are recorded separately in `PLAYTEST.md`.

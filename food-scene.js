@@ -732,18 +732,28 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       for (let i = 0; i < 19; i++) sphere(eggs, -0.35 + (random() - 0.5) * 0.85, random() * 0.09, (random() - 0.5) * 0.68, 0.18, 0xf0c95d, [1, 0.65, 0.8], 0.7);
     } else {
       for (let i = 0; i < 2; i++) {
-        const white = sphere(eggs, -0.43, 0.018, (i - 0.5) * 0.69 - 0.04, 0.49, 0xffedcf, [1.12, 0.1, 0.86], 0.58);
-        const p = white.geometry.attributes.position;
+        const geometry = new THREE.SphereGeometry(0.49, 64, 32);
+        const p = geometry.attributes.position, colors = new Float32Array(p.count * 3);
+        const centerColor = new THREE.Color(0xf2e1bc), edgeColor = new THREE.Color(0xb78a51);
         for (let v = 0; v < p.count; v++) {
           const x = p.getX(v), z = p.getZ(v), a = Math.atan2(z, x);
-          const spread = 1 + Math.sin(a * 5 + i) * 0.06 + Math.sin(a * 9) * 0.025;
+          const spread = 1 + Math.sin(a * 3 + i) * 0.035 + Math.sin(a * 7) * 0.012;
           p.setXYZ(v, x * spread, p.getY(v), z * spread);
+          const edge = clamp((Math.hypot(x, z) / 0.49 - 0.84) / 0.16, 0, 1);
+          const tint = centerColor.clone().lerp(edgeColor, edge * edge * 0.72);
+          colors[v * 3] = tint.r; colors[v * 3 + 1] = tint.g; colors[v * 3 + 2] = tint.b;
         }
-        white.geometry.computeVertexNormals();
-        const crispEdge = mesh(white.geometry.clone(), material(0xba8347, 0.79), eggs,
-          white.position.x, 0.007, white.position.z);
-        crispEdge.scale.set(1.17, 0.055, 0.9);
-        sphere(eggs, -0.37, 0.076, (i - 0.5) * 0.69 - 0.04, 0.205, 0xeeb331, [1, 0.36, 1], 0.32);
+        geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+        geometry.computeVertexNormals();
+        if (!materialCache.has("fried-egg-white")) {
+          const eggMaterial = material(0xffffff, 0.66).clone();
+          eggMaterial.vertexColors = true;
+          materialCache.set("fried-egg-white", eggMaterial);
+        }
+        const white = mesh(geometry, materialCache.get("fried-egg-white"), eggs,
+          -0.43, 0.02, (i - 0.5) * 0.69 - 0.04);
+        white.scale.set(1.12, 0.16, 0.86);
+        sphere(eggs, -0.37, 0.096, (i - 0.5) * 0.69 - 0.04, 0.205, 0xeeb331, [1, 0.36, 1], 0.32);
       }
     }
     const protein = layer("protein", 0.3);
@@ -824,16 +834,6 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
         noodle.rotation.set(random() * 3, random() * 3, random() * 3);
       }
     }
-    if (selected.has("cheese")) {
-      const topping = layer("cheese", selected.has("chili") ? 1.18 : 1.1);
-      const drizzleRandom = rng(742);
-      for (let i = 0; i < 7; i++) {
-        const z = -0.52 + i * 0.16, tilt = (drizzleRandom() - 0.5) * 0.5;
-        const start = -0.67 + drizzleRandom() * 0.16, end = 0.43 + drizzleRandom() * 0.26;
-        tube(topping, [[start, -0.04, z - tilt], [-0.25, 0.055, z + 0.05], [0.16, 0.075, z - 0.035], [end, -0.06, z + tilt]],
-          0.022 + drizzleRandom() * 0.012, 0xeab33c, 24, 0.4);
-      }
-    }
     if (selected.has("chili")) {
       const chili = layer("chili", 1.08);
       for (let i = 0; i < 11; i++) {
@@ -846,6 +846,33 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
           Math.cos(angle) * radius, 0.015 + random() * 0.06, Math.sin(angle) * radius);
         mince.scale.set(1.2, 0.6, 0.9);
         mince.rotation.set(random(), random() * 3, random());
+      }
+    }
+    if (selected.has("cheese")) {
+      // Pour broad, thin patches onto the actual food surface, not suspended tubes.
+      food.updateWorldMatrix(true, true);
+      const supports = [pile, ...layers.filter(group => group.name === "chili")];
+      const ray = new THREE.Raycaster(), down = new THREE.Vector3(0, -1, 0);
+      const topping = layer("cheese", 0);
+      const molten = material(0xe9ac39, 0.24);
+      molten.side = THREE.DoubleSide;
+      for (let patch = 0; patch < 3; patch++) {
+        const geometry = new THREE.RingGeometry(0, 1, 40, 4);
+        geometry.rotateX(-Math.PI / 2);
+        const vertices = geometry.attributes.position;
+        for (let v = 0; v < vertices.count; v++) {
+          const px = vertices.getX(v), pz = vertices.getZ(v), angle = Math.atan2(pz, px);
+          const edge = 1 + Math.sin(angle * 3 + patch) * 0.11 + Math.cos(angle * 5) * 0.05;
+          const x = (patch - 1) * 0.35 + px * 0.33 * edge;
+          const z = (patch % 2 ? 0.16 : -0.12) + pz * 0.29 * edge;
+          const origin = food.localToWorld(new THREE.Vector3(x, 3, z));
+          ray.set(origin, down);
+          const hit = ray.intersectObjects(supports, true)[0];
+          const height = hit ? food.worldToLocal(hit.point.clone()).y : 0.91;
+          vertices.setXYZ(v, x, Math.max(0.94, height) + 0.014, z);
+        }
+        geometry.computeVertexNormals();
+        mesh(geometry, molten, topping);
       }
     }
     if (selected.has("bacon")) { const top = layer("bacon", 1.13); bacon(top, 0, 2); top.scale.setScalar(0.65); }
@@ -987,7 +1014,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
               const latitude = py / scoopSurface.radius;
               const ridge = Math.sin(Math.atan2(pz, x) * 17 + latitude * 7) * 0.009 * Math.max(0, 1 - latitude * latitude);
               const scoopMark = Math.sin(x * 22 + py * 5) * Math.cos(pz * 19) * 0.007;
-              const raised = 1 + (ridge + scoopMark + 0.008) / scoopSurface.radius;
+              const raised = 1 + (ridge + scoopMark + 0.026) / scoopSurface.radius;
               positions.push(x * raised, py * raised * scoopSurface.scaleY, (scoopSurface.z || 0) + pz * raised);
             }
             if (step < 36) {
@@ -1001,7 +1028,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
           ribbon.computeVertexNormals();
           mesh(ribbon, chocolate, glaze);
         }
-      } else sauce(layer("chocolate", y - 0.08), 0, 0x512b1d, 0.47);
+      } else sauce(layer("chocolate", item.model === "brownie" ? 0.68 : item.model === "pie" ? 0.98 : 0.9), 0, 0x512b1d, 0.47);
     }
     if (selected.has("whipped-cream")) { whip(layer("whipped-cream", y), 0, 0.8); y += 0.49; }
     if (selected.has("cherry")) {
