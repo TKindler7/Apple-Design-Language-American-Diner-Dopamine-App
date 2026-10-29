@@ -33,3 +33,13 @@
 - Added responsive and accessibility treatments, reduced-motion alternatives, keyboard preview controls, and optional audio.
 - Prepared optimized WebP imagery and production packaging with local Three.js modules; excluded source image drafts from deployment output.
 - Added the PRD, playtest protocol, Record of Thinking, and data integrity tests. Human playtesting remains pending.
+
+## 2026-10-29 — Motion throughout the diner
+
+- Added scroll-driven camera movement to the photographic hero and staggered burger, fries, and shake assembly in the meal showcase.
+- Added a sliding menu-category indicator, crossfading category changes, and restrained hover/focus lift on food cards.
+- Made removed 3D ingredients lift, fade, and shrink away; retained layers settle and rotation, zoom, reset, and framing ease smoothly. Direct gestures interrupt these finite transitions.
+- Connected adding an item to its arrival in the cart, animated quantity and price changes, and matched dialog closing motion to its entrance.
+- Added cooking steam and warmth, a plating transition, connecting stage progress, receipt arrival, and a one-time money-not-spent count-up.
+- Preserved immediate state updates, exact accessible prices, reduced-motion alternatives, hidden-tab cleanup, and photo fallback. Closing dialogs are inert to prevent keyboard submissions during their exit.
+- Kept the existing checkpoint documentation and prepared a normal history-preserving merge for publication. Visual browser verification remains subject to the saved local-preview permission.

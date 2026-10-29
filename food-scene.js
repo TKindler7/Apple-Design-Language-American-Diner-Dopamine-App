@@ -70,11 +70,15 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   let layers = [];
   let frame = 0;
   addCleanup(() => cancelAnimationFrame(frame));
-  let sequenceStart = 0;
+  const departures = new Set();
+  const viewTweens = new Map();
+  addCleanup(() => clearDepartures());
   let distance = 6.5;
   let elevation = 0.42;
   let targetHeight = 1.0;
+  let viewHeight = targetHeight;
   let modelKey = "";
+  let configurationKey = "";
   const pointers = new Map();
   let pinchDistance = 0;
 
@@ -638,9 +642,83 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   function releaseGeometry(group) {
     group?.traverse(object => object.geometry?.dispose());
   }
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  function releaseDeparture(entry) {
+    departures.delete(entry);
+    entry.owner.remove(entry.group);
+    releaseGeometry(entry.group);
+    for (const { material: mat } of entry.materials) mat.dispose();
+    if (!entry.owner.children.length) turntable.remove(entry.owner);
+  }
+  function clearDepartures() {
+    for (const entry of [...departures]) releaseDeparture(entry);
+  }
+  function depart(group, owner, time) {
+    // Shared recipe materials stay untouched; only the departing copy becomes transparent.
+    const copies = new Map();
+    group.traverse(object => {
+      if (!object.material) return;
+      const copy = original => {
+        if (!copies.has(original)) {
+          const mat = original.clone();
+          mat.transparent = true;
+          mat.depthWrite = false;
+          copies.set(original, { material: mat, opacity: original.opacity });
+        }
+        return copies.get(original).material;
+      };
+      object.material = Array.isArray(object.material) ? object.material.map(copy) : copy(object.material);
+      object.castShadow = false;
+    });
+    departures.add({ group, owner, materials: [...copies.values()], startY: group.position.y, startScale: group.scale.clone(), start: time, duration: 300 });
+  }
+  function viewValue(key) {
+    if (key === "rotation") return turntable.rotation.y;
+    if (key === "distance") return distance;
+    if (key === "elevation") return elevation;
+    return viewHeight;
+  }
+  function setViewValue(key, value) {
+    if (key === "rotation") turntable.rotation.y = value;
+    else if (key === "distance") distance = value;
+    else if (key === "elevation") elevation = value;
+    else viewHeight = value;
+  }
+  function advanceView(time) {
+    for (const [key, tween] of viewTweens) {
+      const t = clamp((time - tween.start) / tween.duration, 0, 1);
+      setViewValue(key, tween.from + (tween.to - tween.from) * easeOut(t));
+      if (t === 1) viewTweens.delete(key);
+    }
+  }
+  function tweenView(values, duration = 360) {
+    if (disposed || failed) return;
+    const time = performance.now();
+    advanceView(time);
+    for (const [key, to] of Object.entries(values)) {
+      const from = viewValue(key);
+      if (reduce || Math.abs(from - to) < 0.0001) {
+        setViewValue(key, to);
+        viewTweens.delete(key);
+      } else viewTweens.set(key, { from, to, start: time, duration });
+    }
+    if (reduce) render();
+    else requestFrame();
+  }
+  function requestedView(key) { return viewTweens.get(key)?.to ?? viewValue(key); }
+  function interruptView() {
+    advanceView(performance.now());
+    // Direct dragging takes over immediately; ingredient framing can finish independently.
+    for (const key of ["rotation", "distance", "elevation"]) viewTweens.delete(key);
+  }
+  function homeRotation() {
+    const current = turntable.rotation.y;
+    return current + Math.atan2(Math.sin(-0.24 - current), Math.cos(-0.24 - current));
+  }
   function positionCamera() {
-    camera.position.set(0, targetHeight + Math.sin(elevation) * distance, Math.cos(elevation) * distance);
-    camera.lookAt(0, targetHeight, 0);
+    camera.position.set(0, viewHeight + Math.sin(elevation) * distance, Math.cos(elevation) * distance);
+    camera.lookAt(0, viewHeight, 0);
   }
   function render() {
     if (!disposed && !failed) { positionCamera(); renderer.render(scene, camera); }
@@ -648,54 +726,97 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   function settle() {
     cancelAnimationFrame(frame);
     frame = 0;
-    for (const group of layers) { group.visible = true; group.position.y = group.userData.targetY; if (group.userData.baseScale) group.scale.copy(group.userData.baseScale); }
+    for (const group of layers) {
+      group.visible = true;
+      group.position.y = group.userData.targetY;
+      if (group.userData.baseScale) group.scale.copy(group.userData.baseScale);
+      delete group.userData.motion;
+    }
+    if (food?.userData.scaleMotion) {
+      food.scale.copy(food.userData.scaleMotion.to);
+      delete food.userData.scaleMotion;
+    }
+    for (const [key, tween] of viewTweens) setViewValue(key, tween.to);
+    viewTweens.clear();
+    clearDepartures();
     render();
+  }
+  function advanceAnimations(time) {
+    for (const group of layers) {
+      const motion = group.userData.motion;
+      if (!motion) continue;
+      const t = clamp((time - motion.start - motion.delay) / motion.duration, 0, 1);
+      const eased = easeOut(t);
+      group.visible = t > 0 || motion.existing;
+      group.position.y = motion.fromY + (group.userData.targetY - motion.fromY) * eased;
+      group.scale.lerpVectors(motion.fromScale, group.userData.baseScale, eased);
+      if (t === 1) delete group.userData.motion;
+    }
+    for (const entry of [...departures]) {
+      const t = clamp((time - entry.start) / entry.duration, 0, 1), eased = easeOut(t);
+      entry.group.position.y = entry.startY + 0.36 * eased;
+      entry.group.scale.copy(entry.startScale).multiplyScalar(1 - 0.18 * eased);
+      for (const { material: mat, opacity } of entry.materials) mat.opacity = opacity * (1 - t);
+      if (t === 1) releaseDeparture(entry);
+    }
+    if (food?.userData.scaleMotion) {
+      const motion = food.userData.scaleMotion;
+      const t = clamp((time - motion.start) / motion.duration, 0, 1);
+      food.scale.lerpVectors(motion.from, motion.to, easeOut(t));
+      if (t === 1) delete food.userData.scaleMotion;
+    }
+    advanceView(time);
+  }
+  function hasMotion() {
+    return departures.size || viewTweens.size || food?.userData.scaleMotion || layers.some(group => group.userData.motion);
+  }
+  function requestFrame() {
+    if (!frame && !disposed && !failed) frame = requestAnimationFrame(animate);
   }
   function animate(time) {
     frame = 0;
     if (disposed || failed) return;
     if (reduce) { settle(); return; }
-    let active = false;
-    for (const group of layers) {
-      const t = clamp((time - sequenceStart - group.userData.delay) / group.userData.duration, 0, 1);
-      const eased = 1 - Math.pow(1 - t, 4);
-      group.visible = t > 0 || !group.userData.newLayer;
-      group.position.y = group.userData.startY + (group.userData.targetY - group.userData.startY) * eased;
-      const scale = group.userData.newLayer ? 0.92 + 0.08 * eased : 1;
-      group.scale.copy(group.userData.baseScale).multiplyScalar(scale);
-      if (t < 1) active = true;
-    }
+    advanceAnimations(time);
     render();
-    if (active) frame = requestAnimationFrame(animate);
+    if (hasMotion()) requestFrame();
   }
   function startAssembly(previous = new Map(), full = false) {
-    cancelAnimationFrame(frame);
-    if (reduce) { settle(); return; }
-    sequenceStart = performance.now();
+    if (disposed || failed) return;
+    if (full) clearDepartures();
+    const time = performance.now();
     layers.forEach((group, i) => {
       group.userData.baseScale ||= group.scale.clone();
-      const existing = !full && previous.has(group.name);
-      group.userData.newLayer = !existing;
-      group.userData.startY = existing ? previous.get(group.name) : group.userData.targetY + 0.8 + i * 0.06;
-      group.userData.delay = existing ? 0 : Math.min(i * 65, 450);
-      group.userData.duration = existing ? 300 : 620;
-      group.position.y = group.userData.startY;
+      const before = !full && previous.get(group.name);
+      const existing = Boolean(before);
+      const fromY = existing ? before.y : group.userData.targetY + (full ? 0.65 + i * 0.04 : 0.42);
+      const fromScale = existing ? before.scale : group.userData.baseScale.clone().multiplyScalar(0.94);
+      group.userData.motion = { fromY, fromScale, existing, start: time, delay: existing ? 0 : full ? Math.min(i * 55, 330) : 45, duration: existing ? 340 : full ? 580 : 460 };
+      group.position.y = fromY;
+      group.scale.copy(fromScale);
       group.visible = existing;
     });
-    frame = requestAnimationFrame(animate);
+    if (reduce) { settle(); return; }
+    requestFrame();
   }
   function update(nextItem, nextOptions = {}) {
     if (disposed || failed || !nextItem) return;
-    const previous = new Map(layers.map(group => [group.name, group.position.y]));
+    const selected = ingredientSelection(nextItem, nextOptions);
+    const nextConfiguration = `${nextItem.id}:${JSON.stringify(selected.values)}`;
+    if (configurationKey === nextConfiguration) return;
+    configurationKey = nextConfiguration;
+    const time = performance.now();
+    advanceAnimations(time);
+    const previous = new Map(layers.map(group => [group.name, { y: group.position.y, scale: group.scale.clone() }]));
+    const previousFood = food, previousLayers = layers;
+    const initial = !modelKey;
     const changedItem = modelKey !== nextItem.id;
     item = nextItem; options = nextOptions; modelKey = item.id;
     canvas.setAttribute("aria-label", `${item.name}, interactive three-dimensional preview. Drag to rotate. Use arrow keys to rotate or zoom.`);
-    if (food) { turntable.remove(food); releaseGeometry(food); }
     food = new THREE.Group();
     turntable.add(food);
     layers = [];
     targetHeight = 1.0;
-    const selected = ingredientSelection(item, options);
     switch (item.model) {
       case "sandwich": buildBurger(selected, true); break;
       case "pancakes": buildPancakes(selected); break;
@@ -706,12 +827,32 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       case "pie": case "sundae": case "cheesecake": case "brownie": buildDessert(selected); break;
       default: buildBurger(selected);
     }
-    if (changedItem) { turntable.rotation.y = -0.24; distance = 6.5; elevation = 0.42; }
+    const names = new Set(layers.map(group => group.name));
+    if (changedItem || reduce) clearDepartures();
+    else {
+      // A topping reselected during its exit returns from its current position, without a duplicate.
+      for (const entry of [...departures]) {
+        if (!names.has(entry.group.name)) continue;
+        previous.set(entry.group.name, { y: entry.group.position.y, scale: entry.group.scale.clone() });
+        releaseDeparture(entry);
+      }
+    }
+    for (const group of previousLayers) {
+      if (!changedItem && !reduce && !names.has(group.name) && group.visible) depart(group, previousFood, time);
+      else { previousFood.remove(group); releaseGeometry(group); }
+    }
+    if (previousFood && !previousFood.children.length) turntable.remove(previousFood);
+    if (!changedItem && previousFood && !reduce && !previousFood.scale.equals(food.scale)) {
+      food.userData.scaleMotion = { from: previousFood.scale.clone(), to: food.scale.clone(), start: time, duration: 380 };
+      food.scale.copy(previousFood.scale);
+    }
+    if (initial) { turntable.rotation.y = -0.24; viewHeight = targetHeight; }
+    else tweenView(changedItem ? { height: targetHeight, rotation: homeRotation(), distance: 6.5, elevation: 0.42 } : { height: targetHeight }, 420);
     startAssembly(changedItem ? new Map() : previous, changedItem);
   }
-  function rotate(delta) { if (!disposed) { turntable.rotation.y += Number(delta) || 0; render(); } }
-  function zoom(delta) { if (!disposed) { distance = clamp(distance - (Number(delta) || 0), 4.2, 9.5); render(); } }
-  function reset() { turntable.rotation.y = -0.24; distance = 6.5; elevation = 0.42; render(); }
+  function rotate(delta) { tweenView({ rotation: requestedView("rotation") + (Number(delta) || 0) }); }
+  function zoom(delta) { tweenView({ distance: clamp(requestedView("distance") - (Number(delta) || 0), 4.2, 9.5) }, 280); }
+  function reset() { tweenView({ rotation: homeRotation(), distance: 6.5, elevation: 0.42, height: targetHeight }, 440); }
   function resize() {
     if (disposed) return;
     const bounds = container.getBoundingClientRect();
@@ -728,6 +869,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   addCleanup(() => motionQuery.removeEventListener("change", motionChanged));
   motionQuery.addEventListener("change", motionChanged);
   function pointerDown(event) {
+    interruptView();
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     canvas.setPointerCapture(event.pointerId);
     canvas.style.cursor = "grabbing";
@@ -736,6 +878,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   function pointerMove(event) {
     const before = pointers.get(event.pointerId);
     if (!before) return;
+    interruptView();
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (pointers.size === 1) {
       turntable.rotation.y += (event.clientX - before.x) * 0.009;
@@ -743,8 +886,9 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       render();
     } else if (pointers.size === 2) {
       const p = [...pointers.values()], nextDistance = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      zoom((nextDistance - pinchDistance) * 0.018);
+      distance = clamp(distance - (nextDistance - pinchDistance) * 0.018, 4.2, 9.5);
       pinchDistance = nextDistance;
+      render();
     }
   }
   function pointerUp(event) { pointers.delete(event.pointerId); if (!pointers.size) canvas.style.cursor = "grab"; }
@@ -758,6 +902,9 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     event.preventDefault();
     failed = true;
     cancelAnimationFrame(frame);
+    frame = 0;
+    clearDepartures();
+    viewTweens.clear();
     canvas.hidden = true;
     onFallback();
   }
@@ -774,6 +921,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     disposed = true;
     cleanup();
     pointers.clear();
+    viewTweens.clear();
   }
 
   update(item, options);

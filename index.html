@@ -8,6 +8,8 @@
   <title>Good Hour Diner — Your kind of good.</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./page-motion.css">
+  <link rel="stylesheet" href="./ui-motion.css">
   <link rel="preload" as="image" href="./assets/food/hero.webp" fetchpriority="high">
   <script type="module" src="./app.js"></script>
 </head>
@@ -59,7 +61,7 @@
       <div class="section-heading"><div><p class="eyebrow">23 reasons to stay a while</p><h2 id="menu-title">Find your good thing.</h2></div><p>Pick a favorite.<br>Make every detail yours.</p></div>
       <div class="category-bar" id="category-bar" role="group" aria-label="Menu categories"></div>
       <p class="sr-only" id="menu-status" role="status"></p>
-      <div class="menu-grid" id="menu-grid"></div>
+      <div class="menu-stage"><div class="menu-grid" id="menu-grid"></div></div>
       <noscript><p class="no-script">Turn on JavaScript to browse the menu and build a fictional order. Nothing is charged or delivered.</p></noscript>
     </section>
     <section class="meal-section" id="meals" aria-labelledby="meal-title">

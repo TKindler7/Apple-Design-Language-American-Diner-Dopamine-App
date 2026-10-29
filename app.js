@@ -2,6 +2,8 @@ import { CATEGORIES, ITEMS, ITEM_BY_ID, defaultOptions, normalizeOptions, itemPr
 import { STORAGE_KEY, COMBO_DISCOUNT, SPECIAL_DISCOUNT, loadState, saveState, createLine, lineUnitPrice, lineSummary, addLine, setLineQuantity, cartCount, cartTotal, completeOrder, savingsTotal } from "./cart.js";
 import { createFoodScene } from "./food-scene.js";
 import { specialStatus } from "./special.js";
+import { setupPageMotion } from "./page-motion.js";
+import { animateUI, animateAmount, animateCartArrival, replaceMenu, moveCategoryIndicator, stopMotionWithin } from "./ui-motion.js";
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const all = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -16,6 +18,7 @@ const returning = state.visited || state.cart.length > 0 || state.orders.length 
 let category = "burgers";
 let draft = null;
 let currentModal = null;
+let modalSequence = 0;
 let focusOrigin = null;
 let scene = null;
 let sceneToken = 0;
@@ -105,16 +108,21 @@ function renderWelcome() {
     strip.innerHTML = "<p><strong>Good to see you again.</strong> There’s always room for another good idea.</p><button class='text-button' data-action='history'>Your visits <span aria-hidden='true'>›</span></button>";
   }
 }
-function renderMenu() {
-  $("#category-bar").innerHTML = CATEGORIES.map((entry) => "<button type='button' data-category='" + entry.id + "' aria-pressed='" + (entry.id === category) + "'>" + esc(entry.label) + "<span>" + ITEMS.filter((item) => item.category === entry.id).length + "</span></button>").join("");
+function renderMenu(transition = false) {
+  if (!$("#category-bar").children.length) $("#category-bar").innerHTML = "<span class='category-indicator' aria-hidden='true'></span>" + CATEGORIES.map((entry) => "<button type='button' data-category='" + entry.id + "' aria-pressed='" + (entry.id === category) + "'>" + esc(entry.label) + "<span>" + ITEMS.filter((item) => item.category === entry.id).length + "</span></button>").join("");
+  all("[data-category]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.category === category)));
+  moveCategoryIndicator($("#category-bar"));
   const items = ITEMS.filter((item) => item.category === category);
-  $("#menu-grid").innerHTML = items.map((item, index) => "<article class='food-card' style='animation-delay:" + index * .035 + "s'><button class='food-image-button' type='button' data-item='" + item.id + "' aria-label='Customize " + esc(item.name) + "'><img src='" + item.image + "' alt='" + esc(item.name) + "' width='560' height='480' loading='lazy'>" + (item.id === "midnight-stack" ? "<span class='card-badge'>The house favorite</span>" : "") + "</button><div class='food-card-body'><h3>" + esc(item.name) + "</h3><p>" + esc(item.description) + "</p><div class='food-card-foot'><span>" + money(item.price) + "</span><button type='button' data-item='" + item.id + "' aria-label='Make " + esc(item.name) + " yours'>Make it yours " + icon("plus") + "</button></div></div></article>").join("");
+  const render = () => { $("#menu-grid").innerHTML = items.map((item, index) => "<article class='food-card' style='animation-delay:" + index * .035 + "s'><button class='food-image-button' type='button' data-item='" + item.id + "' aria-label='Customize " + esc(item.name) + "'><img src='" + item.image + "' alt='" + esc(item.name) + "' width='560' height='480' loading='lazy'>" + (item.id === "midnight-stack" ? "<span class='card-badge'>The house favorite</span>" : "") + "</button><div class='food-card-body'><h3>" + esc(item.name) + "</h3><p>" + esc(item.description) + "</p><div class='food-card-foot'><span>" + money(item.price) + "</span><button type='button' data-item='" + item.id + "' aria-label='Make " + esc(item.name) + " yours'>Make it yours " + icon("plus") + "</button></div></div></article>").join("");
+  };
+  if (transition) replaceMenu($("#menu-grid"), render); else render();
   $("#menu-status").textContent = items.length + " " + CATEGORIES.find((entry) => entry.id === category).label.toLowerCase() + " available.";
 }
 function modalHeader(kicker, closeLabel = "Close") {
   return "<header class='dialog-bar'><span class='dialog-kicker'>" + esc(kicker) + "</span><div class='dialog-tools'><button class='icon-button sound-toggle' type='button' data-action='sound' aria-label='Turn sound on'>" + icon(state.sound ? "sound" : "muted") + "</button><button class='icon-button' type='button' data-action='close' aria-label='" + esc(closeLabel) + "'>" + icon("close") + "</button></div></header>";
 }
 function cleanupModal(dialog) {
+  if (dialog) stopMotionWithin(dialog);
   if (dialog?.id === "builder-dialog") {
     sceneToken++;
     scene?.dispose();
@@ -129,6 +137,10 @@ function cleanupModal(dialog) {
   }
 }
 function openModal(dialog) {
+  modalSequence++;
+  dialog.inert = false;
+  dialog.classList.remove("motion-closing");
+  stopMotionWithin(dialog);
   if (!currentModal) focusOrigin = document.activeElement;
   if (currentModal && currentModal !== dialog) {
     cleanupModal(currentModal);
@@ -138,20 +150,36 @@ function openModal(dialog) {
   document.body.classList.add("modal-open");
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
-  if (!reducedMotion.matches && dialog.animate) dialog.animate(
+  animateUI(dialog,
     dialog.id === "cart-dialog" ? [{ transform: "translateX(100%)" }, { transform: "translateX(0)" }] : [{ opacity: 0, transform: "translateY(18px) scale(.985)" }, { opacity: 1, transform: "none" }],
     { duration: 420, easing: "cubic-bezier(.22,1,.36,1)" },
   );
   updateSoundButtons();
 }
 function closeModal() {
-  if (!currentModal) return;
+  if (!currentModal || currentModal.classList.contains("motion-closing")) return;
   const closing = currentModal;
-  cleanupModal(closing);
-  currentModal = null;
-  closing.close();
-  document.body.classList.remove("modal-open");
-  if (focusOrigin?.isConnected) focusOrigin.focus({ preventScroll: true });
+  const sequence = ++modalSequence;
+  stopMotionWithin(closing);
+  if (closing.id === "journey-dialog") { kitchenTimers.forEach(clearTimeout); kitchenTimers = []; }
+  closing.classList.add("motion-closing");
+  closing.inert = true;
+  const finish = () => {
+    exit?.cancel();
+    if (sequence !== modalSequence) return;
+    cleanupModal(closing);
+    currentModal = null;
+    closing.inert = false;
+    closing.classList.remove("motion-closing");
+    closing.close();
+    document.body.classList.remove("modal-open");
+    if (focusOrigin?.isConnected) focusOrigin.focus({ preventScroll: true });
+  };
+  const exit = animateUI(closing, closing.id === "cart-dialog"
+    ? [{ transform: "translateX(0)", opacity: 1 }, { transform: "translateX(100%)", opacity: .6 }]
+    : [{ transform: "none", opacity: 1 }, { transform: "translateY(14px) scale(.99)", opacity: 0 }],
+    { duration: 230, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" });
+  if (exit) exit.finished.then(finish, finish); else finish();
 }
 all("dialog").forEach((dialog) => {
   dialog.addEventListener("cancel", (event) => { event.preventDefault(); closeModal(); });
@@ -186,7 +214,8 @@ function renderMealPhotos() {
 function updateBuilderTotal() {
   if (!draft) return;
   const line = createLine(draft.itemId, draft.options, draft.combo, draft.special);
-  $("#builder-total").textContent = money(lineUnitPrice(line));
+  const amount = lineUnitPrice(line);
+  animateAmount($("#builder-total"), Number($("#builder-total").dataset.value ?? amount), amount, money);
   $("#builder-price-label").textContent = draft.combo ? "Your meal" : "Your creation";
   const discounts = (draft.combo ? COMBO_DISCOUNT : 0) + (draft.special ? SPECIAL_DISCOUNT : 0);
   $("#builder-discount").textContent = discounts ? "Includes " + money(discounts) + " in fictional offers" : "";
@@ -266,6 +295,12 @@ $("#builder-form").addEventListener("change", (event) => {
 function lineDiscount(line) { return (line.combo ? COMBO_DISCOUNT : 0) + (line.special ? SPECIAL_DISCOUNT : 0); }
 function totalDiscount(lines) { return lines.reduce((total, line) => total + lineDiscount(line) * line.quantity, 0); }
 function renderCart() {
+  const previous = new Map(all(".cart-line[data-line-id]").map(row => [row.dataset.lineId, {
+    quantity: Number($(".quantity-value", row)?.dataset.value),
+    total: Number($(".cart-line-price", row)?.dataset.value),
+  }]));
+  const oldTotal = Number($("#cart-total")?.dataset.value);
+  const isUpdating = currentModal?.id === "cart-dialog";
   const count = cartCount(state.cart);
   const heading = "<div class='cart-heading'><div><p>Good Hour Diner</p><h2 id='cart-title'>Your order.</h2></div><button class='icon-button' data-action='close' type='button' aria-label='Close your order'>" + icon("close") + "</button></div>";
   if (!count) {
@@ -274,11 +309,25 @@ function renderCart() {
   }
   const lines = state.cart.map((line) => {
     const item = ITEM_BY_ID[line.itemId];
-    return "<article class='cart-line'><img src='" + item.image + "' alt='' width='76' height='85'><div><div class='cart-line-heading'><h3>" + esc(item.name) + (line.combo ? " meal" : "") + "</h3><strong>" + money(lineUnitPrice(line) * line.quantity) + "</strong></div><p>" + lineSummary(line).map(esc).join(" · ") + "</p><div class='line-actions'><div class='quantity-controls' aria-label='Quantity for " + esc(item.name) + "'><button data-quantity='" + line.id + "' data-delta='-1' aria-label='Remove one " + esc(item.name) + "'>−</button><span aria-label='Quantity " + line.quantity + "'>" + line.quantity + "</span><button data-quantity='" + line.id + "' data-delta='1' aria-label='Add one " + esc(item.name) + "'" + (line.quantity >= 99 ? " disabled" : "") + ">+</button></div><button class='remove-button' data-remove='" + line.id + "' aria-label='Remove " + esc(item.name) + " from order'>Remove</button></div></div></article>";
+    return "<article class='cart-line' data-line-id='" + line.id + "'><img src='" + item.image + "' alt='' width='76' height='85'><div><div class='cart-line-heading'><h3>" + esc(item.name) + (line.combo ? " meal" : "") + "</h3><strong class='cart-line-price' data-value='" + lineUnitPrice(line) * line.quantity + "'>" + money(lineUnitPrice(line) * line.quantity) + "</strong></div><p>" + lineSummary(line).map(esc).join(" · ") + "</p><div class='line-actions'><div class='quantity-controls' aria-label='Quantity for " + esc(item.name) + "'><button data-quantity='" + line.id + "' data-delta='-1' aria-label='Remove one " + esc(item.name) + "'>−</button><span class='quantity-value' data-value='" + line.quantity + "' aria-label='Quantity " + line.quantity + "'>" + line.quantity + "</span><button data-quantity='" + line.id + "' data-delta='1' aria-label='Add one " + esc(item.name) + "'" + (line.quantity >= 99 ? " disabled" : "") + ">+</button></div><button class='remove-button' data-remove='" + line.id + "' aria-label='Remove " + esc(item.name) + " from order'>Remove</button></div></div></article>";
   }).join("");
-  $("#cart-content").innerHTML = heading + "<div class='cart-items'>" + lines + "</div><div class='cart-summary'><div class='summary-row total'><span>Fictional total</span><strong>" + money(cartTotal(state.cart)) + "</strong></div>" + (totalDiscount(state.cart) ? "<div class='summary-row actual'><span>Offers included</span><span>−" + money(totalDiscount(state.cart)) + "</span></div>" : "") + "<div class='summary-row actual'><span>Actually charged</span><strong>$0</strong></div><button class='button primary' data-action='checkout'>Review fictional order " + icon("arrow") + "</button><p>No payment. No delivery. Just the good feeling.</p></div>";
+  $("#cart-content").innerHTML = heading + "<div class='cart-items'>" + lines + "</div><div class='cart-summary'><div class='summary-row total'><span>Fictional total</span><strong id='cart-total' data-value='" + cartTotal(state.cart) + "'>" + money(cartTotal(state.cart)) + "</strong></div>" + (totalDiscount(state.cart) ? "<div class='summary-row actual'><span>Offers included</span><span>−" + money(totalDiscount(state.cart)) + "</span></div>" : "") + "<div class='summary-row actual'><span>Actually charged</span><strong>$0</strong></div><button class='button primary' data-action='checkout'>Review fictional order " + icon("arrow") + "</button><p>No payment. No delivery. Just the good feeling.</p></div>";
+  if (isUpdating) {
+    for (const row of all(".cart-line[data-line-id]")) {
+      const before = previous.get(row.dataset.lineId);
+      if (!before) continue;
+      const quantity = $(".quantity-value", row), total = $(".cart-line-price", row);
+      animateAmount(quantity, before.quantity, Number(quantity.dataset.value), String, { duration: 240 });
+      animateAmount(total, before.total, Number(total.dataset.value), money);
+    }
+    animateAmount($("#cart-total"), oldTotal, cartTotal(state.cart), money);
+  }
 }
-function openCart() { renderCart(); openModal($("#cart-dialog")); }
+function openCart(arrivalId = null) {
+  renderCart();
+  openModal($("#cart-dialog"));
+  if (arrivalId) animateCartArrival($("#cart-dialog"), arrivalId);
+}
 function checkoutRows(lines) {
   return lines.map((line) => "<div class='checkout-line'><img src='" + ITEM_BY_ID[line.itemId].image + "' alt=''><div><h3>" + line.quantity + " × " + esc(ITEM_BY_ID[line.itemId].name) + (line.combo ? " meal" : "") + "</h3><p>" + lineSummary(line).map(esc).join(" · ") + "</p></div><strong>" + money(lineUnitPrice(line) * line.quantity) + "</strong></div>").join("");
 }
@@ -342,6 +391,8 @@ function updateKitchen(stage) {
   $("#kitchen-description").textContent = stages[stage].description;
   $("#kitchen-stage-label").textContent = stage === 0 ? "GOOD HOUR · ORDER RECEIVED" : stage === 1 ? "A LITTLE IMAGINARY SIZZLE" : "MADE YOUR WAY";
   $(".kitchen-preview").classList.toggle("ready", stage === 3);
+  $(".kitchen-preview").classList.toggle("cooking", stage === 1);
+  animateUI($("#kitchen-title"), [{ opacity: .4, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 420 });
   $(".kitchen-preview").classList.toggle("plating", stage === 2);
   all(".stage-list li").forEach((node, index) => { node.classList.toggle("complete", index < stage); node.classList.toggle("active", index === stage); if (index === stage) node.setAttribute("aria-current", "step"); else node.removeAttribute("aria-current"); });
   $("#kitchen-actions").innerHTML = stage === 3 ? "<button class='button primary' data-action='receipt'>See what you kept " + icon("arrow") + "</button>" : "<button class='text-button' data-action='skip-kitchen'>Skip to the good part <span aria-hidden='true'>›</span></button>";
@@ -357,7 +408,7 @@ async function renderKitchen(order) {
   kitchenTimers = [];
   kitchenStage = -1;
   const first = order.lines[0];
-  $("#journey-content").innerHTML = modalHeader("Your fictional kitchen", "Close kitchen and keep order in history") + "<div class='kitchen-body'><p class='eyebrow'>Made with a little imagination</p><h2 id='journey-title' class='sr-only'>Fictional order progress</h2><h2 id='kitchen-title'>Order received.</h2><p class='kitchen-description' id='kitchen-description'></p><div class='kitchen-preview'><img src='" + ITEM_BY_ID[first.itemId].image + "' alt='" + esc(ITEM_BY_ID[first.itemId].name) + "'><div id='kitchen-scene'></div><div class='kitchen-cloche'></div><span class='kitchen-stage-label' id='kitchen-stage-label'></span></div><ol class='stage-list' aria-label='Fictional preparation stages'>" + stages.map((stage) => "<li>" + stage.name + "</li>").join("") + "</ol><p class='kitchen-featured'>Featured preview: " + esc(ITEM_BY_ID[first.itemId].name) + ". Your complete order is below.</p>" + orderPreviewHtml(order) + "<div class='kitchen-actions' id='kitchen-actions'></div><p class='kitchen-fine'>A fictional kitchen sequence. No food is being prepared or delivered.</p></div>";
+  $("#journey-content").innerHTML = modalHeader("Your fictional kitchen", "Close kitchen and keep order in history") + "<div class='kitchen-body'><p class='eyebrow'>Made with a little imagination</p><h2 id='journey-title' class='sr-only'>Fictional order progress</h2><h2 id='kitchen-title'>Order received.</h2><p class='kitchen-description' id='kitchen-description'></p><div class='kitchen-preview'><img src='" + ITEM_BY_ID[first.itemId].image + "' alt='" + esc(ITEM_BY_ID[first.itemId].name) + "'><div id='kitchen-scene'></div><div class='kitchen-heat' aria-hidden='true'></div><div class='kitchen-cloche'></div><div class='kitchen-steam' aria-hidden='true'><i></i><i></i><i></i></div><span class='kitchen-stage-label' id='kitchen-stage-label'></span></div><ol class='stage-list' aria-label='Fictional preparation stages'>" + stages.map((stage) => "<li>" + stage.name + "</li>").join("") + "</ol><p class='kitchen-featured'>Featured preview: " + esc(ITEM_BY_ID[first.itemId].name) + ". Your complete order is below.</p>" + orderPreviewHtml(order) + "<div class='kitchen-actions' id='kitchen-actions'></div><p class='kitchen-fine'>A fictional kitchen sequence. No food is being prepared or delivered.</p></div>";
   openModal($("#journey-dialog"));
   updateKitchen(reducedMotion.matches ? 3 : 0);
   if (!reducedMotion.matches) [[1800, 1], [4000, 2], [6400, 3]].forEach(([delay, stage]) => kitchenTimers.push(setTimeout(() => updateKitchen(stage), delay)));
@@ -391,8 +442,11 @@ function renderReceipt(order, fromHistory = false) {
   activeOrder = order;
   const date = new Date(order.createdAt).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
   const discount = totalDiscount(order.lines);
-  $("#journey-content").innerHTML = modalHeader("Your Good Hour receipt", "Close receipt") + "<div class='receipt-body'><div class='receipt-hero'><span class='receipt-check'>" + icon("check") + "</span><p class='eyebrow'>The meal was pretend. The feeling is yours.</p><h2 id='journey-title'>Keep the good feeling.</h2><p>And every real dollar.</p></div><div class='receipt-paper'><div class='receipt-meta'><span>GOOD HOUR DINER<br>FICTIONAL ORDER</span><span>" + esc(date) + "<br>#" + esc(order.id.slice(-6).toUpperCase()) + "</span></div>" + order.lines.map((line) => "<div class='receipt-line'><strong>" + line.quantity + " × " + esc(ITEM_BY_ID[line.itemId].name) + (line.combo ? " meal" : "") + "</strong><span>" + money(((line.unitPrice ?? lineUnitPrice(line)) + lineDiscount(line)) * line.quantity) + "</span><small>" + lineSummary(line).map(esc).join(" · ") + "</small></div>").join("") + "<div class='receipt-totals'><div class='summary-row'><span>Menu subtotal</span><span>" + money(order.total + discount) + "</span></div>" + (discount ? "<div class='summary-row'><span>Meal & special offers</span><span>−" + money(discount) + "</span></div>" : "") + "<div class='summary-row'><span>Fictional total</span><strong>" + money(order.total) + "</strong></div><div class='summary-row'><span>Actually paid</span><strong>$0</strong></div><div class='kept'><span>Money not spent</span><strong>" + money(order.total) + "</strong></div></div><p>No purchase, payment, preparation, or delivery occurred.<br>This receipt is a reflection on a fictional order.</p></div><p class='receipt-cumulative'>Across your visits: <strong>" + money(savingsTotal(state)) + "</strong> in money not spent.</p><div class='receipt-actions'><button class='button primary' data-action='browse'>Back to the menu</button><button class='text-button' data-action='history'>" + (fromHistory ? "Back to your visits" : "View your visits") + " <span aria-hidden='true'>›</span></button></div></div>";
+  $("#journey-content").innerHTML = modalHeader("Your Good Hour receipt", "Close receipt") + "<div class='receipt-body'><div class='receipt-hero'><span class='receipt-check'>" + icon("check") + "</span><p class='eyebrow'>The meal was pretend. The feeling is yours.</p><h2 id='journey-title'>Keep the good feeling.</h2><p>And every real dollar.</p></div><div class='receipt-paper'><div class='receipt-meta'><span>GOOD HOUR DINER<br>FICTIONAL ORDER</span><span>" + esc(date) + "<br>#" + esc(order.id.slice(-6).toUpperCase()) + "</span></div>" + order.lines.map((line) => "<div class='receipt-line'><strong>" + line.quantity + " × " + esc(ITEM_BY_ID[line.itemId].name) + (line.combo ? " meal" : "") + "</strong><span>" + money(((line.unitPrice ?? lineUnitPrice(line)) + lineDiscount(line)) * line.quantity) + "</span><small>" + lineSummary(line).map(esc).join(" · ") + "</small></div>").join("") + "<div class='receipt-totals'><div class='summary-row'><span>Menu subtotal</span><span>" + money(order.total + discount) + "</span></div>" + (discount ? "<div class='summary-row'><span>Meal & special offers</span><span>−" + money(discount) + "</span></div>" : "") + "<div class='summary-row'><span>Fictional total</span><strong>" + money(order.total) + "</strong></div><div class='summary-row'><span>Actually paid</span><strong>$0</strong></div><div class='kept'><span>Money not spent</span><strong id='receipt-kept'>" + money(order.total) + "</strong></div></div><p>No purchase, payment, preparation, or delivery occurred.<br>This receipt is a reflection on a fictional order.</p></div><p class='receipt-cumulative'>Across your visits: <strong>" + money(savingsTotal(state)) + "</strong> in money not spent.</p><div class='receipt-actions'><button class='button primary' data-action='browse'>Back to the menu</button><button class='text-button' data-action='history'>" + (fromHistory ? "Back to your visits" : "View your visits") + " <span aria-hidden='true'>›</span></button></div></div>";
   openModal($("#journey-dialog"));
+  animateUI($(".receipt-paper"), [{ opacity: 0, transform: "translateY(-24px) scaleY(.94)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: 100, fill: "backwards" });
+  animateUI($(".receipt-check"), [{ transform: "scale(.6)", opacity: 0 }, { transform: "scale(1.08)", opacity: 1, offset: .7 }, { transform: "scale(1)", opacity: 1 }], { duration: 520 });
+  if (!fromHistory) animateAmount($("#receipt-kept"), 0, order.total, money, { duration: 950, step: order.total % 100 ? 1 : 100 });
 }
 function openHistory() {
   const total = savingsTotal(state);
@@ -422,10 +476,12 @@ function updateSpecial() {
   }
 }
 document.addEventListener("click", (event) => {
+  if (currentModal?.classList.contains("motion-closing")) return;
   const target = event.target.closest("button,a");
   if (!target) return;
   if (target.dataset.category) {
-    category = target.dataset.category; renderMenu(); $("[data-category='" + category + "']").focus({ preventScroll: true }); return;
+    if (category === target.dataset.category) return;
+    category = target.dataset.category; renderMenu(true); $("[data-category='" + category + "']").focus({ preventScroll: true }); return;
   }
   if (target.dataset.item) { openBuilder(target.dataset.item, { special: target.dataset.special === "true" }); return; }
   if (target.dataset.preview) { setPreview(target.dataset.preview); return; }
@@ -469,8 +525,11 @@ document.addEventListener("click", (event) => {
       if (!draft) break;
       if (draft.special && !specialStatus().active) { updateSpecial(); showToast("The special has ended. Review the updated price before adding."); break; }
       clearUndo();
-      state.cart = addLine(state.cart, createLine(draft.itemId, draft.options, draft.combo, draft.special));
-      persist(); updateStatus(); sound(); announce(ITEM_BY_ID[draft.itemId].name + " added to your order."); openCart(); break;
+      const added = createLine(draft.itemId, draft.options, draft.combo, draft.special);
+      const previousQuantities = new Map(state.cart.map(line => [line.id, line.quantity]));
+      state.cart = addLine(state.cart, added);
+      const changed = state.cart.find(line => !previousQuantities.has(line.id) || previousQuantities.get(line.id) !== line.quantity);
+      persist(); updateStatus(); sound(); announce(ITEM_BY_ID[draft.itemId].name + " added to your order."); openCart(changed?.id); break;
     }
     case "new-order": undoCart = structuredClone(state.cart); state.cart = []; persist(); updateStatus(); showToast("Your order is clear.", true); break;
     case "undo-clear": if (undoCart) { state.cart = undoCart; undoCart = null; persist(); updateStatus(); $("#toast").hidden = true; announce("Your order was restored."); } break;
@@ -505,3 +564,7 @@ updateStatus();
 updateSpecial();
 setInterval(updateSpecial, 30000);
 setupReveals();
+
+setupPageMotion();
+if ("ResizeObserver" in window) new ResizeObserver(() => moveCategoryIndicator($("#category-bar"))).observe($("#category-bar"));
+document.fonts?.ready.then(() => moveCategoryIndicator($("#category-bar")));

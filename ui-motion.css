@@ -1,0 +1,34 @@
+.menu-stage { position: relative; isolation: isolate; }
+.menu-previous { position: absolute; inset: 0 0 auto; z-index: 2; pointer-events: none; }
+.menu-previous .food-card { animation: none; }
+.menu-grid .food-card { animation: none; }
+.category-bar { position: relative; isolation: isolate; }
+.category-indicator { position: absolute; left: 0; background: var(--ink); border-radius: 99px; pointer-events: none; transition: transform .42s cubic-bezier(.22,1,.36,1), width .42s cubic-bezier(.22,1,.36,1); }
+.category-bar button { position: relative; z-index: 1; flex: none; }
+.category-bar.has-indicator button[aria-pressed=true] { background: transparent; border-color: transparent; }
+.cart-line { border-radius: 14px; }
+.quantity-controls span, .summary-row strong, #builder-total, .kept strong { font-variant-numeric: tabular-nums; }
+dialog.motion-closing { pointer-events: none; }
+.kitchen-preview { isolation: isolate; }
+.kitchen-heat { position: absolute; inset: 12% 17% 4%; border-radius: 50%; background: radial-gradient(ellipse at center, #edb66b60, transparent 68%); opacity: 0; transition: opacity .65s; pointer-events: none; z-index: -1; }
+.kitchen-preview.cooking .kitchen-heat { opacity: 1; }
+.kitchen-steam { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s; z-index: 2; }
+.kitchen-preview.cooking .kitchen-steam { opacity: .65; }
+.kitchen-steam i { position: absolute; bottom: 44%; left: 44%; width: 27px; height: 85px; border-left: 3px solid #9a8d7966; border-radius: 50%; filter: blur(2px); animation: kitchen-steam-rise 1.8s ease-out infinite; animation-play-state: paused; }
+.kitchen-steam i:nth-child(2) { left: 53%; animation-delay: -.6s; height: 70px; }
+.kitchen-steam i:nth-child(3) { left: 37%; animation-delay: -1.2s; height: 60px; }
+.kitchen-preview.cooking .kitchen-steam i { animation-play-state: running; }
+.journey-dialog:not([open]) .kitchen-steam i, .motion-paused .kitchen-steam i { animation-play-state: paused; }
+.kitchen-preview.plating #kitchen-scene, .kitchen-preview.plating>img { animation: plate-settle .65s cubic-bezier(.22,1,.36,1) both; }
+.kitchen-preview.plating .kitchen-cloche { transform: translateY(-7px); }
+.stage-list li:not(:last-child):after { background: linear-gradient(90deg,var(--blue) 50%,var(--line) 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position .65s ease; }
+.stage-list li.complete:not(:last-child):after { background-position: 0 0; }
+.stage-list li:before { transition: background .25s, box-shadow .25s; }
+.receipt-paper { transform-origin: top center; }
+@keyframes kitchen-steam-rise { 0% { transform: translateY(14px) scaleX(.7); opacity: 0; } 25% { opacity: .65; } 100% { transform: translateY(-75px) scaleX(1.15); opacity: 0; } }
+@keyframes plate-settle { 0% { transform: translateY(-14px) scale(.96); } 70% { transform: translateY(3px) scale(1.01); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .category-indicator, .stage-list li:before, .stage-list li:after { transition: none; }
+  .kitchen-steam { display: none; }
+  .kitchen-preview.plating #kitchen-scene, .kitchen-preview.plating>img { animation: none; }
+}

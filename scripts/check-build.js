@@ -14,7 +14,7 @@ if (missing.length) {
   const outputDir = resolve(projectRoot, "public");
   rmSync(outputDir, { recursive: true, force: true });
   mkdirSync(outputDir, { recursive: true });
-  for (const filename of ["index.html", "styles.css", "app.js", "cart.js", "catalog.js", "food-scene.js", "special.js"]) {
+  for (const filename of ["index.html", "styles.css", "app.js", "cart.js", "catalog.js", "food-scene.js", "special.js", "page-motion.js", "page-motion.css", "ui-motion.js", "ui-motion.css"]) {
     copyFileSync(resolve(projectRoot, filename), resolve(outputDir, filename));
   }
   mkdirSync(resolve(outputDir, "assets"), { recursive: true });

@@ -1,0 +1,90 @@
+/* A separate motion layer preserves the page's layout and the photos' framing. */
+html.page-motion-enabled .hero[data-page-motion="hero"] .hero-copy {
+  translate: 0 var(--page-hero-copy-y, 0px);
+}
+
+html.page-motion-enabled .hero[data-page-motion="hero"] .hero-photo img {
+  translate: 0 var(--page-hero-photo-y, 0px);
+  scale: var(--page-hero-photo-scale, 1);
+  transform-origin: 50% 55%;
+}
+
+/* This one artwork now has a scroll sequence instead of the generic reveal. */
+html.page-motion-enabled .meal-art[data-page-motion="meal"] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.page-motion-enabled .meal-art[data-page-motion="meal"] .meal-burger {
+  translate: var(--page-burger-x, 0px) var(--page-burger-y, 0px);
+  scale: var(--page-burger-scale, 1);
+  rotate: var(--page-burger-turn, 0deg);
+  opacity: var(--page-burger-opacity, 1);
+}
+
+html.page-motion-enabled .meal-art[data-page-motion="meal"] .meal-fries {
+  translate: var(--page-fries-x, 0px) var(--page-fries-y, 0px);
+  scale: var(--page-fries-scale, 1);
+  rotate: var(--page-fries-turn, 0deg);
+  opacity: var(--page-fries-opacity, 1);
+}
+
+html.page-motion-enabled .meal-art[data-page-motion="meal"] .meal-shake {
+  translate: var(--page-shake-x, 0px) var(--page-shake-y, 0px);
+  scale: var(--page-shake-scale, 1);
+  rotate: var(--page-shake-turn, 0deg);
+  opacity: var(--page-shake-opacity, 1);
+}
+
+html.page-motion-enabled .meal-art[data-page-motion="meal"] .meal-orbit {
+  scale: var(--page-orbit-scale, 1);
+  opacity: var(--page-orbit-opacity, 1);
+}
+
+/* Promote only the visible scenes; inactive and hidden tabs release the hint. */
+html.page-motion-enabled .hero.page-motion-in-view .hero-copy,
+html.page-motion-enabled .hero.page-motion-in-view .hero-photo img,
+html.page-motion-enabled .meal-art.page-motion-in-view img,
+html.page-motion-enabled .meal-art.page-motion-in-view .meal-orbit {
+  will-change: transform;
+}
+
+/* Fine pointers get a small lift. Keyboard focus keeps its existing outline. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .food-card {
+    transition: translate 240ms cubic-bezier(.22, 1, .36, 1), box-shadow 240ms ease;
+  }
+
+  .food-card:hover,
+  .food-card:focus-within {
+    translate: 0 -5px;
+    box-shadow: 0 14px 32px #20212412;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .food-card:hover,
+  .food-card:focus-within {
+    box-shadow: 0 14px 32px #0005;
+  }
+}
+
+/* Also works before the preference-change listener runs. Static photo tilts stay. */
+@media (prefers-reduced-motion: reduce) {
+  .hero[data-page-motion="hero"] .hero-copy,
+  .hero[data-page-motion="hero"] .hero-photo img,
+  .meal-art[data-page-motion="meal"] img,
+  .meal-art[data-page-motion="meal"] .meal-orbit,
+  .food-card {
+    translate: none !important;
+    scale: none !important;
+    rotate: none !important;
+    will-change: auto !important;
+  }
+
+  .meal-art[data-page-motion="meal"] img,
+  .meal-art[data-page-motion="meal"] .meal-orbit {
+    opacity: 1 !important;
+  }
+}

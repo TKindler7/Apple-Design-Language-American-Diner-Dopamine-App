@@ -39,3 +39,13 @@ Reduced-motion, reduced-transparency, increased-contrast, and dark-appearance tr
 The local Apple Design Skill and its Human Interface Guidelines references informed hierarchy, typography, materials, motion, feedback, modality, entering data, cross-platform layout, and accessibility. This is a web interpretation with an original product identity. The guidance is intentionally local and excluded from Git.
 
 Observed QA and remaining gaps belong in `PLAYTEST.md`; this document describes design intent and implementation, not a claim that every device has been tested.
+
+## October 29 motion expansion
+
+The opening photograph now has a gentle camera push and upward drift tied directly to scroll. The copy moves at a different rate. The meal showcase assembles its three framed food photographs through staggered scroll intervals; ordinary scrolling stays under the visitor's control and nothing is pinned. Compact layouts use about half the travel distance. These scenes update only on scroll, resize, or visibility changes, with one scheduled animation frame at a time.
+
+Menu selection uses a moving pill and a short crossfade into staggered cards. Cart state updates immediately; the arriving photograph, quantities, and totals provide brief confirmation. Animated amounts expose their final value to assistive technology throughout. Drawer exit is approximately 230 ms and leaves no retained visual effect when reopened.
+
+The 3D builder keeps departing ingredients for a 300 ms lift/fade before disposal, settles retained layers, and eases camera changes. Rapid toggles reverse cleanly; pointer gestures take over immediately. The fictional kitchen has distinct cooking and plating cues, then the existing ready reveal. Receipt paper arrives over 700 ms, and its money-not-spent amount counts to the saved total once. Historical receipts display their final amount immediately.
+
+Reduced motion disables spatial effects and interpolation while preserving every action and final value. Changing the preference mid-animation settles the current state. Hidden tabs pause page work and cooking steam; closed 3D scenes release their resources. The local HIG `motion.md` sections “Best practices” and “Providing feedback,” and `feedback.md` “Best practices,” guide this treatment.
