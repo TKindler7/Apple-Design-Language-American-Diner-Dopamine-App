@@ -67,7 +67,8 @@ This record distinguishes observed results from checks still pending. Required c
 - A Node harness using real Three.js geometry and a stub renderer passed all 23 recipes, interrupted ingredient removal/reselection, shared-material cleanup, finite camera rotation/zoom/reset, direct drag/pinch interruption, live and initial reduced motion, and disposal. These checks do not establish visual quality or real GPU behavior.
 - A mocked page-motion lifecycle check covered restored scroll, one pending frame per update, settled meal positions, reduced-motion changes, offscreen/hidden-page suspension, and cleanup.
 - Source review corrected retained exit-animation styles that could hide a reopened dialog and disabled interactions while a dialog closes. Cart and order values update immediately; decorative counters expose the final value to assistive technology immediately.
-- **Visual and integrated interaction checks remain pending:** the authorized local preview was blocked by the saved or managed browser permission. No new desktop/mobile visual, keyboard, screen-reader, or complete ordering-flow pass is claimed. Production file verification will be recorded after deployment; it does not replace browser checks or human playtesting.
+- **Publication verified:** release commit `7bf9855f4ce055a3be085399ccd4043bac067f84` is on GitHub `main`. Vercel returned HTTP 200 with exact byte matches for 13 files: the HTML, three stylesheets, seven application modules, and both Three.js modules. The release preserves both earlier histories without a force-push.
+- **Visual and integrated interaction checks remain pending:** the authorized local preview was blocked by the saved or managed browser permission. No new desktop/mobile visual, keyboard, screen-reader, or complete ordering-flow pass is claimed. Production file verification does not replace browser checks or human playtesting.
 
 ## Revisions after human testing
 
