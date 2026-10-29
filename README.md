@@ -1,15 +1,39 @@
 # Good Hour Diner
 
-A fictional American diner experience about the pleasure of imagining an order. It uses original menu items and original SVG illustrations. The website pairs restrained product-page layout and a one-time food assembly animation with a diner identity; it does not use Apple's marks or pretend to be an Apple product.
+An original American diner presented like a premium product launch. Browse 23 dishes, customize a procedural 3D preview, build a meal, and follow a fictional order from the kitchen to a money-not-spent receipt.
 
 Live site: https://appledesignlanguageamericandinerdop.vercel.app/
 
-**Design claim:** My site makes people feel the satisfying anticipation of a diner meal when they build their perfect order.
+**Design claim:** My site makes people feel excited and rewarded when they browse delicious diner food, build their perfect meal, and place an order without spending real money.
 
-## CP1 starter cart
+## The experience
 
-The menu has three items. Visitors can add, increase, decrease, or remove items; the cart shows a running total. It saves to this browser's `localStorage` after every change and loads again on refresh. There is no checkout, account, payment, or delivery.
+- Five menu categories, original food photography, and dish-specific choices.
+- Real-time Three.js food previews with rotation, zoom, ingredient changes, assembly, lighting, and shadows. A photographic fallback preserves ordering when 3D is unavailable.
+- Entrée, side, and drink combos with a $3 fictional discount; an explicitly fictional daily special.
+- Configured cart lines, quantities, review, simulated kitchen stages, and an itemized receipt. No payment fields, accounts, personal information, food preparation, or delivery.
+- Browser-saved cart, latest meal draft, order history, money-not-spent total, and optional sound preference. Original prototype carts migrate automatically.
+- Keyboard controls, responsive layouts, reduced motion, dark appearance, and muted sound by default.
 
-To run locally, serve this folder with any static server, for example `python3 -m http.server 4173`, then visit `http://localhost:4173`. Run `npm test` for cart behavior checks and `npm run build` to check local asset references and generate `public/`. Vercel publishes that generated folder.
+## Run and verify
 
-The visual system is documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). The design claim and final concept will be revisited for the CP2 planning checkpoint.
+Requires a current Node.js installation and npm.
+
+```sh
+npm ci
+npm test
+npm run build
+python3 -m http.server 4173 --bind 127.0.0.1 --directory public
+```
+
+Open http://127.0.0.1:4173/. Serve `public/`, which contains the app and its local Three.js modules. Rebuild after source edits. Vercel runs `npm run build` and publishes `public/`. The build checks HTML and catalog image references and excludes the large source-image drafts.
+
+## Project records
+
+- [PRD.md](PRD.md): product requirements and school milestones.
+- [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md): visual and interaction decisions.
+- [PLAYTEST.md](PLAYTEST.md): technical evidence and human playtest protocol. Human reactions remain pending.
+- [RECORD_OF_THINKING.md](RECORD_OF_THINKING.md): rationale, tradeoffs, and reflection.
+- [CHANGELOG.md](CHANGELOG.md) and [CHECKPOINTS.md](CHECKPOINTS.md): implementation history.
+
+All food imagery and procedural models are original. AI-generated image sources and provenance are retained in `assets/food-drafts/`; optimized display images are in `assets/food/`. Three.js is MIT licensed and its license is included in the build. Apple-inspired layout conventions do not imply Apple affiliation; the site uses its own name, mark, content, and diner identity. Local design guidance stays in the ignored `.design-rules/` directory.

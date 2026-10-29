@@ -16,3 +16,7 @@ Automated checks at CP1: `npm test` (3 passing) and `npm run build` (all local a
 ## CP2 — 2026-10-29: PRD-lite
 
 `PRD.md` records the design claim, three must-haves, and out-of-scope work for Good Hour Diner. It also defines the original menu, fictional checkout, persistence, behavioral mechanics, and accessibility goals.
+
+## CP3 — 2026-10-29: my store
+
+Good Hour Diner is an original fictional diner with 23 configurable menu items, original food imagery, procedural 3D previews, a cart, simulated checkout, kitchen sequence, receipt, and saved history. It uses no real brands, accounts, personal information, payments, preparation, or delivery.

@@ -1,17 +1,30 @@
 // Original procedural diner models. Geometry is generated here; no external models or textures.
 export async function createFoodScene(container, { item, options = {}, reducedMotion = false, onFallback = () => {} } = {}) {
   if (!container || !item) return null;
-  let THREE;
-  let renderer;
+  const resources = [];
+  const addCleanup = release => resources.push(release);
+  function cleanup() {
+    // Continue releasing the other resources even if a browser API fails during cleanup.
+    for (const release of resources.splice(0).reverse()) {
+      try { release(); } catch { /* The photograph remains available. */ }
+    }
+  }
   try {
-    THREE = await import("./vendor/three.module.js");
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
+    const THREE = await import("./vendor/three.module.js");
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
+    addCleanup(() => renderer.forceContextLoss());
+    addCleanup(() => renderer.dispose());
+    return initializeFoodScene(THREE, renderer, container, { item, options, reducedMotion, onFallback }, addCleanup, cleanup);
   } catch {
+    cleanup();
     onFallback();
     return null;
   }
+}
 
+function initializeFoodScene(THREE, renderer, container, { item, options, reducedMotion, onFallback }, addCleanup, cleanup) {
   const canvas = renderer.domElement;
+  addCleanup(() => canvas.remove());
   canvas.className = "food-scene-canvas";
   canvas.setAttribute("role", "img");
   canvas.setAttribute("aria-label", `${item.name}, interactive three-dimensional preview. Drag to rotate. Use arrow keys to rotate or zoom.`);
@@ -24,9 +37,10 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
 
   const scene = new THREE.Scene();
+  addCleanup(() => scene.traverse(object => { object.geometry?.dispose(); object.shadow?.dispose(); }));
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
   const turntable = new THREE.Group();
   scene.add(turntable);
@@ -46,6 +60,8 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
 
   const materialCache = new Map();
   const textures = new Map();
+  addCleanup(() => { for (const mat of materialCache.values()) mat.dispose(); });
+  addCleanup(() => { for (const map of textures.values()) map.dispose(); });
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduce = reducedMotion || motionQuery.matches;
   let disposed = false;
@@ -53,6 +69,7 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
   let food = null;
   let layers = [];
   let frame = 0;
+  addCleanup(() => cancelAnimationFrame(frame));
   let sequenceStart = 0;
   let distance = 6.5;
   let elevation = 0.42;
@@ -123,6 +140,7 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
   rim.position.y = 0.238;
   turntable.add(rim);
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), new THREE.ShadowMaterial({ color: 0x493a29, opacity: 0.17 }));
+  addCleanup(() => shadow.material.dispose());
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.015;
   shadow.receiveShadow = true;
@@ -286,16 +304,22 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
   function buildBurger(selected, sandwich = false) {
     let y = 0.37;
     const base = layer("bread-bottom", y);
+    const breadColor = selected.has("sourdough") ? 0xffe8c1 : 0xffffff;
     if (sandwich) {
-      mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(0xffffff, 0.72, "toast"), base);
+      mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(breadColor, 0.72, "toast"), base);
     } else {
       const bun = mesh(new THREE.SphereGeometry(1.05, 48, 24), material(0xffffff, 0.5, "bun"), base);
       bun.scale.y = 0.21;
     }
     y += 0.18;
+    if (selected.has("sauce")) {
+      const spread = layer("house-sauce", y - 0.035);
+      cylinder(spread, 0.94, 0.035, 0, selected.values.sauce === "smoky" ? 0x943f28 : 0xe4ad74, 0.25);
+      y += 0.025;
+    }
     const vegetable = item.id === "garden-state-melt";
     const chicken = item.id === "crispy-chicken-club";
-    const pattyCount = selected.has("extra-patty") ? 2 : 1;
+    const pattyCount = vegetable ? 0 : selected.has("extra-patty") ? 2 : 1;
     for (let i = 0; i < pattyCount; i++) {
       const patty = layer(`patty-${i}`, y + 0.14);
       const g = new THREE.CylinderGeometry(0.99, 1.02, 0.27, 64, 3);
@@ -313,17 +337,28 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
         y += 0.09;
       }
     }
+    if (vegetable && (selected.has("cheese") || selected.has("swiss"))) {
+      cheese(layer("cheese-0", y + 0.05), 0, selected.has("swiss"));
+      y += 0.1;
+    }
     if (selected.has("bacon")) { bacon(layer("bacon", y + 0.04), 0); y += 0.1; }
     if (selected.has("mushroom")) {
       const mushrooms = layer("mushroom", y + 0.04);
       for (let i = 0; i < 7; i++) sphere(mushrooms, Math.cos(i * 2.4) * 0.65, 0, Math.sin(i * 2.4) * 0.6, 0.23, 0x9f886e, [1, 0.45, 0.8]);
       y += 0.13;
     }
-    if (selected.has("pepper") || selected.has("zucchini")) {
-      const vegetables = layer("vegetables", y + 0.05);
-      for (let i = 0; i < 7; i++) {
-        const slice = mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.09, 28), material(selected.has("zucchini") ? 0x678447 : 0xbf4c2c, 0.45), vegetables, Math.cos(i * 2.4) * 0.6, i * 0.008, Math.sin(i * 2.4) * 0.5);
-        slice.rotation.z = i * 0.03;
+    for (const vegetableName of ["pepper", "zucchini"]) {
+      if (!selected.has(vegetableName)) continue;
+      const vegetables = layer(vegetableName, y + 0.05);
+      for (let i = 0; i < 6; i++) {
+        const x = Math.cos(i * 2.4) * 0.6, z = Math.sin(i * 2.4) * 0.5;
+        if (vegetableName === "zucchini") {
+          const slice = mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.09, 28), material(0x678447, 0.45), vegetables, x, i * 0.008, z);
+          slice.rotation.z = i * 0.03;
+        } else {
+          const pepper = tube(vegetables, [[x - 0.19, 0, z - 0.12], [x - 0.15, 0.015, z + 0.17], [x + 0.16, 0.02, z + 0.19], [x + 0.2, 0, z - 0.08]], 0.07, 0xbf4c2c, 18, 0.45);
+          pepper.rotation.y = i * 0.12;
+        }
       }
       y += 0.13;
     }
@@ -338,9 +373,14 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
       y += 0.1;
     }
     if (selected.has("lettuce")) { const lettuce = layer("lettuce", y + 0.03); leaf(lettuce, 0); leaf(lettuce, 0.04, 1.1, 1.02); y += 0.12; }
+    if (selected.has("avocado")) {
+      const avocado = layer("avocado", y + 0.055);
+      for (let i = 0; i < 5; i++) sphere(avocado, (i - 2) * 0.27, i * 0.007, 0, 0.68, 0xa4b966, [0.23, 0.1, 1], 0.6);
+      y += 0.12;
+    }
     const top = layer("bread-top", y + (sandwich ? 0.13 : 0.02));
     if (sandwich) {
-      mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(0xffffff, 0.72, "toast"), top);
+      mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(breadColor, 0.72, "toast"), top);
       top.rotation.y = -0.04;
       for (let i = -2; i <= 2; i++) {
         const grill = mesh(roundedSlab(1.7, 0.035, 0.004, 0.01), material(0x6e391d, 0.9), top, 0, 0.15, i * 0.29);
@@ -376,18 +416,25 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     }
     let y = 0.39 + (count - 1) * step;
     if (selected.has("syrup")) { sauce(layer("syrup", y), 0, 0xa16221, 0.9); y += 0.04; }
-    if (selected.has("blueberry") || item.id === "blueberry-griddle") blueberries(layer("blueberry", y + 0.08), 0);
+    if (selected.has("blueberry")) blueberries(layer("blueberry", y + 0.08), 0);
     if (selected.has("butter")) {
       const butter = layer("butter", y + 0.08);
       mesh(roundedSlab(0.42, 0.43, 0.1, 0.04), material(0xf3d778, 0.5), butter);
       butter.rotation.y = 0.25;
     }
-    if (selected.has("chocolate")) sauce(layer("chocolate", y + 0.05), 0, 0x4e291b, 0.73);
+    if (selected.has("chocolate")) {
+      const chips = layer("chocolate", y + 0.05), random = rng(99);
+      for (let i = 0; i < 28; i++) {
+        const chip = mesh(new THREE.ConeGeometry(0.045, 0.065, 7), material(0x4e291b, 0.4), chips, (random() - 0.5) * 1.5, 0.025, (random() - 0.5) * 1.5);
+        chip.rotation.y = random() * 4;
+      }
+    }
     if (selected.has("whipped-cream")) whip(layer("whipped-cream", y + 0.06), 0, 0.65);
     if (selected.has("cinnamon")) {
       const dust = layer("cinnamon", y + 0.035), random = rng(32);
       for (let i = 0; i < 50; i++) sphere(dust, (random() - 0.5) * 1.5, 0, (random() - 0.5) * 1.2, 0.014, 0x89512c, [1, 0.2, 1]);
     }
+    targetHeight = (frenchToast ? 0.5 : 0.56 + (count - 3) * 0.1) + (selected.has("whipped-cream") ? 0.18 : 0);
   }
 
   function buildDrink(selected) {
@@ -399,9 +446,9 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     const color = isSoda ? 0xc94e5c : isFloat ? 0x4b2b1c : item.id === "chocolate-shake" ? 0x88503c : item.id === "vanilla-malt" ? 0xf1d9ae : 0xeaaaaf;
     const liquid = layer("drink", 0.37);
     cylinder(liquid, 0.565, 1.61, 0.8, color, isSoda || isFloat ? 0.17 : 0.6, "", 0.365);
-    if (isSoda) {
+    if (isSoda && selected.values.ice !== "none") {
       const ice = layer("ice", 1.79);
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < (selected.values.ice === "light" ? 3 : 7); i++) {
         const cube = mesh(roundedSlab(0.24, 0.28, 0.22, 0.05), glass, ice, Math.cos(i * 2.4) * 0.31, Math.sin(i * 2) * 0.05, Math.sin(i * 2.4) * 0.3);
         cube.rotation.set(i * 0.2, i * 0.7, 0.2);
       }
@@ -409,12 +456,12 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     let topY = 2.01;
     if (isFloat) {
       const iceCream = layer("ice-cream", topY);
-      sphere(iceCream, 0, 0.1, 0, 0.49, 0xf5e3bd, [1, 0.9, 1], 0.8);
+      sphere(iceCream, 0, 0.1, 0, 0.49, selected.values.scoop === "chocolate" ? 0x9a6a4d : 0xf5e3bd, [1, 0.9, 1], 0.8);
       topY += 0.43;
     }
     if (selected.has("whipped-cream")) { whip(layer("whipped-cream", topY), 0, 0.94); topY += 0.7; }
     if (selected.has("cherry")) cherry(layer("cherry", topY + 0.02), 0);
-    if (selected.has("chocolate")) {
+    if (Array.isArray(selected.values.toppings) && selected.values.toppings.includes("chocolate")) {
       const drizzle = layer("chocolate", topY - 0.13);
       for (let i = 0; i < 4; i++) tube(drizzle, [[-0.3, i * 0.07, -0.28 + i * 0.16], [0, 0.08 + i * 0.07, -0.28 + i * 0.16], [0.3, i * 0.07, -0.28 + i * 0.16]], 0.025, 0x4e291b, 16, 0.25);
     }
@@ -444,7 +491,12 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
         sausage.rotation.x = Math.PI / 2;
       }
     } else if (selected.has("bacon")) { bacon(protein, 0.02, 2); protein.position.x = 0.6; protein.scale.set(0.55, 1, 1); }
-    else { for (let i = 0; i < 5; i++) sphere(protein, 0.75, 0, (i - 2) * 0.16, 0.19, i % 2 ? 0x729244 : 0xb54d32, [1, 0.4, 0.8]); }
+    else {
+      for (let i = 0; i < 5; i++) {
+        sphere(protein, 0.74 + (i % 2) * 0.12, 0.04, (i - 2) * 0.21, 0.2, 0x9b8066, [1, 0.45, 0.85]);
+        sphere(protein, 0.74 + (i % 2) * 0.12, -0.03, (i - 2) * 0.21, 0.08, 0xcbb996, [0.6, 0.8, 0.6]);
+      }
+    }
     if (selected.has("potato")) potatoPile(layer("potato", 0.27), -0.1, 0.83);
     if (selected.has("toast")) {
       const toast = layer("toast", 0.31);
@@ -475,12 +527,12 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
         fry.rotation.set((random() - 0.5) * 0.6, random() * Math.PI, (random() - 0.5) * 0.55);
       }
     } else if (item.model === "pickles") {
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < (selected.has("large") ? 10 : 7); i++) {
         const pickle = mesh(new THREE.CapsuleGeometry(0.13, 0.83, 4, 14), material(0xffffff, 0.9, "crumb"), pile, (random() - 0.5) * 1.2, random() * 0.24, (random() - 0.5) * 0.9);
         pickle.rotation.set(Math.PI / 2 + random() * 0.6, random() * Math.PI, random() * 0.4);
       }
     } else {
-      for (let i = 0; i < 65; i++) {
+      for (let i = 0; i < (selected.has("large") ? 85 : 65); i++) {
         const angle = random() * Math.PI * 2, radius = Math.sqrt(random()) * 0.87;
         const noodle = mesh(new THREE.TorusGeometry(0.11, 0.052, 7, 10, Math.PI * 1.3), material(0xe7b142, 0.52), pile, Math.cos(angle) * radius, random() * 0.22, Math.sin(angle) * radius);
         noodle.rotation.set(random() * 3, random() * 3, random() * 3);
@@ -495,22 +547,48 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
       for (let i = 0; i < 28; i++) sphere(chili, (random() - 0.5) * 1.25, random() * 0.14, (random() - 0.5) * 1.1, 0.08, 0x74402a, [1, 0.7, 0.8], 0.6);
     }
     if (selected.has("bacon")) { const top = layer("bacon", 1.13); bacon(top, 0, 2); top.scale.setScalar(0.65); }
+    if (selected.has("onion")) {
+      const onions = layer("onion", 1.12);
+      for (let i = 0; i < 18; i++) {
+        const piece = mesh(new THREE.BoxGeometry(0.065, 0.04, 0.08), material(0xf0e2ce, 0.55), onions, (random() - 0.5) * 1.3, random() * 0.07, (random() - 0.5) * 1.1);
+        piece.rotation.y = random() * 5;
+      }
+    }
+    if (selected.has("crumbs")) {
+      const crumbs = layer("crumbs", 0.98);
+      for (let i = 0; i < 70; i++) sphere(crumbs, (random() - 0.5) * 1.4, random() * 0.04, (random() - 0.5) * 1.3, 0.022, 0xb97c32, [1, 0.5, 0.9], 0.95);
+    }
+    if (item.model === "pickles" && selected.values.dip !== "none") {
+      const dip = layer("dip", 0.39);
+      dip.position.x = 0.95; dip.position.z = 0.72;
+      cylinder(dip, 0.31, 0.15, 0, 0xf2ecdf, 0.25);
+      cylinder(dip, 0.26, 0.012, 0.08, selected.values.dip === "house" ? 0xe1ac79 : 0xe9e2ce, 0.35);
+    }
+    if (selected.has("large")) food.scale.setScalar(1.08);
     targetHeight = 0.8;
   }
   function pieSlice(parent, y, color, height) {
-    const geometry = new THREE.CylinderGeometry(1.05, 1.05, height, 48, 1, false, -Math.PI / 3, Math.PI * 0.66);
-    const slice = mesh(geometry, material(color, 0.65), parent, 0, y, -0.15);
-    slice.rotation.y = Math.PI;
-    return slice;
+    // A closed extruded sector includes the two cut faces of the slice.
+    const shape = new THREE.Shape();
+    shape.moveTo(0, -0.65);
+    shape.lineTo(Math.cos(Math.PI / 6) * 1.05, -0.65 + Math.sin(Math.PI / 6) * 1.05);
+    shape.absarc(0, -0.65, 1.05, Math.PI / 6, Math.PI * 5 / 6, false);
+    shape.closePath();
+    const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: true, bevelThickness: 0.018, bevelSize: 0.018, bevelSegments: 2, curveSegments: 24 });
+    geometry.rotateX(-Math.PI / 2);
+    geometry.translate(0, -height / 2, 0);
+    return mesh(geometry, material(color, 0.65), parent, 0, y, 0);
   }
   function buildDessert(selected) {
     let y = 0.28;
+    let scoopSurface = null;
     if (item.model === "sundae") {
       bowl(layer("glass-bowl", 0.2), true);
       const scoops = layer("ice-cream", 0.92);
       sphere(scoops, -0.35, 0, 0.08, 0.43, 0xf3dfbd, [1, 0.9, 1], 0.85);
       sphere(scoops, 0.32, 0, 0.11, 0.43, 0xe8d2af, [1, 0.9, 1], 0.85);
       sphere(scoops, 0, 0.37, 0, 0.44, 0xf4e2bd, [1, 0.95, 1], 0.85);
+      scoopSurface = { y: 1.29, radius: 0.44, scaleY: 0.95 };
       y = 1.62;
     } else if (item.model === "brownie") {
       const skillet = layer("skillet", 0.26);
@@ -524,21 +602,35 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
       if (item.model === "pie") {
         const lattice = layer("pastry", 0.9);
         pieSlice(lattice, 0, 0xd5a667, 0.07);
-        for (let i = 0; i < 4; i++) {
-          const bar = mesh(roundedSlab(0.1, 0.72 + i * 0.08, 0.035, 0.03), material(0xdcb579, 0.78), lattice, -0.39 + i * 0.24, 0.055, -0.63);
-          bar.rotation.y = -0.3;
+        for (let i = 0; i < 3; i++) {
+          const vent = mesh(roundedSlab(0.025, 0.2, 0.002, 0.01), material(0x9c6b35, 0.78), lattice, -0.25 + i * 0.25, 0.055, -0.08);
+          vent.rotation.y = -0.3;
         }
       }
       y = 0.95;
     }
-    if (selected.has("ice-cream") || selected.has("vanilla")) { sphere(layer("ice-cream", y), 0, 0.28, 0.05, 0.47, 0xf1dfbd, [1, 0.9, 1], 0.85); y += 0.65; }
-    if (selected.has("chocolate") || item.model === "brownie") { sauce(layer("chocolate", y - 0.08), 0, 0x512b1d, 0.47); }
+    if (selected.has("ice-cream") || selected.has("vanilla")) {
+      sphere(layer("ice-cream", y), 0, 0.28, 0.05, 0.47, 0xf1dfbd, [1, 0.9, 1], 0.85);
+      scoopSurface = { y: y + 0.28, radius: 0.47, scaleY: 0.9, z: 0.05 };
+      y += 0.65;
+    }
+    if (selected.has("chocolate")) {
+      if (scoopSurface) {
+        const glaze = layer("chocolate", scoopSurface.y);
+        const cap = mesh(new THREE.SphereGeometry(scoopSurface.radius + 0.008, 40, 20, 0, Math.PI * 2, 0, 1.05), material(0x512b1d, 0.22), glaze, 0, 0, scoopSurface.z || 0);
+        cap.scale.y = scoopSurface.scaleY;
+      } else sauce(layer("chocolate", y - 0.08), 0, 0x512b1d, 0.47);
+    }
     if (selected.has("whipped-cream")) { whip(layer("whipped-cream", y), 0, 0.8); y += 0.56; }
     if (selected.has("cherry")) {
       const cherries = layer("cherry", y);
       if (item.model === "cheesecake") {
-        for (let i = 0; i < 8; i++) sphere(cherries, Math.sin(i * 2.3) * 0.46, 0.03 + (i % 2) * 0.08, -0.5 + Math.cos(i * 2.3) * 0.3, 0.12, 0xa3212d, [1, 1, 1], 0.2);
+        for (let i = 0; i < 8; i++) sphere(cherries, Math.sin(i * 2.3) * 0.4, 0.03 + (i % 2) * 0.08, -0.06 + Math.cos(i * 2.3) * 0.22, 0.12, 0xa3212d, [1, 1, 1], 0.2);
       } else cherry(cherries, 0.02);
+    }
+    if (selected.has("nuts")) {
+      const nuts = layer("nuts", y - 0.1), random = rng(186);
+      for (let i = 0; i < 30; i++) sphere(nuts, (random() - 0.5) * 0.8, random() * 0.15, (random() - 0.5) * 0.8, 0.035, 0xa96e30, [1, 0.8, 1.3], 0.75);
     }
     targetHeight = item.model === "sundae" ? 1.1 : 0.75;
   }
@@ -556,7 +648,7 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
   function settle() {
     cancelAnimationFrame(frame);
     frame = 0;
-    for (const group of layers) { group.visible = true; group.position.y = group.userData.targetY; group.scale.setScalar(1); }
+    for (const group of layers) { group.visible = true; group.position.y = group.userData.targetY; if (group.userData.baseScale) group.scale.copy(group.userData.baseScale); }
     render();
   }
   function animate(time) {
@@ -570,7 +662,7 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
       group.visible = t > 0 || !group.userData.newLayer;
       group.position.y = group.userData.startY + (group.userData.targetY - group.userData.startY) * eased;
       const scale = group.userData.newLayer ? 0.92 + 0.08 * eased : 1;
-      group.scale.setScalar(scale);
+      group.scale.copy(group.userData.baseScale).multiplyScalar(scale);
       if (t < 1) active = true;
     }
     render();
@@ -581,6 +673,7 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     if (reduce) { settle(); return; }
     sequenceStart = performance.now();
     layers.forEach((group, i) => {
+      group.userData.baseScale ||= group.scale.clone();
       const existing = !full && previous.has(group.name);
       group.userData.newLayer = !existing;
       group.userData.startY = existing ? previous.get(group.name) : group.userData.targetY + 0.8 + i * 0.06;
@@ -629,8 +722,10 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     render();
   }
   const resizeObserver = new ResizeObserver(resize);
+  addCleanup(() => resizeObserver.disconnect());
   resizeObserver.observe(container);
   function motionChanged(event) { reduce = event.matches; if (reduce) settle(); }
+  addCleanup(() => motionQuery.removeEventListener("change", motionChanged));
   motionQuery.addEventListener("change", motionChanged);
   function pointerDown(event) {
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
@@ -667,32 +762,21 @@ export async function createFoodScene(container, { item, options = {}, reducedMo
     onFallback();
   }
   const listeners = [["pointerdown", pointerDown], ["pointermove", pointerMove], ["pointerup", pointerUp], ["pointercancel", pointerUp], ["lostpointercapture", pointerUp], ["keydown", keyboard], ["webglcontextlost", contextLost]];
+  addCleanup(() => {
+    for (const [name, handler] of listeners) canvas.removeEventListener(name, handler);
+    canvas.removeEventListener("wheel", wheel);
+  });
   for (const [name, handler] of listeners) canvas.addEventListener(name, handler);
   canvas.addEventListener("wheel", wheel, { passive: false });
 
   function dispose() {
     if (disposed) return;
     disposed = true;
-    cancelAnimationFrame(frame);
-    resizeObserver.disconnect();
-    motionQuery.removeEventListener("change", motionChanged);
-    for (const [name, handler] of listeners) canvas.removeEventListener(name, handler);
-    canvas.removeEventListener("wheel", wheel);
-    releaseGeometry(scene);
-    for (const mat of materialCache.values()) mat.dispose();
-    shadow.material.dispose();
-    for (const map of textures.values()) map.dispose();
-    renderer.dispose();
-    renderer.forceContextLoss();
-    canvas.remove();
+    cleanup();
     pointers.clear();
   }
 
-  try { update(item, options); resize(); }
-  catch {
-    dispose();
-    onFallback();
-    return null;
-  }
+  update(item, options);
+  resize();
   return { update, rotate, zoom, reset, assemble: () => startAssembly(new Map(), true), dispose };
 }
