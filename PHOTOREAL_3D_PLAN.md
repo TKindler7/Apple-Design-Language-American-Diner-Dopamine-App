@@ -8,9 +8,9 @@ Replace the lightweight procedural food with original, detailed, textured 3D ass
 
 Keep the existing Apple-inspired page layout, original diner identity, cart, pricing, saved orders, keyboard controls, reduced-motion behavior, and photo fallback. The local design skill remains the UI guidance. Loading must leave usable content and controls on screen, following its loading and motion references.
 
-## Required product decision
+## Confirmed product decision
 
-The user has been asked whether selected ingredients must continue changing the visible model. The recommended approach preserves that behavior through separate ingredient meshes. A complete-dish GLB can rotate and zoom but cannot be assumed to have removable ingredients. If complete-dish previews are chosen, captions and replay controls must explicitly describe an original-recipe preview; order customization still works independently. Do not silently change this behavior.
+On October 29, 2026, the user selected **Keep visible ingredient customization**. Adding, removing, or changing ingredients must continue to update the visible 3D food. Rotation, zoom, and ingredient assembly must remain usable. Replacement assets must therefore contain separate, named ingredient meshes or use independently authored ingredient assets with compatible contact points. A fused complete-dish model is insufficient for this requirement.
 
 The current catalog has 2216 supported item configurations. Twenty-three complete-dish models do not cover all of them.
 
@@ -19,7 +19,7 @@ The current catalog has 2216 supported item configurations. Twenty-three complet
 Read-only preflight through the connected Higgsfield tools on October 29, 2026:
 
 - Tripo H3.1 image-to-3D: 18 credits for one textured PBR model with detailed geometry and textures, target 80,000 faces. Reference used for the quote: the site's original Midnight Stack image.
-- Twenty-three comparable complete-dish generations would therefore total 414 credits before retries or variants. This is arithmetic from a single-model quote, not a complete modular-asset budget or a quality guarantee.
+- Twenty-three comparable complete-dish generations would total 414 credits before retries or variants. This historical comparison is **not the budget for the selected modular approach**, which requires a separate quote after the ingredient assets and production method are defined.
 - Asset generation has not started. Funding and permitted generation capacity must be confirmed before submitting jobs.
 - Tripo P2 with extreme textures, 50,000 faces and PBR quoted 40 credits for one model; it is not a lower-cost route for the requested detail.
 - No generation was submitted and no credits were spent. Original user-supplied GLB assets with permission for this project are another possible source.
@@ -27,9 +27,9 @@ Read-only preflight through the connected Higgsfield tools on October 29, 2026:
 ## Pilot before broad production
 
 1. Produce an original high-resolution food reference for one burger, based on the established recipe and original imagery.
-2. Generate or author a textured GLB pilot; retain source references, generation parameters, and provenance.
-3. Inspect the actual mesh, material maps, back and underside, and ingredient separability. Do not infer quality or modularity from the generation status or thumbnail.
-4. Load it in the site's real viewer. Inspect a full rotation, close-up, shadows, color, contact between ingredients, and all required interactions.
+2. Generate or author a modular textured burger pilot with separate top/bottom buns, patty, cheeses, produce, bacon, and sauces; retain source references, generation parameters, and provenance. Reuse the patty for the extra-patty option.
+3. Inspect the actual mesh, material maps, back and underside, and ingredient separability. Hidden surfaces must have complete geometry and textures so removing a topping reveals convincing food. Do not infer quality or modularity from the generation status or thumbnail.
+4. Load it in the site's real viewer. Inspect a full rotation, close-up, shadows, color, and ingredient contact. Exercise no cheese, both cheese types, every topping toggle, an extra patty, all sauces, rapid removal/reselection, and replay. Changing an ingredient must not reveal a baked image of the removed ingredient elsewhere on the model.
 5. Proceed to the remaining menu only once the pilot meets the photographic target. Regenerate or author missing details rather than labeling a visibly stylized result photorealistic.
 
 ## Asset families for visible customization
