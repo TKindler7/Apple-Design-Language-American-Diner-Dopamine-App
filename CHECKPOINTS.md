@@ -20,3 +20,7 @@ Expanded the prototype to 23 configurable items and meals, original food imagery
 The production build and 19 automated checks pass. The PRD, playtest protocol, design system, and Record of Thinking are present. Implementation commit `a7517f7` is published on GitHub and Vercel; production code, vendor modules, and all 24 display images match the tested build byte for byte. Integrated browser checks remain blocked by the saved or managed preview permission; see `PLAYTEST.md` for exact evidence and remaining checks.
 
 Next school milestones: both mechanics live by October 29; real participant playtests by November 3; final submission November 4. Agent checks do not substitute for human playtesting. The PRD, design claim, three must-haves, and out-of-scope list are in `PRD.md`.
+
+## CP3 — 2026-10-29: my store
+
+Good Hour Diner is live as an original fictional diner with 23 original menu items, its own identity, original food imagery, and no real-brand or starter-cart presentation. The ordering flow remains explicitly fictional: it collects no personal information and never takes a payment.
