@@ -24,3 +24,7 @@ Good Hour Diner is an original fictional diner with 23 configurable menu items, 
 ## CP4 — 2026-10-29: two mechanics
 
 The clearly fictional time-limited special is the purchasing-pressure mechanic. The completed-order receipt and cumulative money-not-spent total are the self-binding feature. The special’s schedule and pricing behavior are tested in `test/special.test.js`.
+
+## Motion refinement — 2026-10-29
+
+Added the six approved animation improvements across the hero, meal, menu, 3D customization, cart, and kitchen/receipt flow. The build and 27 automated checks pass; isolated motion checks cover all 23 food models, interruption, cleanup, and reduced motion. Integrated browser verification remains blocked by the saved or managed preview permission. `PLAYTEST.md` records the evidence and remaining human playtests. The revised checkpoint history and previously published history are both preserved through a normal merge.

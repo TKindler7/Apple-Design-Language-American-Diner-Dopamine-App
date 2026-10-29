@@ -56,8 +56,18 @@ This record distinguishes observed results from checks still pending. Required c
 - Source review found and corrected an Undo path that could replace later cart changes, handling of storage-clear events, and simultaneous-checkout risk. Checkout now reloads and compares the reviewed cart inside a Web Lock where supported. These integration fixes still require browser confirmation.
 - The special now runs from local 08:00 until midnight, becomes inactive overnight, and preserves discounts already added to the cart. Its clock boundaries are tested independently.
 - Three.js initialization failure injection (Node-only): simulated missing motion/resize APIs returned the photo fallback and released the renderer/canvas/listeners; syntax and whitespace checks passed. This does not establish real GPU context-loss behavior.
-- **Publication verified (before the checkpoint-history rewrite):** Vercel served HTTP 200 with byte-identical HTML, CSS, all app modules, both Three.js modules, and all 24 display images. The revised checkpoint history still needs to be force-pushed to GitHub before this deployment assertion can be refreshed. Live URL: https://appledesignlanguageamericandinerdop.vercel.app/
+- **Earlier publication verified:** Vercel served HTTP 200 with byte-identical HTML, CSS, all app modules, both Three.js modules, and all 24 display images. The October 29 motion release preserves both the published history and the revised checkpoint history through a normal merge; no force-push is needed. Live URL: https://appledesignlanguageamericandinerdop.vercel.app/
 - **Integrated browser checks pending:** the saved or managed browser permission continued to block the local preview after the user explicitly approved access and reported changing the setting. Desktop/mobile visual inspection, real cart-to-receipt interaction, real WebGL failure, reduced motion, sound, focus return, and a production interaction smoke test are not claimed as passed. Static deployment-file verification is not a substitute for these checks.
+
+## Motion verification — October 29, 2026
+
+- Implemented scroll-linked hero movement, staggered meal assembly, menu transitions and a sliding category indicator, smooth 3D ingredient and camera changes, cart feedback and dialog exits, and kitchen/receipt motion.
+- `npm test`: **27 passing**, including eight new motion checks for immediate accessible totals, exact final values, rapid replacement, reduced-motion changes, hidden pages, disconnected elements, scoped cancellation, and unavailable animation APIs.
+- `npm run build`: **passed**, resolving 35 local HTML/catalog references and packaging both new motion modules and stylesheets. JavaScript syntax and Git whitespace checks also passed.
+- A Node harness using real Three.js geometry and a stub renderer passed all 23 recipes, interrupted ingredient removal/reselection, shared-material cleanup, finite camera rotation/zoom/reset, direct drag/pinch interruption, live and initial reduced motion, and disposal. These checks do not establish visual quality or real GPU behavior.
+- A mocked page-motion lifecycle check covered restored scroll, one pending frame per update, settled meal positions, reduced-motion changes, offscreen/hidden-page suspension, and cleanup.
+- Source review corrected retained exit-animation styles that could hide a reopened dialog and disabled interactions while a dialog closes. Cart and order values update immediately; decorative counters expose the final value to assistive technology immediately.
+- **Visual and integrated interaction checks remain pending:** the authorized local preview was blocked by the saved or managed browser permission. No new desktop/mobile visual, keyboard, screen-reader, or complete ordering-flow pass is claimed. Production file verification will be recorded after deployment; it does not replace browser checks or human playtesting.
 
 ## Revisions after human testing
 
