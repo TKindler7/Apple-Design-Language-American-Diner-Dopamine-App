@@ -35,7 +35,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.18;
+  renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
 
@@ -44,8 +44,8 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
   const turntable = new THREE.Group();
   scene.add(turntable);
-  scene.add(new THREE.HemisphereLight(0xfff5e6, 0x7d6554, 2.6));
-  const keyLight = new THREE.DirectionalLight(0xfff5e8, 3.8);
+  scene.add(new THREE.HemisphereLight(0xfff5e6, 0x7d6554, 1.35));
+  const keyLight = new THREE.DirectionalLight(0xfff5e8, 3.2);
   keyLight.position.set(-3, 6, 4);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.set(1024, 1024);
@@ -54,9 +54,13 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   keyLight.shadow.normalBias = 0.02;
   keyLight.shadow.radius = 3;
   scene.add(keyLight);
-  const fillLight = new THREE.DirectionalLight(0xe4edff, 1.5);
+  const fillLight = new THREE.DirectionalLight(0xe4edff, 1.1);
   fillLight.position.set(4, 2.5, -2);
   scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0xffe8cd, 2.0);
+  rimLight.position.set(2, 4, -4);
+  scene.add(rimLight);
 
   const materialCache = new Map();
   const textures = new Map();
@@ -118,13 +122,49 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     return result;
   }
 
+  // Neutral, seamless microstructure preserves each ingredient's own color.
+  // Data maps use linear values; only the existing albedo paintings use sRGB.
+  function surfaceDetail(coarse = false) {
+    const key = coarse ? "detail-coarse" : "detail-fine";
+    if (textures.has(key)) return textures.get(key);
+    const size = 128, data = new Uint8Array(size * size * 4), random = rng(coarse ? 817 : 293);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      const grain = random();
+      const pores = coarse && grain < 0.12 ? -65 : 0;
+      const waves = Math.sin(x * Math.PI / 16) * Math.cos(y * Math.PI / 16);
+      const value = Math.round(clamp(185 + waves * 18 + (grain - 0.5) * (coarse ? 95 : 38) + pores, 0, 255));
+      const offset = (y * size + x) * 4;
+      data[offset] = data[offset + 1] = data[offset + 2] = value;
+      data[offset + 3] = 255;
+    }
+    const result = new THREE.DataTexture(data, size, size);
+    result.wrapS = result.wrapT = THREE.RepeatWrapping;
+    result.magFilter = THREE.LinearFilter;
+    result.minFilter = THREE.LinearMipmapLinearFilter;
+    result.generateMipmaps = true;
+    result.repeat.set(coarse ? 3 : 5, coarse ? 3 : 5);
+    result.needsUpdate = true;
+    textures.set(key, result);
+    return result;
+  }
+
   function material(color, roughness = 0.55, kind = "") {
     const key = `${color}|${roughness}|${kind}`;
     if (!materialCache.has(key)) {
-      materialCache.set(key, new THREE.MeshStandardMaterial({
+      const coarse = ["patty", "crumb", "toast", "potato"].includes(kind) || roughness >= 0.75;
+      const foodSurface = Boolean(kind) || (roughness >= 0.32 && color !== 0x292825);
+      const detail = foodSurface ? surfaceDetail(coarse) : null;
+      const mat = new THREE.MeshPhysicalMaterial({
         color, roughness, metalness: 0,
-        ...(kind ? { map: texture(kind), bumpMap: texture(kind), bumpScale: kind === "patty" ? 0.075 : 0.018 } : {}),
-      }));
+        ...(kind ? { map: texture(kind) } : {}),
+        ...(detail ? { bumpMap: detail, bumpScale: coarse ? 0.028 : 0.009,
+          roughnessMap: detail } : {}),
+        // A thin moist highlight on sauces; porous foods stay matte.
+        clearcoat: roughness < 0.4 ? 0.16 : 0,
+        clearcoatRoughness: 0.3,
+      });
+      mat.userData.organic = foodSurface;
+      materialCache.set(key, mat);
     }
     return materialCache.get(key);
   }
@@ -151,6 +191,22 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   scene.add(shadow);
 
   function mesh(geometry, mat, parent, x = 0, y = 0, z = 0) {
+    // Continuous position-based displacement keeps duplicate seam vertices joined.
+    // Restrict this to curved food meshes so dishes, glass, and cut edges stay clean.
+    if (mat.userData.organic && ["SphereGeometry", "CylinderGeometry", "CapsuleGeometry", "TorusGeometry"].includes(geometry.type)) {
+      const positions = geometry.attributes.position;
+      const strength = mat.roughness >= 0.7 ? 0.012 : 0.004;
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i);
+        const wave = Math.sin(x * 17 + z * 11) * Math.cos(y * 21 - z * 9);
+        // Radial displacement is seam-safe, including cylinder cap boundaries.
+        const length = Math.hypot(x, y, z) || 1;
+        positions.setXYZ(i, x + x / length * wave * strength,
+          y + y / length * wave * strength, z + z / length * wave * strength);
+      }
+      positions.needsUpdate = true;
+      geometry.computeVertexNormals();
+    }
     const result = new THREE.Mesh(geometry, mat);
     result.position.set(x, y, z);
     result.castShadow = result.receiveShadow = true;

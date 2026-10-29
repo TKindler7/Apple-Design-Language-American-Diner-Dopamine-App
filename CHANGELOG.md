@@ -43,3 +43,9 @@
 - Added cooking steam and warmth, a plating transition, connecting stage progress, receipt arrival, and a one-time money-not-spent count-up.
 - Preserved immediate state updates, exact accessible prices, reduced-motion alternatives, hidden-tab cleanup, and photo fallback. Closing dialogs are inert to prevent keyboard submissions during their exit.
 - Kept the existing checkpoint documentation and prepared a normal history-preserving merge for publication. Visual browser verification remains subject to the saved local-preview permission.
+
+## 2026-10-29 — 3D food surface refinement
+
+- Added shared seamless fine/coarse surface detail and roughness variation throughout the food models, plus slight organic irregularity on curved food geometry.
+- Added a warm rim light and reduced ambient/exposure washout to make ingredient depth clearer; moist surfaces receive a restrained clearcoat highlight.
+- Build and 27 tests pass. The isolated 3D harness passes all 23 recipes, option changes, interrupted animation, reduced motion, and disposal. Browser visual assessment remains pending; this is a procedural realism improvement, not a claim of photographic fidelity.
