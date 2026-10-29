@@ -20,3 +20,7 @@ Automated checks at CP1: `npm test` (3 passing) and `npm run build` (all local a
 ## CP3 — 2026-10-29: my store
 
 Good Hour Diner is an original fictional diner with 23 configurable menu items, original food imagery, procedural 3D previews, a cart, simulated checkout, kitchen sequence, receipt, and saved history. It uses no real brands, accounts, personal information, payments, preparation, or delivery.
+
+## CP4 — 2026-10-29: two mechanics
+
+The clearly fictional time-limited special is the purchasing-pressure mechanic. The completed-order receipt and cumulative money-not-spent total are the self-binding feature. The special’s schedule and pricing behavior are tested in `test/special.test.js`.
