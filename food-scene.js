@@ -44,15 +44,15 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
   const turntable = new THREE.Group();
   scene.add(turntable);
-  scene.add(new THREE.HemisphereLight(0xfff7ee, 0x807362, 1.8));
-  const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.7);
+  scene.add(new THREE.HemisphereLight(0xfff7ee, 0x807362, 2.05));
+  const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.25);
   keyLight.position.set(-3, 6, 4);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.set(1024, 1024);
   Object.assign(keyLight.shadow.camera, { left: -3.8, right: 3.8, top: 4.5, bottom: -3.8, near: 0.5, far: 15 });
   keyLight.shadow.bias = -0.0005;
   keyLight.shadow.normalBias = 0.02;
-  keyLight.shadow.radius = 3;
+  keyLight.shadow.radius = 4;
   scene.add(keyLight);
   const fillLight = new THREE.DirectionalLight(0xe4edff, 0.7);
   fillLight.position.set(4, 2.5, -2);
@@ -93,7 +93,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     if (textures.has(kind)) return textures.get(kind);
     const size = 256, pixels = new Uint8Array(size * size * 4);
     const palettes = {
-      bun: [190, 123, 59], patty: [89, 55, 35], pancake: [199, 142, 77],
+      bun: [193, 137, 73], patty: [72, 47, 32], pancake: [199, 142, 77],
       toast: [200, 155, 98], crumb: [198, 142, 66], potato: [227, 179, 85],
     };
     const base = palettes[kind] || palettes.toast;
@@ -117,11 +117,20 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
       const u = x / size, v = y / size;
       const broad = noise(u, v, 5), medium = noise(u, v, 19), fine = noise(u, v, 73);
-      let variation = (broad - 0.5) * 0.32 + (medium - 0.5) * (charred ? 0.85 : 0.3) + (fine - 0.5) * 0.13;
-      // Irregular seared islands and small pores, without straight painted grill stripes.
-      if (charred && medium < 0.36) variation -= (0.36 - medium) * 2.3;
-      if (breaded) variation += (fine - 0.5) * 0.45;
-      if (!charred && fine < 0.24) variation -= 0.1;
+      let variation;
+      if (kind === "bun") {
+        // Quiet browning and fine pores; no stretched cloud bands resembling wood grain.
+        variation = (broad - 0.5) * 0.08 + (medium - 0.5) * 0.045 + (fine - 0.5) * 0.1;
+        if (fine < 0.23) variation -= 0.025;
+      } else if (charred) {
+        // Beef is consistently dark brown; searing should not turn into black/tan camouflage.
+        variation = (broad - 0.5) * 0.1 + (medium - 0.5) * 0.16 + (fine - 0.5) * 0.12;
+        if (medium < 0.3) variation -= 0.035;
+      } else {
+        variation = (broad - 0.5) * 0.32 + (medium - 0.5) * 0.3 + (fine - 0.5) * 0.13;
+        if (breaded) variation += (fine - 0.5) * 0.45;
+        if (fine < 0.24) variation -= 0.1;
+      }
       const i = (y * size + x) * 4;
       pixels[i] = clamp(base[0] * (1 + variation), 0, 255);
       pixels[i + 1] = clamp(base[1] * (1 + variation * 1.12), 0, 255);
@@ -130,6 +139,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     }
     const result = new THREE.DataTexture(pixels, size, size);
     result.colorSpace = THREE.SRGBColorSpace;
+    if (kind === "bun") result.repeat.set(4, 1);
     result.wrapS = result.wrapT = THREE.RepeatWrapping;
     result.magFilter = THREE.LinearFilter;
     result.minFilter = THREE.LinearMipmapLinearFilter;
@@ -148,9 +158,8 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     const size = 128, data = new Uint8Array(size * size * 4), random = rng(coarse ? 817 : 293);
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
       const grain = random();
-      const pores = coarse && grain < 0.12 ? -65 : 0;
-      const waves = Math.sin(x * Math.PI / 16) * Math.cos(y * Math.PI / 16);
-      const value = Math.round(clamp(185 + waves * 18 + (grain - 0.5) * (coarse ? 95 : 38) + pores, 0, 255));
+      const pores = coarse && grain < 0.1 ? -28 : 0;
+      const value = Math.round(clamp(185 + (grain - 0.5) * (coarse ? 55 : 28) + pores, 0, 255));
       const offset = (y * size + x) * 4;
       data[offset] = data[offset + 1] = data[offset + 2] = value;
       data[offset + 3] = 255;
@@ -178,7 +187,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
         color, roughness: surfaceRoughness, metalness: 0,
         specularIntensity: kind ? 0.24 : foodSurface ? 0.38 : 0.6,
         ...(kind ? { map: texture(kind) } : {}),
-        ...(detail ? { bumpMap: detail, bumpScale: coarse ? 0.012 : 0.004 } : {}),
+        ...(detail ? { bumpMap: detail, bumpScale: kind === "bun" ? 0.0018 : coarse ? 0.008 : 0.003 } : {}),
         // Keep food diffuse. The shared bump map must not reduce its roughness.
         clearcoat: !kind && roughness < 0.25 ? 0.06 : 0,
         clearcoatRoughness: 0.5,
@@ -309,19 +318,29 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     result.rotation.y = rotation;
     result.scale.setScalar(scale);
   }
-  function cheese(parent, y, swiss = false) {
-    const geometry = new THREE.PlaneGeometry(1.95, 1.95, 10, 10);
+  function cheese(parent, y, swiss = false, support = "round") {
+    const toast = support === "toast";
+    const geometry = new THREE.PlaneGeometry(1.95, toast ? 1.56 : 1.95, 40, 40);
     geometry.rotateX(-Math.PI / 2);
     const vertices = geometry.attributes.position;
     for (let i = 0; i < vertices.count; i++) {
-      const x = vertices.getX(i), z = vertices.getZ(i), edge = Math.max(Math.abs(x), Math.abs(z));
-      vertices.setY(i, -Math.max(0, edge - 0.68) * 0.55 + Math.sin(x * 5 + z * 3) * 0.025);
+      const x = vertices.getX(i), z = vertices.getZ(i);
+      const radiusZ = support === "chicken" ? 0.87 : 1;
+      const radius = toast ? Math.max(Math.abs(x) / 0.97, Math.abs(z) / 0.77) : Math.hypot(x, z / radiusZ);
+      // Cheese rests on the filling. Only its unsupported perimeter bends down;
+      // folding through the center of a patty creates triangular intersections.
+      const overhang = Math.max(0, radius - (toast ? 0.96 : 0.93));
+      const bentRadius = (toast ? 0.96 : 0.93) + (toast ? 0.05 : 0.2) * (1 - Math.exp(-overhang * 7));
+      const scale = overhang ? bentRadius / radius : 1;
+      const ripple = Math.sin(x * 5 + z * 3) * 0.002;
+      vertices.setXYZ(i, x * scale, -overhang * 0.4 + ripple, z * scale);
     }
     geometry.computeVertexNormals();
-    const mat = material(swiss ? 0xf7d489 : 0xf1b334, 0.36);
+    const mat = material(swiss ? 0xf7d489 : 0xf1b334, 0.45);
     mat.side = THREE.DoubleSide;
     const result = mesh(geometry, mat, parent, 0, y, 0);
-    result.rotation.y = 0.24;
+    // Keep rectangular toast and oval chicken support aligned with their cheese.
+    result.rotation.y = support === "round" ? 0.12 : 0;
   }
   function tomato(parent, y) {
     for (let i = 0; i < 3; i++) {
@@ -438,9 +457,30 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     return { has: name => set.has(name), values };
   }
 
+  function grillMarks(parent) {
+    for (let i = -2; i <= 2; i++) {
+      const shape = new THREE.Shape();
+      const samples = 14;
+      for (let j = 0; j <= samples; j++) {
+        const x = -0.78 + j / samples * 1.56;
+        const width = 0.018 + Math.sin(j * 1.9 + i) * 0.004;
+        if (!j) shape.moveTo(x, width); else shape.lineTo(x, width);
+      }
+      for (let j = samples; j >= 0; j--) {
+        const x = -0.78 + j / samples * 1.56;
+        shape.lineTo(x, -0.014 + Math.cos(j * 1.3 + i) * 0.004);
+      }
+      shape.closePath();
+      const geometry = new THREE.ShapeGeometry(shape);
+      geometry.rotateX(-Math.PI / 2);
+      const mark = mesh(geometry, material(i % 2 ? 0x85502b : 0x744323, 0.96), parent, 0, 0.141, i * 0.245);
+      mark.rotation.y = -0.3;
+      mark.castShadow = false;
+    }
+  }
+
   function buildBurger(selected, sandwich = false) {
-    let y = 0.37;
-    const base = layer("bread-bottom", y);
+    const base = layer("bread-bottom", 0.37);
     const breadColor = selected.has("sourdough") ? 0xffe8c1 : 0xffffff;
     if (sandwich) {
       mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(breadColor, 0.72, "toast"), base);
@@ -448,91 +488,101 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       const bun = mesh(new THREE.SphereGeometry(1.05, 48, 24), material(0xffffff, 0.5, "bun"), base);
       bun.scale.y = 0.21;
     }
-    y += 0.18;
+    // Track the contact surface, including the actual thickness of each ingredient.
+    let y = sandwich ? 0.50 : 0.58;
     if (selected.has("sauce")) {
-      const spread = layer("house-sauce", y - 0.035);
-      cylinder(spread, 0.94, 0.035, 0, selected.values.sauce === "smoky" ? 0x943f28 : 0xe4ad74, 0.25);
-      y += 0.025;
+      const spread = layer("house-sauce", y);
+      const geometry = sandwich ? roundedSlab(1.83, 1.43, 0.009, 0.15) : new THREE.CylinderGeometry(0.94, 0.94, 0.009, 64);
+      mesh(geometry, material(selected.values.sauce === "smoky" ? 0x943f28 : 0xe4ad74, 0.42), spread);
+      y += 0.006;
     }
     const vegetable = item.id === "garden-state-melt";
     const chicken = item.id === "crispy-chicken-club";
     const pattyCount = vegetable ? 0 : selected.has("extra-patty") ? 2 : 1;
     for (let i = 0; i < pattyCount; i++) {
-      const patty = layer(`patty-${i}`, y + 0.14);
-      const g = chicken ? new THREE.SphereGeometry(1, 64, 32) : new THREE.CylinderGeometry(0.99, 1.02, 0.27, 64, 6);
+      const patty = layer(`patty-${i}`, y + (chicken ? 0.14 : 0.11));
+      const g = chicken ? new THREE.SphereGeometry(1, 64, 32) : new THREE.LatheGeometry([
+        new THREE.Vector2(0, -0.115), new THREE.Vector2(0.92, -0.115),
+        new THREE.Vector2(0.985, -0.075), new THREE.Vector2(1.005, -0.01),
+        new THREE.Vector2(0.99, 0.065), new THREE.Vector2(0.93, 0.112),
+        new THREE.Vector2(0, 0.12),
+      ], 96);
       const position = g.attributes.position, uv = g.attributes.uv;
       for (let v = 0; v < position.count; v++) {
         const x = position.getX(v), z = position.getZ(v), py = position.getY(v), a = Math.atan2(z, x);
         if (chicken) {
-          const contour = 1 + Math.sin(a * 3 + 0.8) * 0.085 + Math.sin(a * 9) * 0.035;
-          position.setXYZ(v, x * contour, py * 0.18 + Math.sin(x * 12 + z * 8) * 0.012, z * contour * 0.87);
+          const contour = 1 + Math.sin(a * 3 + 0.8) * 0.055 + Math.sin(a * 9) * 0.025;
+          position.setXYZ(v, x * contour, py * 0.15 + Math.sin(x * 12 + z * 8) * 0.006, z * contour * 0.87);
         } else {
-          const roundEdge = 1 - 0.045 * (Math.abs(py) / 0.135) ** 4;
-          const irregularity = roundEdge * (1 + Math.sin(a * 17) * 0.018 + Math.sin(a * 5) * 0.012);
-          position.setXYZ(v, x * irregularity, py + Math.cos(a * 11) * 0.01, z * irregularity);
-          // Side UVs span the circumference, not the height: avoid stretched horizontal grain.
-          if (v < 65 * 7) uv.setX(v, uv.getX(v) * 8);
+          const radius = Math.hypot(x, z);
+          const contour = 1 + Math.sin(a * 13) * 0.009 + Math.sin(a * 5) * 0.007;
+          position.setXYZ(v, x * contour, py + Math.cos(a * 11) * 0.004 * Math.min(1, radius), z * contour);
         }
+        const vertical = Math.abs(g.attributes.normal.getY(v)) < 0.65;
+        uv.setXY(v, vertical ? uv.getX(v) * 8 : x * 0.65 + 0.5,
+          vertical ? py * 3 + 0.5 : z * 0.65 + 0.5);
       }
       uv.needsUpdate = true;
       g.computeVertexNormals();
       mesh(g, material(0xffffff, 0.82, chicken ? "crumb" : "patty"), patty);
-      y += 0.27;
+      y += chicken ? 0.29 : 0.23;
       if (selected.has("cheese") || selected.has("swiss")) {
-        const cheeseLayer = layer(`cheese-${i}`, y + 0.055);
-        cheese(cheeseLayer, 0, selected.has("swiss"));
-        y += 0.09;
+        cheese(layer(`cheese-${i}`, y + 0.014), 0, selected.has("swiss"), chicken ? "chicken" : "round");
+        y += 0.025;
       }
     }
-    if (vegetable && (selected.has("cheese") || selected.has("swiss"))) {
-      cheese(layer("cheese-0", y + 0.05), 0, selected.has("swiss"));
-      y += 0.1;
-    }
-    if (selected.has("bacon")) { bacon(layer("bacon", y + 0.04), 0); y += 0.1; }
+    if (selected.has("bacon")) { bacon(layer("bacon", y + 0.02), 0); y += 0.06; }
     if (selected.has("mushroom")) {
-      const mushrooms = layer("mushroom", y + 0.04);
-      for (let i = 0; i < 7; i++) sphere(mushrooms, Math.cos(i * 2.4) * 0.65, 0, Math.sin(i * 2.4) * 0.6, 0.23, 0x9f886e, [1, 0.45, 0.8]);
-      y += 0.13;
+      const mushrooms = layer("mushroom", y + 0.025);
+      for (let i = 0; i < 11; i++) {
+        const radius = Math.sqrt((i + 0.5) / 11) * 0.72;
+        const cap = sphere(mushrooms, Math.cos(i * 2.4) * radius, (i % 3) * 0.01, Math.sin(i * 2.4) * radius * 0.8,
+          0.22 + (i % 3) * 0.015, 0x947251, [1, 0.25, 0.7], 0.75);
+        cap.rotation.y = i * 1.7;
+        cap.rotation.z = Math.sin(i) * 0.16;
+      }
+      y += 0.07;
     }
     for (const vegetableName of ["pepper", "zucchini"]) {
       if (!selected.has(vegetableName)) continue;
-      const vegetables = layer(vegetableName, y + 0.05);
+      const vegetables = layer(vegetableName, y + 0.025);
       for (let i = 0; i < 6; i++) {
         const x = Math.cos(i * 2.4) * 0.6, z = Math.sin(i * 2.4) * 0.5;
         if (vegetableName === "zucchini") {
-          const slice = mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.09, 28), material(0x678447, 0.45), vegetables, x, i * 0.008, z);
-          slice.rotation.z = i * 0.03;
+          const slice = mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.07, 28), material(0x678447, 0.45), vegetables, x, i * 0.005, z);
+          slice.rotation.z = Math.sin(i * 1.7) * 0.08;
         } else {
-          const pepper = tube(vegetables, [[x - 0.19, 0, z - 0.12], [x - 0.15, 0.015, z + 0.17], [x + 0.16, 0.02, z + 0.19], [x + 0.2, 0, z - 0.08]], 0.07, 0xbf4c2c, 18, 0.45);
+          const pepper = tube(vegetables, [[x - 0.19, 0, z - 0.12], [x - 0.15, 0.015, z + 0.17], [x + 0.16, 0.02, z + 0.19], [x + 0.2, 0, z - 0.08]], 0.055, 0xbf4c2c, 18, 0.45);
           pepper.rotation.y = i * 0.12;
         }
       }
-      y += 0.13;
+      y += 0.065;
     }
-    if (selected.has("tomato")) { tomato(layer("tomato", y + 0.05), 0); y += 0.12; }
-    if (selected.has("pickle")) { pickles(layer("pickle", y + 0.04), 0); y += 0.08; }
+    if (vegetable && (selected.has("cheese") || selected.has("swiss"))) {
+      cheese(layer("cheese-0", y + 0.006), 0, selected.has("swiss"), "toast");
+      y += 0.018;
+    }
+    if (selected.has("tomato")) { tomato(layer("tomato", y + 0.035), 0); y += 0.09; }
+    if (selected.has("pickle")) { pickles(layer("pickle", y + 0.025), 0); y += 0.065; }
     if (selected.has("onion")) {
-      const onions = layer("onion", y + 0.04);
+      const onions = layer("onion", y + 0.015);
       for (let i = 0; i < 3; i++) {
-        const ring = mesh(new THREE.TorusGeometry(0.48 - i * 0.07, 0.04, 8, 40), material(0xe3cece, 0.58), onions, (i - 1) * 0.32, i * 0.025, (i % 2) * 0.15);
+        const ring = mesh(new THREE.TorusGeometry(0.48 - i * 0.07, 0.032, 8, 40), material(0xe3cece, 0.58), onions, (i - 1) * 0.32, i * 0.014, (i % 2) * 0.15);
         ring.rotation.x = Math.PI / 2;
       }
-      y += 0.1;
+      y += 0.06;
     }
-    if (selected.has("lettuce")) { const lettuce = layer("lettuce", y + 0.03); leaf(lettuce, 0); leaf(lettuce, 0.04, 1.1, 1.02); y += 0.12; }
+    if (selected.has("lettuce")) { const lettuce = layer("lettuce", y + 0.005); leaf(lettuce, 0); leaf(lettuce, 0.025, 1.1, 1.02); y += 0.055; }
     if (selected.has("avocado")) {
-      const avocado = layer("avocado", y + 0.055);
-      for (let i = 0; i < 5; i++) sphere(avocado, (i - 2) * 0.27, i * 0.007, 0, 0.68, 0xa4b966, [0.23, 0.1, 1], 0.6);
-      y += 0.12;
+      const avocado = layer("avocado", y + 0.035);
+      for (let i = 0; i < 5; i++) sphere(avocado, (i - 2) * 0.27, i * 0.005, 0, 0.68, 0xa4b966, [0.23, 0.1, 1], 0.6);
+      y += 0.09;
     }
-    const top = layer("bread-top", y + (sandwich ? 0.13 : 0.02));
+    const top = layer("bread-top", y + (sandwich ? 0.125 : -0.015));
     if (sandwich) {
       mesh(roundedSlab(2.05, 1.65, 0.23, 0.16), material(breadColor, 0.72, "toast"), top);
       top.rotation.y = -0.04;
-      for (let i = -2; i <= 2; i++) {
-        const grill = mesh(roundedSlab(1.7, 0.035, 0.004, 0.01), material(0x6e391d, 0.9), top, 0, 0.142, i * 0.29);
-        grill.rotation.y = -0.4;
-      }
+      grillMarks(top);
     } else {
       const bun = mesh(new THREE.SphereGeometry(1.08, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2), material(0xffffff, 0.44, "bun"), top);
       bun.scale.y = 0.59;
@@ -573,8 +623,26 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
 
       }
     }
-    let y = 0.39 + (count - 1) * step;
-    if (selected.has("syrup")) { sauce(layer("syrup", y), 0, 0x995a23, frenchToast ? 0.76 : 0.9, frenchToast ? 0.8 : 1.04); y += 0.04; }
+    // Extruded toast includes a 0.035 bevel above its nominal half-height.
+    const topSurface = 0.28 + (count - 1) * step + (frenchToast ? 0.135 : 0.098);
+    let y = topSurface + 0.016;
+    if (selected.has("syrup")) {
+      const syrup = layer("syrup", y);
+      sauce(syrup, 0, 0xa76021, frenchToast ? 0.76 : 0.9, frenchToast ? 0.8 : 1.04);
+      if (!materialCache.has("maple-syrup")) {
+        materialCache.set("maple-syrup", new THREE.MeshPhysicalMaterial({
+          color: 0xa96722, roughness: 0.24, metalness: 0, specularIntensity: 0.45,
+          transparent: true, opacity: 0.64, depthWrite: false,
+          clearcoat: 0.12, clearcoatRoughness: 0.32,
+        }));
+      }
+      syrup.traverse(object => {
+        if (!object.isMesh) return;
+        object.material = materialCache.get("maple-syrup");
+        object.castShadow = false;
+      });
+      y += 0.025;
+    }
     if (selected.has("blueberry")) blueberries(layer("blueberry", y + 0.08), 0);
     if (selected.has("butter")) {
       const butter = layer("butter", y + 0.08);
@@ -622,9 +690,10 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
         [1, 0.55, 1], 0.5);
     }
     if (isSoda && selected.values.ice !== "none") {
-      const ice = layer("ice", 1.79);
+      const ice = layer("ice", 1.98);
+      if (!materialCache.has("ice")) materialCache.set("ice", new THREE.MeshPhysicalMaterial({ color: 0xe7f1ee, roughness: 0.15, transparent: true, opacity: 0.58, transmission: 0.15, thickness: 0.18, ior: 1.31, depthWrite: false }));
       for (let i = 0; i < (selected.values.ice === "light" ? 3 : 7); i++) {
-        const cube = mesh(roundedSlab(0.24, 0.28, 0.22, 0.05), glass, ice, Math.cos(i * 2.4) * 0.31, Math.sin(i * 2) * 0.05, Math.sin(i * 2.4) * 0.3);
+        const cube = mesh(roundedSlab(0.24, 0.28, 0.22, 0.05), materialCache.get("ice"), ice, Math.cos(i * 2.4) * 0.31, Math.sin(i * 2) * 0.05, Math.sin(i * 2.4) * 0.3);
         cube.rotation.set(i * 0.2, i * 0.7, 0.2);
       }
     }
@@ -635,10 +704,18 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       topY += 0.43;
     }
     if (selected.has("whipped-cream")) { whip(layer("whipped-cream", topY), 0, 0.94); topY += 0.7; }
-    if (selected.has("cherry")) cherry(layer("cherry", topY + 0.02), 0);
+    if (selected.has("cherry")) cherry(layer("cherry", topY - 0.025), 0);
     if (Array.isArray(selected.values.toppings) && selected.values.toppings.includes("chocolate")) {
-      const drizzle = layer("chocolate", topY - 0.13);
-      for (let i = 0; i < 4; i++) tube(drizzle, [[-0.3, i * 0.07, -0.28 + i * 0.16], [0, 0.08 + i * 0.07, -0.28 + i * 0.16], [0.3, i * 0.07, -0.28 + i * 0.16]], 0.025, 0x4e291b, 16, 0.25);
+      const withCream = selected.has("whipped-cream");
+      const drizzle = layer("chocolate", withCream ? topY - 0.7 : 2.005);
+      for (let i = 0; i < 4; i++) {
+        const z = -0.26 + i * 0.17, points = [];
+        for (let j = 0; j <= 14; j++) {
+          const x = -0.35 + j / 14 * 0.7, radius = Math.hypot(x, z);
+          points.push([x, withCream ? Math.max(0.09, 0.62 * (1 - radius / 0.48)) : 0.008, z + Math.sin(j * 0.6 + i) * 0.018]);
+        }
+        tube(drizzle, points, 0.012, 0x4e291b, 22, 0.24);
+      }
     }
     const straw = layer("straw", 1.63);
     straw.position.x = 0.3; straw.position.z = -0.18; straw.rotation.z = -0.2;
@@ -655,7 +732,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       for (let i = 0; i < 19; i++) sphere(eggs, -0.35 + (random() - 0.5) * 0.85, random() * 0.09, (random() - 0.5) * 0.68, 0.18, 0xf0c95d, [1, 0.65, 0.8], 0.7);
     } else {
       for (let i = 0; i < 2; i++) {
-        const white = sphere(eggs, -0.35, 0, (i - 0.5) * 0.64, 0.49, 0xf4e4c3, [1.12, 0.1, 0.86], 0.58);
+        const white = sphere(eggs, -0.43, 0.018, (i - 0.5) * 0.69 - 0.04, 0.49, 0xffedcf, [1.12, 0.1, 0.86], 0.58);
         const p = white.geometry.attributes.position;
         for (let v = 0; v < p.count; v++) {
           const x = p.getX(v), z = p.getZ(v), a = Math.atan2(z, x);
@@ -663,7 +740,10 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
           p.setXYZ(v, x * spread, p.getY(v), z * spread);
         }
         white.geometry.computeVertexNormals();
-        sphere(eggs, -0.29, 0.058, (i - 0.5) * 0.64, 0.205, 0xeeb331, [1, 0.36, 1], 0.32);
+        const crispEdge = mesh(white.geometry.clone(), material(0xba8347, 0.79), eggs,
+          white.position.x, 0.007, white.position.z);
+        crispEdge.scale.set(1.17, 0.055, 0.9);
+        sphere(eggs, -0.37, 0.076, (i - 0.5) * 0.69 - 0.04, 0.205, 0xeeb331, [1, 0.36, 1], 0.32);
       }
     }
     const protein = layer("protein", 0.3);
@@ -679,7 +759,7 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
         sphere(protein, 0.74 + (i % 2) * 0.12, -0.03, (i - 2) * 0.21, 0.08, 0xcbb996, [0.6, 0.8, 0.6]);
       }
     }
-    if (selected.has("potato")) potatoPile(layer("potato", 0.27), -0.1, 0.83);
+    if (selected.has("potato")) potatoPile(layer("potato", 0.27), 0.18, 0.88);
     if (selected.has("toast")) {
       const toast = layer("toast", 0.31);
       const piece = mesh(roundedSlab(0.75, 0.7, 0.13, 0.08), material(0xffffff, 0.8, "toast"), toast, -0.9, 0, 0.5);
@@ -690,11 +770,26 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
   }
   function potatoPile(parent, x = 0, z = 0) {
     const random = rng(382);
+    const tones = [0xf4d8a1, 0xe0b877, 0xffffff, 0xd5a56c];
     for (let i = 0; i < 15; i++) {
-      const cube = mesh(roundedSlab(0.15 + random() * 0.12, 0.17 + random() * 0.13, 0.12 + random() * 0.07, 0.035), material(0xffffff, 0.75, "potato"), parent, x + (random() - 0.5) * 0.75, random() * 0.13, z + (random() - 0.5) * 0.35);
+      const width = 0.15 + random() * 0.12, depth = 0.17 + random() * 0.13, height = 0.12 + random() * 0.07;
+      const cube = mesh(roundedSlab(width, depth, height, 0.035), material(tones[i % tones.length], 0.82, "potato"), parent,
+        x + (random() - 0.5) * 0.75, random() * 0.1, z + (random() - 0.5) * 0.35);
       cube.rotation.set((random() - 0.5) * 0.35, random() * Math.PI, (random() - 0.5) * 0.3);
+      // Small browned contact patches break up the pale, uniform diced-potato surfaces.
+      const patchGeometry = new THREE.CircleGeometry(width * 0.27, 13);
+      patchGeometry.rotateX(-Math.PI / 2);
+      const positions = patchGeometry.attributes.position;
+      for (let v = 1; v < positions.count; v++) {
+        const factor = 0.7 + random() * 0.5;
+        positions.setXYZ(v, positions.getX(v) * factor, 0, positions.getZ(v) * factor);
+      }
+      const patch = mesh(patchGeometry, material(i % 3 ? 0xa86c31 : 0x81502c, 0.88), cube,
+        0, height / 2 + 0.036, 0);
+      patch.scale.z = 0.7 + random() * 0.5;
     }
   }
+
   function bowl(parent, glassBowl = false) {
     mesh(new THREE.LatheGeometry([new THREE.Vector2(0.55, 0), new THREE.Vector2(0.65, 0.04), new THREE.Vector2(0.95, 0.35), new THREE.Vector2(1.08, 0.67), new THREE.Vector2(1.07, 0.72), new THREE.Vector2(1.02, 0.71), new THREE.Vector2(0.91, 0.4), new THREE.Vector2(0.59, 0.1)], 48), glassBowl ? glass : plateMaterial, parent);
   }
@@ -706,24 +801,31 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     if (item.model === "fries") {
       for (let i = 0; i < count; i++) {
         const fry = mesh(roundedSlab(0.1, 0.75 + random() * 0.5, 0.1, 0.025), material(0xffffff, 0.7, "potato"), pile, (random() - 0.5) * 1.4, random() * 0.42, (random() - 0.5) * 1.1);
-        fry.rotation.set((random() - 0.5) * 0.6, random() * Math.PI, (random() - 0.5) * 0.55);
+        const positions = fry.geometry.attributes.position;
+        for (let v = 0; v < positions.count; v++) {
+          const x = positions.getX(v), y = positions.getY(v), z = positions.getZ(v);
+          positions.setXYZ(v, x * (0.93 + Math.cos(z * 5 + i) * 0.08), y + Math.sin(z * 4 + i) * 0.017, z);
+        }
+        fry.geometry.computeVertexNormals();
+        fry.rotation.set((random() - 0.5) * 0.3, random() * Math.PI, (random() - 0.5) * 0.3);
       }
     } else if (item.model === "pickles") {
       for (let i = 0; i < (selected.has("large") ? 10 : 7); i++) {
         const pickle = mesh(new THREE.CapsuleGeometry(0.13, 0.83, 4, 14), material(0xffffff, 0.9, "crumb"), pile, (random() - 0.5) * 1.2, random() * 0.24, (random() - 0.5) * 0.9);
-        pickle.rotation.set(Math.PI / 2 + random() * 0.6, random() * Math.PI, random() * 0.4);
+        const angle = random() * Math.PI * 2;
+        pickle.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(Math.cos(angle), 0.15 + random() * 0.3, Math.sin(angle)).normalize());
       }
     } else {
       // A shallow sauce bed joins the pasta instead of exposing the empty bowl.
-      sphere(pile, 0, -0.01, 0, 0.9, 0xdbab48, [1, 0.14, 1], 0.54);
+      sphere(pile, 0, -0.01, 0, 0.9, 0xd49b3b, [1, 0.14, 1], 0.3);
       for (let i = 0; i < (selected.has("large") ? 110 : 85); i++) {
         const angle = random() * Math.PI * 2, radius = Math.sqrt(random()) * 0.87;
-        const noodle = mesh(new THREE.TorusGeometry(0.11, 0.052, 7, 10, Math.PI * 1.3), material(0xe7b142, 0.52), pile, Math.cos(angle) * radius, random() * 0.22, Math.sin(angle) * radius);
+        const noodle = mesh(new THREE.TorusGeometry(0.11, 0.052, 7, 10, Math.PI * 1.3), material(i % 3 ? 0xe4a23c : 0xd99c38, 0.3), pile, Math.cos(angle) * radius, random() * 0.22, Math.sin(angle) * radius);
         noodle.rotation.set(random() * 3, random() * 3, random() * 3);
       }
     }
     if (selected.has("cheese")) {
-      const topping = layer("cheese", 1.02);
+      const topping = layer("cheese", selected.has("chili") ? 1.18 : 1.1);
       const drizzleRandom = rng(742);
       for (let i = 0; i < 7; i++) {
         const z = -0.52 + i * 0.16, tilt = (drizzleRandom() - 0.5) * 0.5;
@@ -733,12 +835,18 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
       }
     }
     if (selected.has("chili")) {
-      const chili = layer("chili", 1.06);
+      const chili = layer("chili", 1.08);
       for (let i = 0; i < 11; i++) {
         const a = i * 2.4, r = 0.17 + random() * 0.35;
         sphere(chili, Math.cos(a) * r, -0.025 + random() * 0.025, Math.sin(a) * r, 0.24, 0x79402a, [1.1, 0.22, 0.9], 0.6);
       }
-      for (let i = 0; i < 28; i++) sphere(chili, (random() - 0.5) * 1.25, random() * 0.14, (random() - 0.5) * 1.1, 0.08, 0x74402a, [1, 0.7, 0.8], 0.6);
+      for (let i = 0; i < 65; i++) {
+        const angle = random() * Math.PI * 2, radius = Math.sqrt(random()) * 0.56;
+        const mince = mesh(new THREE.DodecahedronGeometry(0.035 + random() * 0.035, 1), material(i % 3 ? 0x6c3b24 : 0x854529, 0.65), chili,
+          Math.cos(angle) * radius, 0.015 + random() * 0.06, Math.sin(angle) * radius);
+        mince.scale.set(1.2, 0.6, 0.9);
+        mince.rotation.set(random(), random() * 3, random());
+      }
     }
     if (selected.has("bacon")) { const top = layer("bacon", 1.13); bacon(top, 0, 2); top.scale.setScalar(0.65); }
     if (selected.has("onion")) {
@@ -807,17 +915,26 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     } else {
       pieSlice(layer("crust", 0.29), 0, 0xffffff, 0.12, "crumb");
       const filling = layer("filling", 0.61);
-      pieSlice(filling, 0, item.model === "cheesecake" ? 0xf2e1c5 : 0xb77b3e, 0.5);
+      pieSlice(filling, 0, item.model === "cheesecake" ? 0xf2e1c5 : 0xc18b4c, 0.5);
       if (item.model === "pie") {
-        // Apple slices are visible along both cut faces, embedded in a caramel filling.
-        for (const angle of [Math.PI / 6, Math.PI * 5 / 6]) {
-          for (let row = 0; row < 3; row++) for (let column = 0; column < 5; column++) {
-            const r = 0.2 + column * 0.17 + random() * 0.03;
-            const apple = sphere(filling, Math.cos(angle) * r,
-              -0.16 + row * 0.14 + (random() - 0.5) * 0.035,
-              0.65 - Math.sin(angle) * r, 0.13,
-              (row + column) % 3 ? 0xe4bd7c : 0xd7a866, [1.2, 0.4, 0.62], 0.58);
-            apple.rotation.set((random() - 0.5) * 0.25, -angle, (random() - 0.5) * 0.3);
+        // Broad, overlapping cut surfaces read as tender apple layers instead of beads.
+        for (const [face, angle] of [Math.PI / 6, Math.PI * 5 / 6].entries()) {
+          for (let row = 0; row < 5; row++) for (let column = 0; column < 3; column++) {
+            const width = 0.31 + random() * 0.11, thickness = 0.045 + random() * 0.035;
+            const shape = new THREE.Shape();
+            shape.moveTo(-width / 2, -thickness * 0.3);
+            shape.quadraticCurveTo(-width * 0.2, thickness * 0.75, width * 0.35, thickness * 0.4);
+            shape.quadraticCurveTo(width * 0.62, 0, width * 0.42, -thickness * 0.4);
+            shape.quadraticCurveTo(-width * 0.1, -thickness * 0.5, -width / 2, -thickness * 0.3);
+            const r = 0.19 + column * 0.31 + (random() - 0.5) * 0.09;
+            const outward = face ? -1 : 1;
+            const apple = mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.018, bevelEnabled: true,
+              bevelThickness: 0.007, bevelSize: 0.01, bevelSegments: 2, curveSegments: 8 }),
+            material((row + column) % 3 ? 0xd6a264 : 0xc99754, 0.26), filling,
+            Math.cos(angle) * r + Math.sin(angle) * outward * 0.015,
+            -0.19 + row * 0.087 + (random() - 0.5) * 0.025,
+            0.65 - Math.sin(angle) * r + Math.cos(angle) * outward * 0.015);
+            apple.rotation.set(0, angle + (face ? Math.PI : 0), (random() - 0.5) * 0.16);
           }
         }
         const pastry = layer("pastry", 0.9);
@@ -852,32 +969,50 @@ function initializeFoodScene(THREE, renderer, container, { item, options, reduce
     if (selected.has("chocolate")) {
       if (scoopSurface) {
         const glaze = layer("chocolate", scoopSurface.y);
-        // Narrow ribbons follow the scoop surface, leaving visible ice cream between them.
-        // Their uneven lengths and rounded ends avoid the former solid helmet silhouette.
-        for (let i = 0; i < 5; i++) {
-          const offset = (i - 2) * 0.115, points = [];
-          const extent = Math.sqrt(Math.max(0, scoopSurface.radius ** 2 - offset ** 2));
-          const end = 1.05 + random() * 0.45;
-          for (let step = 0; step <= 18; step++) {
-            const angle = -0.85 + step / 18 * (end + 0.85);
-            points.push([offset + Math.sin(step * 0.55 + i) * 0.008,
-              Math.cos(angle) * extent * scoopSurface.scaleY + 0.008,
-              (scoopSurface.z || 0) + Math.sin(angle) * extent]);
+        // Thin ribbons spread across the scoop, with meandering edges and tapered ends.
+        const chocolate = material(0x4e281b, 0.22);
+        chocolate.side = THREE.DoubleSide;
+        for (let i = 0; i < 4; i++) {
+          const offset = (i - 1.5) * 0.16, positions = [], indices = [];
+          const start = -0.76 + random() * 0.28, end = 1.05 + random() * 0.45;
+          const width = 0.022 + random() * 0.014;
+          for (let step = 0; step <= 36; step++) {
+            const t = step / 36, angle = start + t * (end - start);
+            const spread = width * Math.min(1, Math.sqrt(Math.sin(Math.PI * t)) * 2.5)
+              * (1 + Math.sin(t * 12 + i) * 0.2);
+            for (const side of [-1, 1]) {
+              const x = offset + Math.sin(t * 7 + i * 1.6) * 0.03 + spread * side;
+              const extent = Math.sqrt(Math.max(0.001, scoopSurface.radius ** 2 - x ** 2));
+              const py = Math.cos(angle) * extent, pz = Math.sin(angle) * extent;
+              const latitude = py / scoopSurface.radius;
+              const ridge = Math.sin(Math.atan2(pz, x) * 17 + latitude * 7) * 0.009 * Math.max(0, 1 - latitude * latitude);
+              const scoopMark = Math.sin(x * 22 + py * 5) * Math.cos(pz * 19) * 0.007;
+              const raised = 1 + (ridge + scoopMark + 0.008) / scoopSurface.radius;
+              positions.push(x * raised, py * raised * scoopSurface.scaleY, (scoopSurface.z || 0) + pz * raised);
+            }
+            if (step < 36) {
+              const v = step * 2;
+              indices.push(v, v + 2, v + 1, v + 1, v + 2, v + 3);
+            }
           }
-          tube(glaze, points, 0.014 + random() * 0.008, 0x4e281b, 28, 0.36);
+          const ribbon = new THREE.BufferGeometry();
+          ribbon.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+          ribbon.setIndex(indices);
+          ribbon.computeVertexNormals();
+          mesh(ribbon, chocolate, glaze);
         }
       } else sauce(layer("chocolate", y - 0.08), 0, 0x512b1d, 0.47);
     }
-    if (selected.has("whipped-cream")) { whip(layer("whipped-cream", y), 0, 0.8); y += 0.56; }
+    if (selected.has("whipped-cream")) { whip(layer("whipped-cream", y), 0, 0.8); y += 0.49; }
     if (selected.has("cherry")) {
       const cherries = layer("cherry", y);
       if (item.model === "cheesecake") {
         // Connected compote with collapsed fruit pieces, rather than separate red marbles.
         for (let i = 0; i < 7; i++) {
           const x = Math.sin(i * 2.3) * 0.34, z = -0.06 + Math.cos(i * 2.3) * 0.19;
-          sphere(cherries, x, -0.045, z, 0.17, 0x8d2230, [1.15, 0.13, 0.9], 0.32);
+          sphere(cherries, x, -0.045, z, 0.19, 0x8d2230, [1.15, 0.1, 0.9], 0.22);
           const fruit = sphere(cherries, x, -0.005 + random() * 0.02, z, 0.115, 0xa72d35,
-            [0.85 + random() * 0.25, 0.55, 0.8], 0.4);
+            [0.85 + random() * 0.25, 0.45 + random() * 0.14, 0.8], 0.24);
           fruit.rotation.y = random() * Math.PI;
         }
       } else cherry(cherries, 0.02);

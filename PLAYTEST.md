@@ -70,7 +70,14 @@ This record distinguishes observed results from checks still pending. Required c
 - **Publication verified:** release commit `7bf9855f4ce055a3be085399ccd4043bac067f84` is on GitHub `main`. Vercel returned HTTP 200 with exact byte matches for 13 files: the HTML, three stylesheets, seven application modules, and both Three.js modules. The release preserves both earlier histories without a force-push.
 - **Visual and integrated interaction checks remain pending:** the authorized local preview was blocked by the saved or managed browser permission. No new desktop/mobile visual, keyboard, screen-reader, or complete ordering-flow pass is claimed. Production file verification does not replace browser checks or human playtesting.
 
-## Revisions after human testing
+## Live food-model review — October 29, 2026
+
+- Opened every one of the 23 default 3D previews on the production Vercel site in the in-app browser. This was an implementation review, not a participant playtest of the design claim.
+- The first visual review found plastic-like highlights, stretched textures, hard ingredient silhouettes, a jagged liquid/glass intersection on all drinks, flat syrup, and geometric desserts. Corrected those issues and inspected all 23 published models again.
+- That second review exposed cheese intersecting burger patties, hidden French-toast syrup, rigid grill marks, bead-like pie filling, and overly regular chocolate drizzle. These prompted a further correction pass rather than relying on the successful geometry harness as proof of appearance.
+- Verification covers the preview presentation at the browser's current desktop-sized viewport. It does not establish photographic fidelity, mobile GPU performance, screen-reader behavior, or a complete cart-to-receipt flow. The earlier local-preview permission failures remain part of the historical record; production browser access worked for this review.
+
+## Revisions after human testing (participant log)
 
 | Date | Evidence from session | Change made | Follow-up result |
 | --- | --- | --- | --- |
