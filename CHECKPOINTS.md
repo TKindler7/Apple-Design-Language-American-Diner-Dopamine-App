@@ -19,4 +19,4 @@ Expanded the prototype to 23 configurable items and meals, original food imagery
 
 The production build and 19 automated checks pass. The PRD, playtest protocol, design system, and Record of Thinking are present. Implementation commit `a7517f7` is published on GitHub and Vercel; production code, vendor modules, and all 24 display images match the tested build byte for byte. Integrated browser checks remain blocked by the saved or managed preview permission; see `PLAYTEST.md` for exact evidence and remaining checks.
 
-Next school milestones: both mechanics live by October 29; real participant playtests by November 3; final submission November 4. Agent checks do not substitute for human playtesting.
+Next school milestones: both mechanics live by October 29; real participant playtests by November 3; final submission November 4. Agent checks do not substitute for human playtesting. The PRD, design claim, three must-haves, and out-of-scope list are in `PRD.md`.
