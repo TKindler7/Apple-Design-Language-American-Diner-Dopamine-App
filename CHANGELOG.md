@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-29 — Breakfast, pickle, and glass realism refinement
+
+- Added three irregular pancake shapes, two asymmetric fried eggs with softer yolk highlights, softly rounded scrambled curds, and three individually curved breaded pickle spears. Repeated servings now vary in shape and placement.
+- Rebuilt the drinking glass and sundae bowl with thinner, smooth walls and finer rims; fitted all five drink liquids to the inner glass profile.
+- Kept every ingredient and portion control connected to its separate 3D part. All 33 tests pass, including all 2,216 customization combinations, and the production build passes.
+- Reviewed the actual exported models in default and loaded configurations from front and alternate angles. The models remain authored CGI; offline renders do not establish live WebGL or mobile performance.
+- Recorded the reproducible baseline and refinement script in assets/models/realism-refinement.json. The library now contains 81 self-contained models.
+
 ## 2026-10-29 — Textured 3D across the complete menu
 
 - Replaced the main procedural food viewer with original, separately textured GLB ingredients for all 23 dishes, including the fictional kitchen preview.

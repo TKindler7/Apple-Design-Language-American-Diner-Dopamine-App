@@ -3,27 +3,27 @@
   "ingredients": {
     "sweet-glass": {
       "url": "./sweet-glass.glb",
-      "width": 1.382
+      "width": 1.3539999723434448
     },
     "sweet-shake-cherry": {
       "url": "./sweet-shake-cherry.glb",
-      "width": 1.23
+      "width": 1.2959294319152832
     },
     "sweet-shake-vanilla": {
       "url": "./sweet-shake-vanilla.glb",
-      "width": 1.23
+      "width": 1.2959294319152832
     },
     "sweet-shake-chocolate": {
       "url": "./sweet-shake-chocolate.glb",
-      "width": 1.23
+      "width": 1.2959294319152832
     },
     "sweet-soda": {
       "url": "./sweet-soda.glb",
-      "width": 1.23
+      "width": 1.2959216833114624
     },
     "sweet-coldbrew": {
       "url": "./sweet-coldbrew.glb",
-      "width": 1.23
+      "width": 1.2959216833114624
     },
     "sweet-ice": {
       "url": "./sweet-ice.glb",
@@ -67,7 +67,7 @@
     },
     "sweet-sundae-bowl": {
       "url": "./sweet-sundae-bowl.glb",
-      "width": 2.154
+      "width": 2.109999895095825
     },
     "sweet-plate": {
       "url": "./sweet-plate.glb",

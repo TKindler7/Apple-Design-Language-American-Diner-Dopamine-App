@@ -125,9 +125,9 @@ export function sidesRecipe(item, options = {}) {
   }
   if (id === "pickle-spears") {
     const parts = [part("plate","plate",[0,0,0],large ? 1.10 : 1)];
-    const locations = [[-.76,.045,-.07],[-.33,.045,-.19],[.10,.045,-.13],[.53,.045,-.25]];
+    const locations = [[-.72,.045,-.08],[-.29,.045,-.28],[.14,.045,-.04],[.57,.045,-.22]];
     if (large) locations.push([-.52,.24,-.13],[.22,.24,-.23]);
-    locations.forEach((position,i)=>parts.push(part(`spear-${i}`,"pickle-spear",position,1,[0,(i-1.5)*.095,0])));
+    locations.forEach((position,i)=>parts.push(part(`spear-${i}`,["pickle-spear","pickle-spear-2","pickle-spear-3"][i%3],position,[1,1,[.97,1.04,.92,1.02,.95,1.05][i]],[0,[-.19,.12,-.07,.22,-.12,.17][i],0])));
     if (options.dip !== "none") {
       const x = large ? 1.02 : .94, z = .72;
       parts.push(part("ramekin","ramekin",[x,.05,z]));

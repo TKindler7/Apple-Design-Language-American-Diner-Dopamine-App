@@ -1,0 +1,103 @@
+{
+  "baseline": "bf29f323730c9e410e72119bb587e3a00ffd4a57",
+  "method": "Original mesh refinements and new thin-wall glass geometry; original texture sources preserved.",
+  "script": "scripts/food-assets/refine-realism.py",
+  "assets": [
+    {
+      "asset": "savory-pancake",
+      "width": 2.4,
+      "height": 0.1906179040670395,
+      "bytes": 454752
+    },
+    {
+      "asset": "savory-pancake-2",
+      "width": 2.4,
+      "height": 0.1906179040670395,
+      "bytes": 454752
+    },
+    {
+      "asset": "savory-pancake-3",
+      "width": 2.4,
+      "height": 0.1906179040670395,
+      "bytes": 454752
+    },
+    {
+      "asset": "savory-egg-sunny",
+      "width": 1.65,
+      "height": 0.19499999284744263,
+      "bytes": 900896
+    },
+    {
+      "asset": "savory-egg-sunny-2",
+      "width": 1.65,
+      "height": 0.19499999284744263,
+      "bytes": 900896
+    },
+    {
+      "asset": "savory-eggs-scrambled",
+      "width": 1.65,
+      "height": 0.2199999988079071,
+      "bytes": 8593428
+    },
+    {
+      "asset": "sides-pickle-spear",
+      "width": 1.5730047225952148,
+      "height": 0.24827396124601364,
+      "bytes": 1555700
+    },
+    {
+      "asset": "sides-pickle-spear-2",
+      "width": 1.6479946374893188,
+      "height": 0.22365736961364746,
+      "bytes": 1555696
+    },
+    {
+      "asset": "sides-pickle-spear-3",
+      "width": 1.7231810092926025,
+      "height": 0.25423114746809006,
+      "bytes": 1555696
+    },
+    {
+      "asset": "sweet-glass",
+      "width": 1.3539999723434448,
+      "height": 2.6710000038146973,
+      "bytes": 87580
+    },
+    {
+      "asset": "sweet-sundae-bowl",
+      "width": 2.109999895095825,
+      "height": 1.0579999685287476,
+      "bytes": 87580
+    },
+    {
+      "asset": "sweet-shake-cherry",
+      "width": 1.2959294319152832,
+      "height": 2.3929998874664307,
+      "bytes": 154948
+    },
+    {
+      "asset": "sweet-shake-vanilla",
+      "width": 1.2959294319152832,
+      "height": 2.3929998874664307,
+      "bytes": 155568
+    },
+    {
+      "asset": "sweet-shake-chocolate",
+      "width": 1.2959294319152832,
+      "height": 2.3929998874664307,
+      "bytes": 155576
+    },
+    {
+      "asset": "sweet-soda",
+      "width": 1.2959216833114624,
+      "height": 2.36299991607666,
+      "bytes": 166164
+    },
+    {
+      "asset": "sweet-coldbrew",
+      "width": 1.2959216833114624,
+      "height": 2.36299991607666,
+      "bytes": 36508
+    }
+  ]
+}

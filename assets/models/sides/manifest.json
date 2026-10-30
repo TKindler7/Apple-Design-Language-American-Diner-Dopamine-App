@@ -51,7 +51,7 @@
     },
     "sides-pickle-spear": {
       "url": "./sides-pickle-spear.glb",
-      "width": 1.6699999570846558
+      "width": 1.5730047225952148
     },
     "sides-ranch": {
       "url": "./sides-ranch.glb",
@@ -84,6 +84,14 @@
     "sides-onion-chili-large": {
       "url": "./sides-onion-chili-large.glb",
       "width": 1.68502277135849
+    },
+    "sides-pickle-spear-2": {
+      "url": "./sides-pickle-spear-2.glb",
+      "width": 1.6479946374893188
+    },
+    "sides-pickle-spear-3": {
+      "url": "./sides-pickle-spear-3.glb",
+      "width": 1.7231810092926025
     }
   }
 }

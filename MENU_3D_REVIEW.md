@@ -32,7 +32,7 @@ Models load per recipe rather than downloading the entire library on page load. 
 
 Family review caught and corrected repeated pie layers, a brownie surface overlap, smooth cheesecake/cream surfaces, sauce contact, noodle contact, pancake/syrup material issues, and artificial directional fry texture. See family reports and actual model renders for the final evidence.
 
-## Verification status
+## Previous full-menu release verification
 
 Release checks: **33 tests passed**, including all 2,216 configurations; the production build, JavaScript/Python syntax checks, and whitespace checks passed. The delivered library contains **76 self-contained GLBs**. The combined default contact sheet includes all 23 actual assembled dishes; family reviews additionally cover minimum and loaded configurations, including all four cold-brew scoop/size combinations.
 
@@ -41,3 +41,13 @@ The saved local-browser permission prevents interactive localhost testing. Offli
 Production URL: https://appledesignlanguageamericandinerdop.vercel.app/
 
 All **88 checked production files**, including **all 76 GLBs**, were fetched successfully and matched the release build byte-for-byte. The browser connection then reported unavailable when reloading the live app, so interactive WebGL behavior, mobile performance, and live interaction checks are **not claimed as verified**. The site remains published and all existing ordering-state tests pass.
+
+## Breakfast, pickle, and glass refinement
+
+The follow-up replaces repeated pancake and egg shapes with separate variants, softens scrambled eggs into rounded curds, adds bent and irregular breaded pickle spears, and rebuilds both glass vessels with smooth thin walls. Five drink volumes now fit the inner glass profile. Ingredients remain separate, and all existing option combinations retain distinct visible recipes. The library now contains **81 GLBs**.
+
+Run `scripts/food-assets/refine-realism.py` with Blender after the original family authoring scripts. It reads the recorded Git baseline, preserves the original texture images, and deterministically regenerates the refined models and family manifests. The exact baseline, dimensions, and output sizes are in `assets/models/realism-refinement.json`.
+
+Validation: **33 tests passed**, including all **2,216 configurations**; production build and source syntax checks passed. Default model reviews cover both pancake dishes, breakfast, pickles, all five drinks, and the sundae. Loaded portions are additionally rendered at 140 degrees for pancakes, breakfast, pickles, the cherry shake, and the sundae. Contact and topping placement are inspected in these actual exported models.
+
+These are original textured CGI, not scans. Offline Cycles renders use different lighting/refraction from browser WebGL; glass reflections in particular can differ. Live interactive browser control remains unavailable, so no live visual, gesture, or phone performance pass is claimed. Production delivery should be verified by comparing the built modules, manifest, and all 81 models against their published URLs.

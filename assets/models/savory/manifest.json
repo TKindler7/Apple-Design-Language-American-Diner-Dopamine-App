@@ -23,8 +23,7 @@
     },
     "savory-pancake": {
       "url": "./savory-pancake.glb",
-      "width": 2.4,
-      "height": 0.188721444112234
+      "width": 2.4
     },
     "savory-crispy-chicken": {
       "url": "./savory-crispy-chicken.glb",
@@ -78,13 +77,11 @@
     },
     "savory-egg-sunny": {
       "url": "./savory-egg-sunny.glb",
-      "width": 1.65,
-      "height": 0.198531585188998
+      "width": 1.65
     },
     "savory-eggs-scrambled": {
       "url": "./savory-eggs-scrambled.glb",
-      "width": 1.65,
-      "height": 0.24368892834789566
+      "width": 1.65
     },
     "savory-sausage": {
       "url": "./savory-sausage.glb",
@@ -100,6 +97,18 @@
       "url": "./savory-cinnamon.glb",
       "width": 1.95,
       "height": 0.004103572133852183
+    },
+    "savory-pancake-2": {
+      "url": "./savory-pancake-2.glb",
+      "width": 2.4
+    },
+    "savory-pancake-3": {
+      "url": "./savory-pancake-3.glb",
+      "width": 2.4
+    },
+    "savory-egg-sunny-2": {
+      "url": "./savory-egg-sunny-2.glb",
+      "width": 1.65
     }
   }
 }

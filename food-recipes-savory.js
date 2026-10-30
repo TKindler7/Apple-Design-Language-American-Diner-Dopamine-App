@@ -66,7 +66,7 @@ function pancakes(options, blueberryRecipe) {
   const count = options.stack === 'tall' ? 5 : 3;
   const base = .026;
   for (let i = 0; i < count; i++) {
-    layers.push(part(`pancake-${i}`, 'savory-pancake', .018 * Math.sin(i * 3), base + i * (H.pancake - .008), .016 * Math.cos(i * 2), 1, i * .72));
+    layers.push(part(`pancake-${i}`, ['savory-pancake', 'savory-pancake-2', 'savory-pancake-3'][i % 3], .018 * Math.sin(i * 3), base + i * (H.pancake - .008), .016 * Math.cos(i * 2), 1, i * .72));
     // Visible berry pieces near the edge distinguish filled griddle cakes.
     if (blueberryRecipe && has(options, 'blueberry') && i < count - 1) {
       layers.push(part(`berry-filling-${i}`, 'savory-blueberries', i % 2 ? .72 : -.64, base + (i + 1) * (H.pancake - .008) - .065, .32, [.32, .28, .32], i));
@@ -89,7 +89,7 @@ function breakfast(options) {
     layers.push(part('scrambled-eggs', 'savory-eggs-scrambled', -.30, base, -.32, 1.10, -.2));
   } else {
     layers.push(part('sunny-egg-1', 'savory-egg-sunny', -.52, base, -.43, .86, -.5));
-    layers.push(part('sunny-egg-2', 'savory-egg-sunny', .28, base + .015, -.36, .82, 1.6));
+    layers.push(part('sunny-egg-2', 'savory-egg-sunny-2', .28, base + .015, -.36, .82, 1.6));
   }
   if (options.protein === 'sausage') layers.push(part('sausage', 'savory-sausage', .98, base, .69, .83, -.4));
   else if (options.protein === 'veggie') layers.push(part('roasted-mushrooms', 'savory-mushroom', 1.02, base, .62, .65, -.4));

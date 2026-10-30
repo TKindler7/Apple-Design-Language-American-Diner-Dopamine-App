@@ -24,7 +24,7 @@ export function sweetRecipe(item, options) {
   const id = typeof item === "string" ? item : item?.id;
   if (["cherry-cloud-shake", "vanilla-malt", "chocolate-shake"].includes(id)) {
     const flavor = id === "cherry-cloud-shake" ? "cherry" : id === "vanilla-malt" ? "vanilla" : "chocolate";
-    const parts = [part("glass", "glass"), part("shake", `shake-${flavor}`, [0, .15, 0]), part("straw", "straw", [.32, .15, -.29], 1, [0, 0, -.10])];
+    const parts = [part("glass", "glass"), part("shake", `shake-${flavor}`, [0, .067, 0]), part("straw", "straw", [.32, .15, -.29], 1, [0, 0, -.10])];
     const hasCream = selected(options, "whipped-cream");
     if (hasCream) parts.push(whip("whipped-cream", [0, 2.47, 0]));
     if (selected(options, "cherry")) parts.push(cherry([0, hasCream ? 3.07 : 2.43, .015]));
@@ -32,14 +32,14 @@ export function sweetRecipe(item, options) {
     return resize(parts, options.size === "large" ? 1.16 : 1);
   }
   if (id === "strawberry-soda") {
-    const parts = [part("glass", "glass"), part("soda", "soda", [0, .15, 0]), part("straw", "straw", [.32, .16, -.29], 1, [0, 0, -.1])];
+    const parts = [part("glass", "glass"), part("soda", "soda", [0, .067, 0]), part("straw", "straw", [.32, .16, -.29], 1, [0, 0, -.1])];
     const icePositions = [[-.25,2.10,.02],[.11,2.19,.16],[.25,2.0,-.18],[-.12,1.77,-.20],[.14,1.65,.20],[-.29,1.42,.05],[.22,1.22,-.08],[0,1.05,.1],[0,2.36,-.15]];
     const count = options.ice === "none" ? 0 : options.ice === "light" ? 3 : icePositions.length;
     icePositions.slice(0, count).forEach((position, index) => parts.push(part(`ice-${index}`, "ice", position, .92, [.12*index,.43*index,.09*index])));
     return resize(parts, options.size === "large" ? 1.16 : 1);
   }
   if (id === "cold-brew-float") {
-    const parts = [part("glass", "glass"), part("coffee", "coldbrew", [0,.15,0]), scoop("ice-cream", [0,2.13,0], options.scoop === "chocolate" ? "chocolate" : "vanilla", .95), part("straw", "straw", [.38,.16,-.24], 1, [0,0,-.08])];
+    const parts = [part("glass", "glass"), part("coffee", "coldbrew", [0,.067,0]), scoop("ice-cream", [0,2.13,0], options.scoop === "chocolate" ? "chocolate" : "vanilla", .95), part("straw", "straw", [.38,.16,-.24], 1, [0,0,-.08])];
     if (selected(options, "whipped-cream")) parts.push(whip("whipped-cream", [.02,2.81,.02], .72));
     return resize(parts, options.size === "large" ? 1.16 : 1, 2.13);
   }
