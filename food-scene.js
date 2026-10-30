@@ -122,18 +122,20 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     for (const layer of layers) {
       layer.position.copy(layer.userData.restPosition);
       layer.scale.copy(layer.userData.restScale);
+      layer.visible = true;
     }
     if (draw) render();
   }
   function assemble(incremental = false) {
     settle(false);
     if (reduce || !layers.length) { render(); return; }
-    // Render the arrival pose while still covered by the photo. Expensive first
+    // Render the arrival pose before revealing the 3D stage. Expensive first
     // texture uploads must not consume the animation's clock or flash the rest pose.
     let start;
     const positions = layers.map((layer, index) => incremental ? layer.userData.arrivalPosition : layer.userData.restPosition.clone().add(new THREE.Vector3(0, .65 + Math.min(index, 8) * .16, 0)));
     layers.forEach((layer, index) => {
       layer.position.copy(positions[index]);
+      layer.visible = incremental || index === 0;
       if (incremental) layer.scale.copy(layer.userData.arrivalScale);
     });
     render();
@@ -142,10 +144,23 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
       start ??= now;
       let active = false;
       layers.forEach((layer, index) => {
-        const progress = clamp((now - start - (incremental ? 0 : Math.min(index, 8) * 55)) / (incremental ? 400 : 750), 0, 1);
-        const eased = 1 - (1 - progress) ** 3;
-        layer.position.lerpVectors(positions[index], layer.userData.restPosition, eased);
-        if (incremental) layer.scale.lerpVectors(layer.userData.arrivalScale, layer.userData.restScale, eased);
+        // Each ingredient completes its drop and small rebound before the next
+        // appears. Customization changes keep their quicker, concurrent settling.
+        const elapsed = now - start - (incremental ? 0 : index * 460);
+        const progress = clamp(elapsed / (incremental ? 400 : 460), 0, 1);
+        layer.visible = incremental || elapsed >= 0;
+        if (incremental) {
+          const eased = 1 - (1 - progress) ** 3;
+          layer.position.lerpVectors(positions[index], layer.userData.restPosition, eased);
+          layer.scale.lerpVectors(layer.userData.arrivalScale, layer.userData.restScale, eased);
+        } else {
+          const drop = clamp(progress / .65, 0, 1);
+          const rebound = clamp((progress - .65) / .35, 0, 1);
+          layer.position.copy(layer.userData.restPosition);
+          layer.position.y += progress < .65
+            ? (positions[index].y - layer.userData.restPosition.y) * (1 - drop * drop)
+            : .09 * Math.sin(Math.PI * rebound);
+        }
         if (progress < 1) active = true;
       });
       render();

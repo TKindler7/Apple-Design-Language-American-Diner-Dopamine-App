@@ -238,12 +238,12 @@ function setPreview(mode) {
   $("#food-scene").setAttribute("aria-hidden", String(!show3d));
   const canvas = $("#food-scene canvas");
   if (canvas) { canvas.style.visibility = show3d ? "visible" : "hidden"; canvas.tabIndex = show3d ? 0 : -1; }
-  $("#builder-photo").classList.toggle("is-hidden", Boolean(show3d));
+  $("#builder-photo").hidden = mode !== "photo" && !previewFailed;
   $("#preview-loading").hidden = mode !== "3d" || !previewLoading;
   $("#preview-controls").hidden = !show3d;
   all("[data-preview]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.preview === mode)); button.disabled = previewFailed && button.dataset.preview === "3d"; });
   const subject = draft?.combo ? "Entrée preview. " : "";
-  $("#preview-caption").textContent = subject + (show3d ? "Your ingredients, in 3D. Drag to turn or use the controls." : previewLoading && mode === "3d" ? "Loading your ingredients. Photo shows the original recipe." : previewFailed ? "3D preview is unavailable here. Photo shows the original recipe; every option still works." : "Photo shows the original recipe. See your changes in 3D.");
+  $("#preview-caption").textContent = subject + (show3d ? "Your ingredients, in 3D. Drag to turn or use the controls." : previewLoading && mode === "3d" ? "Preparing your 3D ingredients. They’ll assemble here in a moment." : previewFailed ? "3D preview is unavailable here. Photo shows the original recipe; every option still works." : "Photo shows the original recipe. See your changes in 3D.");
 }
 async function startBuilderScene() {
   const token = ++sceneToken;
@@ -256,9 +256,8 @@ async function startBuilderScene() {
   previewLoading = true;
   all("[data-preview]").forEach((button) => { button.disabled = false; });
   $("#preview-loading").hidden = false;
-  $("#builder-photo").classList.remove("is-hidden");
+  setPreview(previewMode);
   $("#preview-controls").hidden = true;
-  $("#food-scene").style.visibility = "visible";
   const result = await createFoodScene($("#food-scene"), {
     item: ITEM_BY_ID[initialItemId], options: initialOptions, reducedMotion: reducedMotion.matches,
     signal: builderSceneAbort.signal,

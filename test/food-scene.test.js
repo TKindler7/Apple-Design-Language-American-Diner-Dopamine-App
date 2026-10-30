@@ -53,21 +53,34 @@ test("the first ingredient entrance survives control-layout resize and slow firs
       if (state.ready) readyPose = layers().map(layer => layer.position.y - layer.userData.restPosition.y);
     }, onFallback: error => { throw error; } });
     assert.ok(scene);
-    assert.ok(readyPose.every(y => y >= .64), "arrival pose must be rendered before ready/photo handoff");
+    assert.ok(readyPose.every(y => y >= .64), "arrival pose must be rendered before ready handoff");
+    assert.equal(layers().filter(layer => layer.visible).length, 1, "only the first ingredient starts visible");
     const initial = layers().map(layer => layer.position.clone());
     tick(10000); // First frame can arrive long after models/shaders were prepared.
     assert.ok(layers().every((layer, i) => layer.position.equals(initial[i])), "slow initial rendering must not consume the entrance");
-    tick(10300);
+    tick(10299); // First contact: 65% of the 460 ms slot.
+    assert.ok(Math.abs(layers()[0].position.y - layers()[0].userData.restPosition.y) < 1e-9);
+    tick(10370); // Small upward rebound after contact.
+    assert.ok(layers()[0].position.y > layers()[0].userData.restPosition.y);
+    assert.ok(layers().slice(1).every(layer => !layer.visible), "later ingredients wait through the bounce");
     const midway = layers().map(layer => layer.position.clone());
     assert.ok(midway[0].y < initial[0].y && midway[0].y > layers()[0].userData.restPosition.y);
     height = 360; resize(); // Revealing the controls reduces the preview stage.
     assert.equal(frames.size, 1, "layout resize must not cancel the entrance frame");
     assert.ok(layers().every((layer, i) => layer.position.equals(midway[i])), "resize must preserve current ingredient poses");
-    tick(12000);
+    tick(10460);
+    assert.ok(layers()[0].position.distanceTo(layers()[0].userData.restPosition) < 1e-9);
+    assert.equal(layers()[1].visible, true, "the next ingredient appears only after the first settles");
+    assert.ok(layers().slice(2).every(layer => !layer.visible));
+    tick(10000 + layers().length * 460);
     assert.equal(frames.size, 0);
     assert.ok(layers().every(layer => layer.position.distanceTo(layer.userData.restPosition) < 1e-9));
     scene.assemble();
     assert.equal(frames.size, 1);
+    scene.rotate(.2);
+    assert.ok(layers().every(layer => layer.visible), "view controls reveal the finished dish when interrupting assembly");
+    assert.ok(layers().every(layer => layer.position.distanceTo(layer.userData.restPosition) < 1e-9));
+    scene.assemble();
     scene.dispose(); scene = null;
     assert.equal(frames.size, 0, "closing must cancel the remaining entrance");
 

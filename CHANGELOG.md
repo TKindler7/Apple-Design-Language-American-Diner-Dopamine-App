@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-29 — Sequential assembly and 3D-first opening
+
+- Ingredients now appear one at a time, accelerate down, and make a small upward rebound before the next ingredient starts. Each drop and landing takes 460 ms; customization changes retain quicker settling.
+- Item dialogs open directly in the selected 3D mode with a loading message instead of an original-recipe photo. Photos remain available through the Photo tab and on rendering failure.
+- Preserved resize-safe animation, immediate reduced motion, replay, and gesture/close interruption; interrupted assembly reveals all remaining ingredients in their final positions.
+- Extended lifecycle tests for sequential visibility, contact, rebound, and the next arrival. Added actual presentation-function coverage for initial loading, ready state, Photo selection, and failure fallback. All 35 tests and the production build pass; live visual browser verification remains unavailable.
+
 ## 2026-10-29 — Restore first-open ingredient entrance
 
 - Fixed the preview controls resizing the stage and cancelling the initial ingredient animation. Camera measurement now uses the finished dish bounds while preserving the active ingredient positions.
