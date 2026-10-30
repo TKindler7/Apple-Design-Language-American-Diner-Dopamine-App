@@ -17,3 +17,12 @@ coverage/
 
 # Local design guidance (intentionally not versioned)
 .design-rules/
+
+# Local AI runtimes, large model weights, and private access credentials
+.local-ai/
+
+# Local authoring caches and review scenes; source scripts and exported models are versioned
+__pycache__/
+*.pyc
+artifacts/burger-pilot/*.blend
+artifacts/burger-pilot/*.blend1

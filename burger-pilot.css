@@ -1,0 +1,44 @@
+:root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1d1d1f; background: #fff; --muted: #616166; --line: #d2d2d7; --blue: #0066cc; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; opacity: .45; }
+:focus-visible { outline: 3px solid #0066cc; outline-offset: 4px; }
+.preview-header { max-width: 1280px; padding: 23px 40px; margin: auto; display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid #e8e8ed; font-size: 14px; }
+.preview-header a { font-weight: 650; font-size: 18px; letter-spacing: -.4px; }
+.preview-header a span, .preview-header > span { color: var(--muted); }
+main { max-width: 1280px; margin: auto; padding: 64px 40px 80px; }
+.intro { text-align: center; margin-bottom: 48px; }
+.eyebrow { color: #9c4a1a; font-size: 17px; font-weight: 650; margin: 0 0 12px; }
+h1 { font-size: clamp(36px, 5vw, 64px); letter-spacing: -.045em; line-height: 1.04; margin: 0; font-weight: 650; }
+.intro > p:last-child { font-size: 21px; color: var(--muted); margin: 20px 0 0; }
+.preview-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 64px; align-items: start; }
+.visual { min-width: 0; position: sticky; top: 20px; }
+.stage-wrap { position: relative; aspect-ratio: 1.12; background: #f5f5f7; border-radius: 28px; overflow: hidden; }
+#pilot-photo, #pilot-stage { position: absolute; inset: 0; width: 100%; height: 100%; }
+#pilot-photo { object-fit: contain; padding: 6%; }
+#pilot-stage { opacity: 0; pointer-events: none; }
+#pilot-stage canvas:focus-visible { outline-offset: -5px; }
+.stage-wrap.is-ready #pilot-stage { opacity: 1; pointer-events: auto; }
+.stage-wrap.is-ready #pilot-photo, .stage-wrap.is-ready .photo-label { visibility: hidden; }
+.photo-label { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; color: var(--muted); font-size: 13px; pointer-events: none; }
+.view-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+.view-controls button { border: 0; border-radius: 24px; background: #f1f1f3; color: #1d1d1f; min-width: 44px; min-height: 44px; padding: 10px 16px; font-size: 14px; }
+.view-controls button:not(:disabled):hover { background: #e5e5e9; }
+.status { color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; margin: 18px auto; max-width: 510px; min-height: 42px; }
+.customization-heading { display: flex; justify-content: space-between; gap: 18px; align-items: baseline; padding-bottom: 12px; }
+h2 { font-size: 28px; letter-spacing: -.03em; margin: 0; }
+#pilot-price { font-size: 19px; margin: 0; }
+fieldset { border: 0; border-top: 1px solid var(--line); margin: 16px 0 0; padding: 24px 0 6px; min-width: 0; }
+legend { float: left; width: 100%; font-size: 17px; font-weight: 600; padding: 0; margin-bottom: 12px; }
+.choices { clear: both; display: grid; gap: 8px; }
+.choice { display: flex; align-items: center; gap: 11px; min-height: 48px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; font-size: 15px; cursor: pointer; }
+.choice:has(input:checked) { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); background: #f5f9ff; }
+.choice input { width: 17px; height: 17px; accent-color: var(--blue); flex-shrink: 0; margin: 0; }
+.choice-price { color: var(--muted); font-size: 13px; margin-left: auto; }
+.restore { background: none; border: 0; color: var(--blue); padding: 12px 0; min-height: 44px; font-size: 15px; margin-top: 12px; }
+.pilot-note { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 20px; }
+@media (max-width: 800px) { main { padding: 40px 20px 56px; } .preview-header { padding: 20px; } .preview-header > span { font-size: 12px; } .intro { margin-bottom: 32px; } .intro > p:last-child { font-size: 18px; } .preview-layout { grid-template-columns: 1fr; gap: 28px; } .visual { position: static; } .stage-wrap { aspect-ratio: 1.12; border-radius: 20px; } .customization { max-width: 520px; width: 100%; margin: auto; } }
+@media (prefers-contrast: more) { :root { --muted: #333; --line: #777; } }

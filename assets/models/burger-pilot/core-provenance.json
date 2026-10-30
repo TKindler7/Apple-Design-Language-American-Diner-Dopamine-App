@@ -1,0 +1,26 @@
+{
+  "original_assets": true,
+  "paid_generation_credits": 0,
+  "geometry_authoring": "Blender 4.5.15",
+  "textures": "OpenAI built-in image generation; original texture PNGs retained",
+  "assets": [
+    {
+      "file": "bun-top.glb",
+      "triangles": 45524,
+      "bytes": 2780420,
+      "method": "original authored closed geometry with chat-generated photographic color maps and Blender-baked tangent normals"
+    },
+    {
+      "file": "bun-bottom.glb",
+      "triangles": 26044,
+      "bytes": 2114588,
+      "method": "original authored closed geometry with chat-generated photographic color maps and Blender-baked tangent normals"
+    },
+    {
+      "file": "patty.glb",
+      "triangles": 43644,
+      "bytes": 2878976,
+      "method": "original authored closed geometry with chat-generated photographic color maps and Blender-baked tangent normals"
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-29 — One-burger textured 3D pilot
+
+- Added an isolated Midnight Stack review page with separate bun, patty, cheese, vegetable, bacon, and sauce GLBs. The normal menu viewer remains unchanged.
+- Authored original ingredient meshes and chat-generated photographic food textures in Blender; retained original texture prompts and authoring scripts. No Hugging Face account or model weights are used by this pilot.
+- Preserved all 576 catalog configurations, with shared extra-patty geometry, contact-aware stacking, rotation, zoom, keyboard controls, assembly replay, reduced motion, and an explicitly labeled original-image fallback.
+- Corrected stretched meat/bread texture mapping, bun shading, transformed seed bounds that lifted the bun, slice normals, onion cross sections, and pickle surfaces during actual-model render review.
+- Packaged only the manifest and embedded-texture GLBs for the preview; source images, local authoring tools, and model-weight setup are excluded from deployment output.
+- All 30 project tests and the build pass. Offline renders inspect the real GLBs. Interactive browser verification is still blocked by the saved local-page permission, so no browser or mobile performance pass is claimed. The pilot has not been deployed or expanded to the remaining menu.
+
 ## 2026-10-27 — Diner motion pass
 
 - Added a one-time ingredient-by-ingredient hero animation, timed with the headline and plate light.

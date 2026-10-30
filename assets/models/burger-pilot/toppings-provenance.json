@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-29",
+  "method": "Original authored Blender geometry with original chat-generated photographic surface textures; Blender tangent-normal baking. No downloaded food models or model weights.",
+  "generator": "Built-in image_gen tool",
+  "source_script": "scripts/burger-assets/toppings.py",
+  "review_script": "scripts/burger-assets/review-toppings.py",
+  "models": [
+    "lettuce.glb",
+    "tomato.glb",
+    "bacon.glb",
+    "cheddar.glb",
+    "swiss.glb",
+    "onion.glb",
+    "pickle.glb",
+    "sauce-house.glb",
+    "sauce-smoky.glb"
+  ],
+  "textures": [
+    {
+      "file": "textures/topping-lettuce-color.png",
+      "prompt": "Create an original food material texture for a 3D fresh green-leaf lettuce model. Square 1024 image. Extreme macro photograph of the INSIDE SURFACE of one fresh green lettuce leaf, flattened, viewed exactly orthographically from straight above. The leaf surface fills every pixel all the way beyond all four edges, NO background, NO leaf outline, NO plate or props or text. Mid green and yellow-green edible lettuce tissue, fine pale translucent veins branching in a naturally irregular network from a restrained central pale rib running vertically; delicate tiny cellular texture, realistic fresh food, no water droplets. Even neutral diffuse cross-polarized lighting, nearly shadow-free albedo suitable for texture mapping, no directional highlights or gradients. Natural leaf color variation, not neon, not kale, not plastic, not illustration. No repeated pattern grid."
+    },
+    {
+      "file": "textures/topping-tomato-color.png",
+      "prompt": "Create one original photorealistic square food texture for the cut surface of a ripe red tomato slice. Exactly top-down orthographic view of a SINGLE circular tomato cross section, centered, no perspective, its red skin perimeter nearly touches all four edges leaving only an extremely narrow pure red background. Natural wet bright red flesh, pale cream central star pith, five irregular seed chambers filled with slightly translucent coral red juice and small pale yellow seeds. Realistic fresh tomato anatomy and fine cellular tissue, small irregularities. Even neutral diffuse shadow-free cross-polarized lighting for an albedo texture: no directional shadow, no strong specular white shine, no plate, no leaves, no green stem, no text. This is the flat cut face only, not a 3D rendered tomato. Render macro photographic detail throughout."
+    },
+    {
+      "file": "textures/topping-bacon-color.png",
+      "prompt": "Create an original high-resolution food material texture for a cooked bacon strip. Square image, extreme macro straight-down orthographic photograph of cooked streaky bacon SURFACE that fills the entire image edge to edge, no outline or background. Long irregular bands run vertically: reddish chestnut browned meat alternating with narrow creamy golden translucent rendered fat, small caramelized ripples and darker crisp toasted spots. Appetizing real cooked bacon with natural variation, not raw pink meat, no black burnt areas. About three uneven streaks across width. Neutral diffuse shadow-free lighting, restrained highlights, usable as albedo texture on a 3D model. No plate, no props, no text, no fake CGI/plastic style, no sharp directional reflections."
+    },
+    {
+      "file": "textures/topping-pickle-color.png",
+      "prompt": "Create an original photorealistic macro albedo texture of a single dill pickle chip cut face viewed exactly straight down, orthographic. One circular cucumber pickle slice, perfectly centered, diameter fills the square image almost edge to edge. Olive and muted yellow-green flesh with translucent moist cellular detail, delicate mottled gradients, several naturally distributed pale elongated seeds in three slightly irregular radial seed zones, a narrow dark forest green skin ring around perimeter. Real pickled cucumber, not raw bright cucumber. The outermost corners outside circular slice are a matching dark olive green. Soft fully diffuse neutral lighting, low contrast shadows, restrained wet highlights, not stylized, not CGI, no plate, no text, no props. This will texture the top of a real three-dimensional pickle chip; preserve believable botanical anatomy."
+    },
+    {
+      "file": "textures/topping-onion-color.png",
+      "prompt": "Original photographic material texture: straight overhead orthographic macro of the freshly cut cross section of one red onion. One centered nearly circular onion slice filling the square all the way to its edges, no background or props. Many delicate concentric irregular onion layers, ivory-white translucent flesh separated by thin dusty purple membranes. Outer skin excluded; only edible sliced onion. Naturally asymmetric fine cellular striations and layered wet cut surface, no large white specular hotspots. Neutral soft cross-polarized lighting suitable for a 3D albedo texture, no shadows, no perspective, no text, realistic food photograph, not illustration, not stylized model."
+    },
+    {
+      "file": "textures/topping-cheddar-color.png",
+      "prompt": "Create an original photorealistic food albedo texture of the surface of softly melted cheddar cheese. Square macro image, cheese fills every pixel to all edges, no outline, no plate, no food other than cheese. Natural warm medium golden yellow-orange cheddar, very subtle creamy mottling and tiny shallow irregular pores, barely visible softened fine wrinkles, a few minute oil droplets but no shiny large highlights. Smooth melted cheese surface, not wax or plastic or wrinkled fabric. Extremely even neutral diffuse lighting for use as a base-color texture on a three-dimensional model, no perspective, no shadows, no large spots, no burned patches, no text. Keep color variation quiet and realistic."
+    },
+    {
+      "file": "textures/topping-swiss-color.png",
+      "prompt": "Create an original photorealistic food albedo texture of the surface of softly melted Swiss cheese. Square macro image, cheese fills every pixel to all edges, no outline, no plate, no other food. Natural warm pale ivory cream with a slight buttery yellow tint, very subtle creamy mottling and minuscule shallow pores, barely visible softened fine wrinkles. No large holes in this texture because holes will be modeled separately. Smooth actual melted dairy surface, not wax, plastic, cloth, marble or sponge. Very even neutral diffuse lighting for use as a color texture on a three-dimensional model, no perspective, no shadows, no large highlights, no burned patches, no text. Quiet organic color variation and tiny surface detail, realistic food photography."
+    }
+  ],
+  "material_notes": "Normal maps are Blender material bakes of restrained surface relief from each original color texture. Seven ingredient families use original generated photographic color maps. Sauces use original geometry and constant physically based material values. All ingredients are true meshes with thickness, not camera-facing photo cards.",
+  "cheese_refinement": "Rounded gently irregular boundaries, 0.014 thickness, shortened corner drop to about 0.159 below support plane; actual bounds in toppings-authoring-report.json."
+}

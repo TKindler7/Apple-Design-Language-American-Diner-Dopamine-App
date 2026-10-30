@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-29",
+  "assets": [
+    {
+      "ingredient": "bun-bottom",
+      "bytes": 2114588,
+      "meshes": 1,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "bun-top",
+      "bytes": 2780420,
+      "meshes": 2,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "patty",
+      "bytes": 2878976,
+      "meshes": 1,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "lettuce",
+      "bytes": 6458756,
+      "meshes": 6,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "tomato",
+      "bytes": 3917056,
+      "meshes": 2,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "pickle",
+      "bytes": 3811240,
+      "meshes": 3,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "onion",
+      "bytes": 4572508,
+      "meshes": 6,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "bacon",
+      "bytes": 6284588,
+      "meshes": 2,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "cheddar",
+      "bytes": 2715744,
+      "meshes": 1,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "swiss",
+      "bytes": 2584096,
+      "meshes": 1,
+      "embeddedImages": 2
+    },
+    {
+      "ingredient": "sauce-house",
+      "bytes": 405896,
+      "meshes": 1,
+      "embeddedImages": 0
+    },
+    {
+      "ingredient": "sauce-smoky",
+      "bytes": 405900,
+      "meshes": 1,
+      "embeddedImages": 0
+    }
+  ],
+  "allExternalReferencesAbsent": true,
+  "browserVerified": false
+}

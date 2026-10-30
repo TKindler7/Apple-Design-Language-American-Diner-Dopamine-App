@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "itemId": "midnight-stack",
+  "status": "local-pilot",
+  "method": "Original chat-generated textures on individually authored Blender meshes. No external AI account or model weights.",
+  "ingredients": {
+    "bun-bottom": {
+      "url": "./bun-bottom.glb",
+      "width": 2.4
+    },
+    "bun-top": {
+      "url": "./bun-top.glb",
+      "width": 2.45
+    },
+    "patty": {
+      "url": "./patty.glb",
+      "width": 2.34
+    },
+    "lettuce": {
+      "url": "./lettuce.glb",
+      "width": 2.53,
+      "stackHeight": 0.16
+    },
+    "tomato": {
+      "url": "./tomato.glb",
+      "width": 2.35,
+      "stackHeight": 0.12
+    },
+    "pickle": {
+      "url": "./pickle.glb",
+      "width": 1.85,
+      "stackHeight": 0.085
+    },
+    "onion": {
+      "url": "./onion.glb",
+      "width": 2.05,
+      "stackHeight": 0.08
+    },
+    "bacon": {
+      "url": "./bacon.glb",
+      "width": 2.26,
+      "stackHeight": 0.14
+    },
+    "cheddar": {
+      "url": "./cheddar.glb",
+      "width": 2.23,
+      "contactBottom": 0.16346014960777383,
+      "contactTop": 0.1962877105875701
+    },
+    "swiss": {
+      "url": "./swiss.glb",
+      "width": 2.23,
+      "contactBottom": 0.16346014960777383,
+      "contactTop": 0.1962877105875701
+    },
+    "sauce-house": {
+      "url": "./sauce-house.glb",
+      "width": 2.08,
+      "stackHeight": 0.026
+    },
+    "sauce-smoky": {
+      "url": "./sauce-smoky.glb",
+      "width": 2.08,
+      "stackHeight": 0.026
+    }
+  }
+}

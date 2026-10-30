@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>The Midnight Stack · Good Hour preview</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./burger-pilot.css">
+  <script type="module" src="./burger-pilot.js"></script>
+</head>
+<body>
+  <header class="preview-header"><a href="./">Good Hour<span> Diner</span></a><span>One-burger preview</span></header>
+  <main>
+    <div class="intro"><p class="eyebrow">A closer look</p><h1>The Midnight Stack.</h1><p>Make it yours. Then look from every angle.</p></div>
+    <div class="preview-layout">
+      <section class="visual" aria-label="Burger preview">
+        <div class="stage-wrap">
+          <img id="pilot-photo" src="./assets/food/midnight-stack.webp" alt="Original recipe image of The Midnight Stack. It does not reflect the ingredient selections." width="508" height="508">
+          <div id="pilot-stage"></div>
+          <p id="pilot-photo-label" class="photo-label">Original recipe image</p>
+        </div>
+        <div class="view-controls" aria-label="3D view controls">
+          <button type="button" data-view="left" aria-label="Rotate burger left" disabled>↶</button>
+          <button type="button" data-view="right" aria-label="Rotate burger right" disabled>↷</button>
+          <button type="button" data-view="out" aria-label="Zoom out" disabled>−</button>
+          <button type="button" data-view="in" aria-label="Zoom in" disabled>+</button>
+          <button type="button" data-view="reset" disabled>Reset view</button>
+          <button type="button" data-view="assemble" disabled>Replay assembly</button>
+        </div>
+        <p id="pilot-status" class="status" role="status" aria-live="polite">Preparing the ingredient preview. The original recipe image remains visible while it loads.</p>
+      </section>
+      <section class="customization" aria-labelledby="customize-title">
+        <div class="customization-heading"><h2 id="customize-title">Your burger.</h2><p id="pilot-price"></p></div>
+        <form id="pilot-options"></form>
+        <button id="pilot-defaults" class="restore" type="button">Restore original recipe</button>
+        <p class="pilot-note">A preview for reviewing the new 3D ingredients. Your cart and the rest of the menu are unchanged.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

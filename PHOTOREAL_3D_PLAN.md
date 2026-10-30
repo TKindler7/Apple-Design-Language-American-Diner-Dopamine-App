@@ -1,6 +1,12 @@
 # Photorealistic 3D replacement
 
-Requested October 29, 2026. Status: asset production is blocked; no photorealistic 3D replacement has been generated or deployed.
+Requested October 29, 2026. Status: one modular burger pilot has been authored and rendered for visual review. The rest of the menu and production site have not been replaced. See `BURGER_PILOT_REVIEW.md` for actual checks and remaining limits.
+
+## Active pilot method
+
+The user requested that the work be handled through chat without Hugging Face. The active method is original chat-generated food textures applied to individually authored, closed 3D ingredient meshes in Blender. No Hugging Face account, model download, or inference is part of this method. Earlier gated-model setup is archived locally and excluded from the project build.
+
+The first review target is The Midnight Stack, preserving all 576 ingredient combinations. Its isolated `burger-pilot.html` page uses separate GLB ingredient assets and the existing catalog options. A generated source image is not a 3D result; quality must be judged from the actual rotating mesh in this preview. The remainder of the menu is out of scope until this pilot is reviewed.
 
 ## Target and current limitation
 
@@ -14,13 +20,13 @@ On October 29, 2026, the user selected **Keep visible ingredient customization**
 
 The current catalog has 2216 supported item configurations. Twenty-three complete-dish models do not cover all of them.
 
-## Verified generation availability
+## Prior paid-service preflight (not the active method)
 
 Read-only preflight through the connected Higgsfield tools on October 29, 2026:
 
 - Tripo H3.1 image-to-3D: 18 credits for one textured PBR model with detailed geometry and textures, target 80,000 faces. Reference used for the quote: the site's original Midnight Stack image.
 - Twenty-three comparable complete-dish generations would total 414 credits before retries or variants. This historical comparison is **not the budget for the selected modular approach**, which requires a separate quote after the ingredient assets and production method are defined.
-- Asset generation has not started. Funding and permitted generation capacity must be confirmed before submitting jobs.
+- No paid-service asset generation was started. The active pilot uses the account-free Blender authoring method above instead.
 - Tripo P2 with extreme textures, 50,000 faces and PBR quoted 40 credits for one model; it is not a lower-cost route for the requested detail.
 - No generation was submitted and no credits were spent. Original user-supplied GLB assets with permission for this project are another possible source.
 

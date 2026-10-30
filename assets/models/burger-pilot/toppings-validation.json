@@ -1,0 +1,56 @@
+{
+  "lettuce": {
+    "triangles": 76416,
+    "degenerate_triangles": 0,
+    "textured_meshes": 6,
+    "consistent_winding": true
+  },
+  "tomato": {
+    "triangles": 24576,
+    "degenerate_triangles": 0,
+    "textured_meshes": 2,
+    "consistent_winding": true
+  },
+  "bacon": {
+    "triangles": 15344,
+    "degenerate_triangles": 0,
+    "textured_meshes": 2,
+    "consistent_winding": true
+  },
+  "cheddar": {
+    "triangles": 31584,
+    "degenerate_triangles": 0,
+    "textured_meshes": 1,
+    "consistent_winding": true
+  },
+  "swiss": {
+    "triangles": 33272,
+    "degenerate_triangles": 0,
+    "textured_meshes": 1,
+    "consistent_winding": true
+  },
+  "onion": {
+    "triangles": 12288,
+    "degenerate_triangles": 0,
+    "textured_meshes": 6,
+    "consistent_winding": true
+  },
+  "pickle": {
+    "triangles": 25344,
+    "degenerate_triangles": 0,
+    "textured_meshes": 3,
+    "consistent_winding": true
+  },
+  "sauce-house": {
+    "triangles": 17920,
+    "degenerate_triangles": 0,
+    "textured_meshes": 0,
+    "consistent_winding": true
+  },
+  "sauce-smoky": {
+    "triangles": 17920,
+    "degenerate_triangles": 0,
+    "textured_meshes": 0,
+    "consistent_winding": true
+  }
+}

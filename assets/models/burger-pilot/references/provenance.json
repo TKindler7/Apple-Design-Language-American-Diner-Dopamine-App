@@ -1,0 +1,17 @@
+{
+  "kind": "original ingredient references",
+  "method": "built-in chat image generation",
+  "date": "2026-10-29",
+  "reference": "assets/food/midnight-stack.webp",
+  "images": [
+    {
+      "file": "bun-top.png",
+      "intent": "One isolated photorealistic upper sesame brioche bun half. Original burger used as material and recipe reference. Transparent background, complete silhouette, diffuse studio lighting. No other ingredients or plate."
+    },
+    {
+      "file": "patty.png",
+      "intent": "One isolated photorealistic cooked beef patty. Original burger used as material and recipe reference. Brown seared coarse crust, natural irregular edge, transparent background. No cheese, buns, sauce, greens, or plate."
+    }
+  ],
+  "use": "Reference artwork only; these images are not the rendered 3D pilot."
+}
