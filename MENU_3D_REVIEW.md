@@ -36,4 +36,8 @@ Family review caught and corrected repeated pie layers, a brownie surface overla
 
 Release checks: **33 tests passed**, including all 2,216 configurations; the production build, JavaScript/Python syntax checks, and whitespace checks passed. The delivered library contains **76 self-contained GLBs**. The combined default contact sheet includes all 23 actual assembled dishes; family reviews additionally cover minimum and loaded configurations, including all four cold-brew scoop/size combinations.
 
-The saved local-browser permission prevents interactive localhost testing. Offline renders do not establish browser or phone performance. Live verification follows publication to the existing Vercel site.
+The saved local-browser permission prevents interactive localhost testing. Offline renders do not establish browser or phone performance. Published implementation commit: `85784aedc15573e7529bda874f9dbbfff7fd5487` on GitHub `main`.
+
+Production URL: https://appledesignlanguageamericandinerdop.vercel.app/
+
+All **88 checked production files**, including **all 76 GLBs**, were fetched successfully and matched the release build byte-for-byte. The browser connection then reported unavailable when reloading the live app, so interactive WebGL behavior, mobile performance, and live interaction checks are **not claimed as verified**. The site remains published and all existing ordering-state tests pass.

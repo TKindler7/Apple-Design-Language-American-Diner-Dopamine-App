@@ -1,0 +1,448 @@
+{
+  "checkedAt": "2026-10-30T02:32:46.457Z",
+  "origin": "https://appledesignlanguageamericandinerdop.vercel.app/",
+  "files": 88,
+  "models": 76,
+  "results": [
+    {
+      "path": "food-model.js",
+      "bytes": 2684,
+      "sha256": "54ea030c4f9fa4336637eac28223f643aa46e9dc8725e3d50ae3ef550bc463af"
+    },
+    {
+      "path": "app.js",
+      "bytes": 43023,
+      "sha256": "efcad9a60251884959786fd5a6bac6a623980916cd7dbd0a8b09345bb0c90b52"
+    },
+    {
+      "path": "food-scene.js",
+      "bytes": 18297,
+      "sha256": "29a1c141675e98dd8fe9c600d1f9eaf8f1154d509d42e2a06abcf7fd1de1b075"
+    },
+    {
+      "path": "food-recipes-savory.js",
+      "bytes": 7313,
+      "sha256": "ba29d31380314e199688c83fb88a7f5f536bf6524d23163a045431bd87dd7f80"
+    },
+    {
+      "path": "food-recipes-sides.js",
+      "bytes": 3702,
+      "sha256": "6be9cd02a9f63a1c9a6627287686076c2759ac467b8752d943f16f479b23aab7"
+    },
+    {
+      "path": "food-recipes-sweet.js",
+      "bytes": 5793,
+      "sha256": "91ac256ac9a15499c7f8988c051e75d0e3846dc007ca63d2599e400ffd506347"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10853,
+      "sha256": "821f84b3b5867a80b55335f33cdd1cd40dc4a0ba61a35d2072f6997fbb0af790"
+    },
+    {
+      "path": "assets/models/menu.json",
+      "bytes": 10496,
+      "sha256": "dad3b620b9978a207d69f14de03a95adb87c5b2d263ad35df6579c4e6f2e8051"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 117568,
+      "sha256": "ea6945bc119f46237fab6a9228c3566fe66fff200512b3b96b1a6a32e89cb706"
+    },
+    {
+      "path": "vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "path": "vendor/RoomEnvironment.js",
+      "bytes": 4972,
+      "sha256": "77d4d2bed2b60cb98424764264aedd84b56bbf3211e0f48430e15608aeded9dc"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 662772,
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+    },
+    {
+      "path": "assets/models/burger-pilot/bun-bottom.glb",
+      "bytes": 1126704,
+      "sha256": "8cc8e0585c64df926c21bce88650f40d816dee5f46c72113959542bf58d6dc44"
+    },
+    {
+      "path": "assets/models/burger-pilot/bun-top.glb",
+      "bytes": 1721276,
+      "sha256": "08c0afd22349c41d6388623cb82aefeb964fd365819d44a83c434eca3210c8a2"
+    },
+    {
+      "path": "assets/models/burger-pilot/patty.glb",
+      "bytes": 2157444,
+      "sha256": "aa42ae3f89c8eda6cdb3172100c4b7f253bfefd37a8a53abce3d759edd30a2f6"
+    },
+    {
+      "path": "assets/models/burger-pilot/tomato.glb",
+      "bytes": 1380496,
+      "sha256": "e670d0b87d363531366fd7b082dd05ada34859c222e2ddcaa844a01bcd2ed44c"
+    },
+    {
+      "path": "assets/models/burger-pilot/pickle.glb",
+      "bytes": 1447600,
+      "sha256": "2ab3d295d3c99499cc578fc296a04e9006fc911f1ab4d1422c09ae61d40b0a4a"
+    },
+    {
+      "path": "assets/models/burger-pilot/onion.glb",
+      "bytes": 1481588,
+      "sha256": "7d501006146f10738e3740d65cdf0269680e6e2f75c3c6c87e5fba7a0eae0910"
+    },
+    {
+      "path": "assets/models/burger-pilot/lettuce.glb",
+      "bytes": 3556388,
+      "sha256": "e4fdb3f337ad15a8a72303184323ce279694330711dccce707ee2f4011353885"
+    },
+    {
+      "path": "assets/models/burger-pilot/swiss.glb",
+      "bytes": 852916,
+      "sha256": "63432b717b29abc0dfe46e91168ee3e9e36660957555cc21987dde75f3f567bf"
+    },
+    {
+      "path": "assets/models/burger-pilot/cheddar.glb",
+      "bytes": 861624,
+      "sha256": "d478c844e19dda9242379d86344b2d18cdb8d9ac3cb514cdd225dc60279b18e3"
+    },
+    {
+      "path": "assets/models/burger-pilot/sauce-house.glb",
+      "bytes": 405896,
+      "sha256": "198c51485b091bbba012ddd3ae6a61e3eceda3e5a4e44496d1c83fa98f4b15f4"
+    },
+    {
+      "path": "assets/models/burger-pilot/bacon.glb",
+      "bytes": 2686564,
+      "sha256": "910c560add191ab9b0efe74445f616afa2e4bf64a9554b3d9d8a300a1414a065"
+    },
+    {
+      "path": "assets/models/savory/savory-plate.glb",
+      "bytes": 39208,
+      "sha256": "50b3ef674e3b575b27f94ebafbadd1a1581d3139eccc655555ce605cb98da996"
+    },
+    {
+      "path": "assets/models/burger-pilot/sauce-smoky.glb",
+      "bytes": 405900,
+      "sha256": "4b593c58da8695de8a65febbd556c6502c5ba18ed3e02019e8e86c3236cd2a92"
+    },
+    {
+      "path": "assets/models/savory/savory-sourdough.glb",
+      "bytes": 612932,
+      "sha256": "92bee1f87466cfde479147c3fe4ddfeb1121a2e60e2a3454bd15844bc1730bb9"
+    },
+    {
+      "path": "assets/models/savory/savory-pancake.glb",
+      "bytes": 454752,
+      "sha256": "133a1acf33effe941948e1398db261df649182f1b4762d4de57a21e1a903e6c4"
+    },
+    {
+      "path": "assets/models/savory/savory-crispy-chicken.glb",
+      "bytes": 905568,
+      "sha256": "a196d5967d62305f969f5c3c02d681407b4e7b9b6e744d4404e64e90466e3d0a"
+    },
+    {
+      "path": "assets/models/savory/savory-french-toast.glb",
+      "bytes": 631020,
+      "sha256": "6f7812b94159cd5c5670c7d4980e870932e56ea03d9b18a0adfbab6e19e103f4"
+    },
+    {
+      "path": "assets/models/savory/savory-caramelized-onion.glb",
+      "bytes": 538144,
+      "sha256": "67b39283046ce73598fc2b0318ee9f8e6fa17fd6925b95c042e3120a0cf73478"
+    },
+    {
+      "path": "assets/models/savory/savory-rye.glb",
+      "bytes": 604904,
+      "sha256": "3b6bae2188b7f1c5d8d2f561818461097af88923668814f46a2512daa3fd8332"
+    },
+    {
+      "path": "assets/models/savory/savory-pepper.glb",
+      "bytes": 597948,
+      "sha256": "405d8215085107a5b3c16da67e001fb49baab19008f684088cb0b8475ac9ecf4"
+    },
+    {
+      "path": "assets/models/savory/savory-mushroom.glb",
+      "bytes": 771672,
+      "sha256": "703782240bba927d0a44d99464e93ca176bfa09fa43193319b014ed998489e03"
+    },
+    {
+      "path": "assets/models/savory/savory-avocado.glb",
+      "bytes": 397512,
+      "sha256": "1bdb9a872013e426396a33341e797edef09d8a48c978939f6e0aed1ee5af17ec"
+    },
+    {
+      "path": "assets/models/savory/savory-butter.glb",
+      "bytes": 6156,
+      "sha256": "f0e5c26eade5e0b24a3d9c0f50c1cb7fd660261beb0f98623dae8ec6469db227"
+    },
+    {
+      "path": "assets/models/savory/savory-syrup.glb",
+      "bytes": 102140,
+      "sha256": "8b6021d0e1f9b91205b4222baaf7883c488e1cd105833f420d372d5966367fa2"
+    },
+    {
+      "path": "assets/models/savory/savory-blueberries.glb",
+      "bytes": 269524,
+      "sha256": "395e28f1bd379bf9794314b9924bb17e1d598df0c2ff6a5acaff4216c3ba0423"
+    },
+    {
+      "path": "assets/models/savory/savory-zucchini.glb",
+      "bytes": 650612,
+      "sha256": "e46f24aab69b2ceb5dc443214c943a4b4a89e858f24927f0c0f7e10f0566b281"
+    },
+    {
+      "path": "assets/models/savory/savory-chocolate-chips.glb",
+      "bytes": 278896,
+      "sha256": "126c4b88e1e54ec00adb76ed1ffeeca8513ba9afda58d05bf77005ed5761a846"
+    },
+    {
+      "path": "assets/models/savory/savory-egg-sunny.glb",
+      "bytes": 898156,
+      "sha256": "a30e607762ae0619f2a2a73130b73df8ff2aa73ceaf121478d3c9c883fce1903"
+    },
+    {
+      "path": "assets/models/savory/savory-eggs-scrambled.glb",
+      "bytes": 1520536,
+      "sha256": "5df372c6535027e30bb296a70df7d750472417d66a451bff5f108aa020563d8d"
+    },
+    {
+      "path": "assets/models/savory/savory-sausage.glb",
+      "bytes": 688680,
+      "sha256": "d3ba5c5d8615fa33261b25650561890f38f29f90ea89f47567d222356d970c38"
+    },
+    {
+      "path": "assets/models/savory/savory-potato.glb",
+      "bytes": 780300,
+      "sha256": "d974216739b6a791dd2e0099ac6fc99ef3da49d020c8427156d04cbedfd3a8b3"
+    },
+    {
+      "path": "assets/models/savory/savory-cinnamon.glb",
+      "bytes": 372264,
+      "sha256": "0f566e45ebfceef7a5d6585d89b58ac93421f982159fa4d0f7248b8b795f8e52"
+    },
+    {
+      "path": "assets/models/sides/sides-plate.glb",
+      "bytes": 42440,
+      "sha256": "6650285edbcd4ffcffe5be109dc9745d1b33aabd5770bfd2788777a6fef9b871"
+    },
+    {
+      "path": "assets/models/sides/sides-bowl.glb",
+      "bytes": 50956,
+      "sha256": "dbec61d1c62b7e3e34fe2d00e8f16f5c16db1f855b243ab7e75752e0aa0cba25"
+    },
+    {
+      "path": "assets/models/sides/sides-ramekin.glb",
+      "bytes": 28800,
+      "sha256": "3961a202d52df8e0e787c46349db5deb87cec048e7aa0555582321bd46527d54"
+    },
+    {
+      "path": "assets/models/sides/sides-fries.glb",
+      "bytes": 824776,
+      "sha256": "3d844d31642e6796ad5cf1539277bd940aa2195b7a85ba44342db4f61f611a39"
+    },
+    {
+      "path": "assets/models/sides/sides-chili.glb",
+      "bytes": 999184,
+      "sha256": "65ed11193b0fd9b9abb26cb2a64367855cc4b45c61345eedbdc9c07250468a22"
+    },
+    {
+      "path": "assets/models/sides/sides-fries-large.glb",
+      "bytes": 935448,
+      "sha256": "bca0dd725c5f613aefe99cf0791c6532e946f4f61591372a383232cae4623b21"
+    },
+    {
+      "path": "assets/models/sides/sides-cheese.glb",
+      "bytes": 508820,
+      "sha256": "ac6a801ff041b94f76af2117b19c7520e30c6945fa8d05f0c5b9505e8e5b05d3"
+    },
+    {
+      "path": "assets/models/sides/sides-cheese-large.glb",
+      "bytes": 508820,
+      "sha256": "1fb34842661a1506515ac6290e43df2201d88c8b1fdc18bbf22d3525a2152eae"
+    },
+    {
+      "path": "assets/models/sides/sides-chili-large.glb",
+      "bytes": 999192,
+      "sha256": "8732ef37143a2b9aa6d3d979e804d6a32b004e64d9f58c6ec78fc672698ffa51"
+    },
+    {
+      "path": "assets/models/sides/sides-cheese-chili.glb",
+      "bytes": 508824,
+      "sha256": "76bf092d139a56c209ae39d7664bc8407b4df811ff3a5f326c4d931adbb5b981"
+    },
+    {
+      "path": "assets/models/sides/sides-onion.glb",
+      "bytes": 25536,
+      "sha256": "c3b7ce8f6cc5946879e19405cf9ea54338792fa28cc90713a5e216637fcdf936"
+    },
+    {
+      "path": "assets/models/sides/sides-cheese-chili-large.glb",
+      "bytes": 508820,
+      "sha256": "fd1ac1f6d18655049df7a43b0e93bcc4460b495c9d6deeba9f5d0e322e714f57"
+    },
+    {
+      "path": "assets/models/sides/sides-pickle-spear.glb",
+      "bytes": 1154636,
+      "sha256": "3eb9f26d0b1baec3f6f27f35f4c073d3601b6b44391e813c93c8069bf67f9d40"
+    },
+    {
+      "path": "assets/models/sides/sides-house.glb",
+      "bytes": 142264,
+      "sha256": "9c0f02f2c600a41e136b33e74684e86db05b2fbd04986869c640db600fa440c0"
+    },
+    {
+      "path": "assets/models/sides/sides-ranch.glb",
+      "bytes": 187208,
+      "sha256": "83a159532f3f20028da9fe2347685cdf90ff4d034b98de18ef5d97ccdfc93be4"
+    },
+    {
+      "path": "assets/models/sides/sides-crumbs.glb",
+      "bytes": 886288,
+      "sha256": "39f0f6b3252701b90bb58a69b76b97787174991d4dd4b123bfe71a9396341761"
+    },
+    {
+      "path": "assets/models/sides/sides-macaroni.glb",
+      "bytes": 1588888,
+      "sha256": "34522e95d9c2782bd555bf4bae82f3f7e5ebcaeee0ff8e026fe02e2f9af9a4a9"
+    },
+    {
+      "path": "assets/models/sides/sides-onion-large.glb",
+      "bytes": 25536,
+      "sha256": "beb146c38ce605d0fbf3fb1f790e2fd3f5e7d38760877c8214200ef682194aec"
+    },
+    {
+      "path": "assets/models/sides/sides-bacon.glb",
+      "bytes": 887044,
+      "sha256": "6d665c0244dc35ba8adfe88d58a736715fdbd05660ce1f104b1fd3fdc555e532"
+    },
+    {
+      "path": "assets/models/sides/sides-onion-chili.glb",
+      "bytes": 25536,
+      "sha256": "4ae2d80fc3ae0ed4145ea1d02ca6d57f050556730119cdcac842d45ef8f8a713"
+    },
+    {
+      "path": "assets/models/sides/sides-onion-chili-large.glb",
+      "bytes": 25536,
+      "sha256": "3b4ca485e63084677012427b8be915de3c053c8341eae178a5e293c2b3888840"
+    },
+    {
+      "path": "assets/models/sweet/sweet-glass.glb",
+      "bytes": 80344,
+      "sha256": "cd0eea3fb6af396778b1e9b26908e96aa25b7bd0e5394bd7c69a2dd7153eacd6"
+    },
+    {
+      "path": "assets/models/sweet/sweet-shake-cherry.glb",
+      "bytes": 154952,
+      "sha256": "a3bb435eb7b7b39ffb774dbe0a1d99232da36632a810ee7bbc7fcc97ee38da94"
+    },
+    {
+      "path": "assets/models/sweet/sweet-shake-chocolate.glb",
+      "bytes": 155600,
+      "sha256": "8946c4417218bb5b8680e0d77ac742e8cc2e8be42cd3d68308183160305bcc4d"
+    },
+    {
+      "path": "assets/models/sweet/sweet-shake-vanilla.glb",
+      "bytes": 155584,
+      "sha256": "ce444777a3fd8cf282e36f51234c173d3ffacba6a39ccb02af66dc82741b5462"
+    },
+    {
+      "path": "assets/models/sweet/sweet-ice.glb",
+      "bytes": 25692,
+      "sha256": "313455dadf89fe31ddac86f2828684f8f4834a7ecc0ef132776a38c62b06475a"
+    },
+    {
+      "path": "assets/models/sweet/sweet-coldbrew.glb",
+      "bytes": 31100,
+      "sha256": "990c5cbf66c8f6fc469300bcc1f817edc85a83e585337dcaf22652952ab31cdf"
+    },
+    {
+      "path": "assets/models/sweet/sweet-soda.glb",
+      "bytes": 160724,
+      "sha256": "30099a2c56ebae6ad0e4f4e82c2735dd54a4ba7e2f4e3a4026487938a8b15235"
+    },
+    {
+      "path": "assets/models/sweet/sweet-straw.glb",
+      "bytes": 7012,
+      "sha256": "69928c57aab9b8374225b36eaebde6c56868ade976e62b5e15c6f939bc2d77ba"
+    },
+    {
+      "path": "assets/models/sweet/sweet-icecream-chocolate.glb",
+      "bytes": 392604,
+      "sha256": "4bc2f9e17f7e74eb7a7670b691e2264eb4773188a4f4ebd4b123aae932bade10"
+    },
+    {
+      "path": "assets/models/sweet/sweet-whipped-cream.glb",
+      "bytes": 810728,
+      "sha256": "b35fe866aa966cd68d392ad696816f8e2318def9f9e12dbe1bc58fc397208bce"
+    },
+    {
+      "path": "assets/models/sweet/sweet-cherry.glb",
+      "bytes": 80948,
+      "sha256": "c9dcf4d0274c4bc8ca3a245a171a96dd6751ae8a764c123f9e0d3f6f4e00e41b"
+    },
+    {
+      "path": "assets/models/sweet/sweet-icecream-vanilla.glb",
+      "bytes": 537328,
+      "sha256": "7a65988d420cd926958886e2adc574a1574e374af94997865258920428eb5597"
+    },
+    {
+      "path": "assets/models/sweet/sweet-drizzle-flat.glb",
+      "bytes": 87624,
+      "sha256": "36ddd205aa10e9021d374e9197b387c8e6257445d6ae955a47ce936fa9db9841"
+    },
+    {
+      "path": "assets/models/sweet/sweet-drizzle-cream.glb",
+      "bytes": 84908,
+      "sha256": "6a8a05a265eeeddcb8f432bdeb92164a6b546a466a6365898caf9fffc1b292a0"
+    },
+    {
+      "path": "assets/models/sweet/sweet-drizzle-scoop.glb",
+      "bytes": 299808,
+      "sha256": "534deb4013dc1750951b3e9ebd1a620cf6c69a1b35d6311860aa7a56c8bac426"
+    },
+    {
+      "path": "assets/models/sweet/sweet-nuts.glb",
+      "bytes": 75424,
+      "sha256": "e6acedba8cbeec706ee9665247b8cd8228e2021c84c3d9b57e884ea5eada926f"
+    },
+    {
+      "path": "assets/models/sweet/sweet-plate.glb",
+      "bytes": 52120,
+      "sha256": "d20afb52a22bb67d2e205758879e19938721ecf73341f6e505d1a088a8480088"
+    },
+    {
+      "path": "assets/models/sweet/sweet-sundae-bowl.glb",
+      "bytes": 85988,
+      "sha256": "b01cbd9651c0d9806ab598c656e4e26861eb7e314a957d55c4ed88698c47490e"
+    },
+    {
+      "path": "assets/models/sweet/sweet-apple-pie.glb",
+      "bytes": 1418440,
+      "sha256": "6d61dad28850789e5c5ea0d86f4208f6833632ec3177dda7a121a6e686569007"
+    },
+    {
+      "path": "assets/models/sweet/sweet-cheesecake.glb",
+      "bytes": 1123280,
+      "sha256": "e89945f36072dab89bf8b96b675dd2fee444f52ade96c0b8bd3bb0f7ec75c8dc"
+    },
+    {
+      "path": "assets/models/sweet/sweet-skillet.glb",
+      "bytes": 78720,
+      "sha256": "810b86970c9d11fa0b2eac1a75aaab8717aab857ca0d168629e9df48f0cbc103"
+    },
+    {
+      "path": "assets/models/sweet/sweet-brownie.glb",
+      "bytes": 1162560,
+      "sha256": "d50212a8dc6b0b7f97e7e4f43bb2528cea86664374770a5ea5f2a24e127ac412"
+    },
+    {
+      "path": "assets/models/sweet/sweet-cherry-compote.glb",
+      "bytes": 248684,
+      "sha256": "e665b2c1dc8c84cf8cdcff17329a10152959e4af787980730446e5471c942630"
+    }
+  ]
+}
