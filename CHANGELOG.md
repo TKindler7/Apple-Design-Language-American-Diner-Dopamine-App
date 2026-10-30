@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-29 — Restore first-open ingredient entrance
+
+- Fixed the preview controls resizing the stage and cancelling the initial ingredient animation. Camera measurement now uses the finished dish bounds while preserving the active ingredient positions.
+- Rendered the raised arrival pose before revealing the canvas; started its clock on the first animation frame so initial texture/shader work cannot skip the entrance.
+- Added a short photo-to-3D crossfade and a clearer staggered fall into place. Kept immediate reduced-motion presentation, gesture interruption, and cancellation when closing the preview.
+- Added a scene-lifecycle regression test covering delayed first rendering, control-layout resize, completion, replay/disposal, and reduced motion. All 34 tests and the production build pass. Live browser control remains unavailable; the test stubs GPU rendering and does not claim a browser visual pass.
+
 ## 2026-10-29 — Breakfast, pickle, and glass realism refinement
 
 - Added three irregular pancake shapes, two asymmetric fried eggs with softer yolk highlights, softly rounded scrambled curds, and three individually curved breaded pickle spears. Repeated servings now vary in shape and placement.

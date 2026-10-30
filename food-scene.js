@@ -116,25 +116,33 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     camera.lookAt(0, targetHeight, 0);
     renderer.render(scene, camera);
   }
-  function settle() {
+  function settle(draw = true) {
     cancelAnimationFrame(frame); frame = 0;
     viewTarget = null;
     for (const layer of layers) {
       layer.position.copy(layer.userData.restPosition);
       layer.scale.copy(layer.userData.restScale);
     }
-    render();
+    if (draw) render();
   }
   function assemble(incremental = false) {
-    settle();
-    if (reduce || !layers.length) return;
-    const start = performance.now();
-    const positions = layers.map((layer, index) => incremental ? layer.userData.arrivalPosition : layer.userData.restPosition.clone().add(new THREE.Vector3(0, .2 + Math.min(index, 8) * .12, 0)));
+    settle(false);
+    if (reduce || !layers.length) { render(); return; }
+    // Render the arrival pose while still covered by the photo. Expensive first
+    // texture uploads must not consume the animation's clock or flash the rest pose.
+    let start;
+    const positions = layers.map((layer, index) => incremental ? layer.userData.arrivalPosition : layer.userData.restPosition.clone().add(new THREE.Vector3(0, .65 + Math.min(index, 8) * .16, 0)));
+    layers.forEach((layer, index) => {
+      layer.position.copy(positions[index]);
+      if (incremental) layer.scale.copy(layer.userData.arrivalScale);
+    });
+    render();
     function tick(now) {
       if (disposed || failed) return;
+      start ??= now;
       let active = false;
       layers.forEach((layer, index) => {
-        const progress = clamp((now - start - (incremental ? 0 : Math.min(index, 8) * 40)) / (incremental ? 400 : 600), 0, 1);
+        const progress = clamp((now - start - (incremental ? 0 : Math.min(index, 8) * 55)) / (incremental ? 400 : 750), 0, 1);
         const eased = 1 - (1 - progress) ** 3;
         layer.position.lerpVectors(positions[index], layer.userData.restPosition, eased);
         if (incremental) layer.scale.lerpVectors(layer.userData.arrivalScale, layer.userData.restScale, eased);
@@ -147,7 +155,17 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
   }
   function fitView(preserveZoom = true, stableFrame = false) {
     const zoomRatio = preserveZoom ? distance / homeDistance : 1;
+    // Measure the finished dish without cancelling or reframing its entrance.
+    const poses = layers.map(layer => ({ position: layer.position.clone(), scale: layer.scale.clone() }));
+    layers.forEach(layer => {
+      layer.position.copy(layer.userData.restPosition);
+      layer.scale.copy(layer.userData.restScale);
+    });
     const box = new THREE.Box3().setFromObject(turntable);
+    layers.forEach((layer, index) => {
+      layer.position.copy(poses[index].position);
+      layer.scale.copy(poses[index].scale);
+    });
     const size = box.getSize(new THREE.Vector3());
     targetHeight = (box.min.y + box.max.y) / 2;
     const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
@@ -256,7 +274,6 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
       container.dataset.ingredients = recipe.map(layer => layer.id).join(",");
       container.dataset.item = nextItem.id;
       canvas.setAttribute("aria-label", `${nextItem.name} in 3D, showing your selected ingredients. Drag to rotate. Arrow keys rotate and zoom. Home resets the view.`);
-      canvas.style.visibility = "visible";
       canvas.tabIndex = 0;
       container.setAttribute("aria-busy", "false");
       const used = new Set(recipe.map(layer => layer.asset));
@@ -269,8 +286,9 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
         }).catch(() => {});
       }
       fitView(!firstRecipe, !firstRecipe);
-      onState({ ready: true, loading: false });
       assemble(!firstRecipe);
+      canvas.style.visibility = "visible";
+      onState({ ready: true, loading: false });
     } catch (error) {
       if (disposed || failed || token !== request) return;
       container.setAttribute("aria-busy", "false");
@@ -309,7 +327,7 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     renderer.setSize(Math.max(1, bounds.width), Math.max(1, bounds.height), false);
     camera.aspect = Math.max(1, bounds.width) / Math.max(1, bounds.height);
     camera.updateProjectionMatrix();
-    if (layers.length) { settle(); fitView(); }
+    if (layers.length) fitView();
     render();
   }
   function pointerDown(event) {
