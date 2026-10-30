@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-29 — Textured 3D across the complete menu
+
+- Replaced the main procedural food viewer with original, separately textured GLB ingredients for all 23 dishes, including the fictional kitchen preview.
+- Preserved all 2,216 ingredient/portion combinations and existing cart, pricing, draft persistence, checkout, and history behavior.
+- Added new bread, chicken, breakfast, side, drink, and dessert assets through original chat-generated textures and local Blender authoring. No Hugging Face or external paid 3D generation is required.
+- Corrected food contact, frying texture, sauce shapes, cream folds, egg surfaces, pie filling, brownie overlap, and hollow macaroni after inspecting exported models.
+- Added per-recipe loading, bounded resource cleanup, cancellation-safe option changes, accessible loading/photo fallbacks, and stable camera framing so larger portions visibly grow.
+- Preserved smooth rotation/zoom/reset and assembly replay; ingredient changes settle into place without replaying the entire dish. Reduced-motion behavior remains supported.
+- Reduced the burger library from roughly 39 MB to 18 MB through texture encoding. Deployment includes only referenced models, not authoring tools or source texture sheets.
+- Added exhaustive recipe/asset tests and reproducible actual-model render review. See MENU_3D_REVIEW.md for final validation and deployment evidence.
+
 ## 2026-10-29 — One-burger textured 3D pilot
 
 - Added an isolated Midnight Stack review page with separate bun, patty, cheese, vegetable, bacon, and sauce GLBs. The normal menu viewer remains unchanged.

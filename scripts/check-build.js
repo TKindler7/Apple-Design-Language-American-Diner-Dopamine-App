@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ITEMS } from "../catalog.js";
 import { validateBurgerPilotManifest } from "../burger-pilot-model.js";
+import { foodRecipe, foodPlacements, validateFoodManifest } from "../food-model.js";
+import { loadFoodLibrary } from "./model-library.js";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const references = [...html.matchAll(/(?:src|href)="(\.\/[^"#]+)"/g)].map((match) => match[1]).concat(ITEMS.map(item => item.image));
@@ -15,10 +17,10 @@ if (missing.length) {
   const outputDir = resolve(projectRoot, "public");
   rmSync(outputDir, { recursive: true, force: true });
   mkdirSync(outputDir, { recursive: true });
-  for (const filename of ["index.html", "styles.css", "app.js", "cart.js", "catalog.js", "food-scene.js", "special.js", "page-motion.js", "page-motion.css", "ui-motion.js", "ui-motion.css"]) {
+  for (const filename of ["index.html", "styles.css", "app.js", "cart.js", "catalog.js", "food-scene.js", "food-model.js", "food-recipes-savory.js", "food-recipes-sides.js", "food-recipes-sweet.js", "special.js", "page-motion.js", "page-motion.css", "ui-motion.js", "ui-motion.css"]) {
     copyFileSync(resolve(projectRoot, filename), resolve(outputDir, filename));
   }
-  // The pilot has its own URL and never replaces the live menu's default viewer.
+  // Preserve the original one-burger review page alongside the integrated menu.
   for (const filename of ["burger-pilot.html", "burger-pilot.css", "burger-pilot.js", "burger-pilot-model.js", "burger-pilot-scene.js"]) {
     copyFileSync(resolve(projectRoot, filename), resolve(outputDir, filename));
   }
@@ -38,6 +40,15 @@ if (missing.length) {
       mkdirSync(resolve(destination, ".."), { recursive: true });
       copyFileSync(resolve(pilotRoot, url), destination);
     }
+  }
+  const library = validateFoodManifest(loadFoodLibrary());
+  for (const item of ITEMS) foodPlacements(foodRecipe(item), library);
+  const modelOutput = resolve(outputDir, "assets/models");
+  writeFileSync(resolve(modelOutput, "menu.json"), JSON.stringify(library));
+  for (const { url } of Object.values(library.ingredients)) {
+    const destination = resolve(modelOutput, url);
+    mkdirSync(resolve(destination, ".."), { recursive: true });
+    copyFileSync(resolve(projectRoot, "assets/models", url), destination);
   }
   copyFileSync(resolve(projectRoot, "assets/favicon.svg"), resolve(outputDir, "assets/favicon.svg"));
   mkdirSync(resolve(outputDir, "vendor"), { recursive: true });

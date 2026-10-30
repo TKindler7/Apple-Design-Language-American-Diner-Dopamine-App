@@ -1,12 +1,12 @@
 # Photorealistic 3D replacement
 
-Requested October 29, 2026. Status: one modular burger pilot has been authored and rendered for visual review. The rest of the menu and production site have not been replaced. See `BURGER_PILOT_REVIEW.md` for actual checks and remaining limits.
+Requested October 29, 2026. The user reviewed the modular burger direction and requested the same approach across the entire menu. The active scope is all 23 dishes with every existing ingredient choice preserved. See `MENU_3D_REVIEW.md` for delivery checks and current limitations.
 
-## Active pilot method
+## Active production method
 
 The user requested that the work be handled through chat without Hugging Face. The active method is original chat-generated food textures applied to individually authored, closed 3D ingredient meshes in Blender. No Hugging Face account, model download, or inference is part of this method. Earlier gated-model setup is archived locally and excluded from the project build.
 
-The first review target is The Midnight Stack, preserving all 576 ingredient combinations. Its isolated `burger-pilot.html` page uses separate GLB ingredient assets and the existing catalog options. A generated source image is not a 3D result; quality must be judged from the actual rotating mesh in this preview. The remainder of the menu is out of scope until this pilot is reviewed.
+The Midnight Stack pilot established the approach with 576 configurations. The user then explicitly expanded the scope to every menu item. The main viewer now loads separately authored GLB ingredients from shared burger, savory, sides, and sweet libraries. Generated source images are material references, not evidence of the finished 3D result. Quality is assessed on actual exported meshes and their assembled recipe placements.
 
 ## Target and current limitation
 
@@ -30,13 +30,13 @@ Read-only preflight through the connected Higgsfield tools on October 29, 2026:
 - Tripo P2 with extreme textures, 50,000 faces and PBR quoted 40 credits for one model; it is not a lower-cost route for the requested detail.
 - No generation was submitted and no credits were spent. Original user-supplied GLB assets with permission for this project are another possible source.
 
-## Pilot before broad production
+## Review process
 
 1. Produce an original high-resolution food reference for one burger, based on the established recipe and original imagery.
 2. Generate or author a modular textured burger pilot with separate top/bottom buns, patty, cheeses, produce, bacon, and sauces; retain source references, generation parameters, and provenance. Reuse the patty for the extra-patty option.
 3. Inspect the actual mesh, material maps, back and underside, and ingredient separability. Hidden surfaces must have complete geometry and textures so removing a topping reveals convincing food. Do not infer quality or modularity from the generation status or thumbnail.
 4. Load it in the site's real viewer. Inspect a full rotation, close-up, shadows, color, and ingredient contact. Exercise no cheese, both cheese types, every topping toggle, an extra patty, all sauces, rapid removal/reselection, and replay. Changing an ingredient must not reveal a baked image of the removed ingredient elsewhere on the model.
-5. Proceed to the remaining menu only once the pilot meets the photographic target. Regenerate or author missing details rather than labeling a visibly stylized result photorealistic.
+5. The user accepted the burger direction and authorized the full menu. Carry its material detail and modularity across each dish, inspect the exported assets, and correct floating toppings or implausible surfaces. These remain authored CG assets; do not claim they are photographs or scanned food.
 
 ## Asset families for visible customization
 

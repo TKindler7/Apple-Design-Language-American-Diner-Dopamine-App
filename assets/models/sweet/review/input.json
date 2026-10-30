@@ -1,0 +1,3471 @@
+{
+  "manifest": {
+    "version": 1,
+    "ingredients": {
+      "sweet-glass": {
+        "url": "./sweet/sweet-glass.glb",
+        "width": 1.382
+      },
+      "sweet-shake-cherry": {
+        "url": "./sweet/sweet-shake-cherry.glb",
+        "width": 1.23
+      },
+      "sweet-shake-vanilla": {
+        "url": "./sweet/sweet-shake-vanilla.glb",
+        "width": 1.23
+      },
+      "sweet-shake-chocolate": {
+        "url": "./sweet/sweet-shake-chocolate.glb",
+        "width": 1.23
+      },
+      "sweet-soda": {
+        "url": "./sweet/sweet-soda.glb",
+        "width": 1.23
+      },
+      "sweet-coldbrew": {
+        "url": "./sweet/sweet-coldbrew.glb",
+        "width": 1.23
+      },
+      "sweet-ice": {
+        "url": "./sweet/sweet-ice.glb",
+        "width": 0.34
+      },
+      "sweet-straw": {
+        "url": "./sweet/sweet-straw.glb",
+        "width": 0.086
+      },
+      "sweet-icecream-vanilla": {
+        "url": "./sweet/sweet-icecream-vanilla.glb",
+        "width": 1.061823
+      },
+      "sweet-icecream-chocolate": {
+        "url": "./sweet/sweet-icecream-chocolate.glb",
+        "width": 1.061823
+      },
+      "sweet-whipped-cream": {
+        "url": "./sweet/sweet-whipped-cream.glb",
+        "width": 0.886224
+      },
+      "sweet-cherry": {
+        "url": "./sweet/sweet-cherry.glb",
+        "width": 0.301039
+      },
+      "sweet-drizzle-scoop": {
+        "url": "./sweet/sweet-drizzle-scoop.glb",
+        "width": 0.941773
+      },
+      "sweet-drizzle-flat": {
+        "url": "./sweet/sweet-drizzle-flat.glb",
+        "width": 0.989693
+      },
+      "sweet-drizzle-cream": {
+        "url": "./sweet/sweet-drizzle-cream.glb",
+        "width": 0.670434
+      },
+      "sweet-nuts": {
+        "url": "./sweet/sweet-nuts.glb",
+        "width": 1.007784
+      },
+      "sweet-sundae-bowl": {
+        "url": "./sweet/sweet-sundae-bowl.glb",
+        "width": 2.154
+      },
+      "sweet-plate": {
+        "url": "./sweet/sweet-plate.glb",
+        "width": 3.8
+      },
+      "sweet-apple-pie": {
+        "url": "./sweet/sweet-apple-pie.glb",
+        "width": 2.253468
+      },
+      "sweet-cheesecake": {
+        "url": "./sweet/sweet-cheesecake.glb",
+        "width": 2.209967
+      },
+      "sweet-cherry-compote": {
+        "url": "./sweet/sweet-cherry-compote.glb",
+        "width": 1.06953
+      },
+      "sweet-brownie": {
+        "url": "./sweet/sweet-brownie.glb",
+        "width": 1.77
+      },
+      "sweet-skillet": {
+        "url": "./sweet/sweet-skillet.glb",
+        "width": 3.47
+      }
+    }
+  },
+  "dishes": [
+    {
+      "id": "cherry-cloud-shake",
+      "name": "Cherry Cloud Shake",
+      "category": "drinks",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": [
+          "whipped-cream",
+          "cherry"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-cherry",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            2.47,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.07,
+            0.015
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cherry-cloud-shake",
+      "name": "Cherry Cloud Shake",
+      "category": "drinks",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-cherry",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cherry-cloud-shake",
+      "name": "Cherry Cloud Shake",
+      "category": "drinks",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "whipped-cream",
+          "cherry",
+          "chocolate"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-cherry",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.3456,
+            0.183,
+            -0.3132
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            3.0134000000000003,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.6614,
+            0.0162
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-cream",
+          "position": [
+            0.03855600000000001,
+            3.248732,
+            0.014256000000000001
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vanilla-malt",
+      "name": "Vanilla Malt",
+      "category": "drinks",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": [
+          "whipped-cream",
+          "cherry"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-vanilla",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            2.47,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.07,
+            0.015
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vanilla-malt",
+      "name": "Vanilla Malt",
+      "category": "drinks",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-vanilla",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vanilla-malt",
+      "name": "Vanilla Malt",
+      "category": "drinks",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "whipped-cream",
+          "cherry",
+          "chocolate"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-vanilla",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.3456,
+            0.183,
+            -0.3132
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            3.0134000000000003,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.6614,
+            0.0162
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-cream",
+          "position": [
+            0.03855600000000001,
+            3.248732,
+            0.014256000000000001
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chocolate-shake",
+      "name": "Chocolate Shake",
+      "category": "drinks",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": [
+          "whipped-cream",
+          "cherry"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-chocolate",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            2.47,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.07,
+            0.015
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chocolate-shake",
+      "name": "Chocolate Shake",
+      "category": "drinks",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-chocolate",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.15,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chocolate-shake",
+      "name": "Chocolate Shake",
+      "category": "drinks",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "whipped-cream",
+          "cherry",
+          "chocolate"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "shake",
+          "asset": "sweet-shake-chocolate",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.3456,
+            0.183,
+            -0.3132
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            3.0134000000000003,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            3.6614,
+            0.0162
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-cream",
+          "position": [
+            0.03855600000000001,
+            3.248732,
+            0.014256000000000001
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strawberry-soda",
+      "name": "Strawberry Soda",
+      "category": "drinks",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "ice": "regular"
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "soda",
+          "asset": "sweet-soda",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.16,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "ice-0",
+          "asset": "sweet-ice",
+          "position": [
+            -0.25,
+            2.1,
+            0.02
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-1",
+          "asset": "sweet-ice",
+          "position": [
+            0.11,
+            2.19,
+            0.16
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.12,
+            0.43,
+            0.09
+          ]
+        },
+        {
+          "id": "ice-2",
+          "asset": "sweet-ice",
+          "position": [
+            0.25,
+            2,
+            -0.18
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.24,
+            0.86,
+            0.18
+          ]
+        },
+        {
+          "id": "ice-3",
+          "asset": "sweet-ice",
+          "position": [
+            -0.12,
+            1.77,
+            -0.2
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.36,
+            1.29,
+            0.27
+          ]
+        },
+        {
+          "id": "ice-4",
+          "asset": "sweet-ice",
+          "position": [
+            0.14,
+            1.65,
+            0.2
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.48,
+            1.72,
+            0.36
+          ]
+        },
+        {
+          "id": "ice-5",
+          "asset": "sweet-ice",
+          "position": [
+            -0.29,
+            1.42,
+            0.05
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.6,
+            2.15,
+            0.44999999999999996
+          ]
+        },
+        {
+          "id": "ice-6",
+          "asset": "sweet-ice",
+          "position": [
+            0.22,
+            1.22,
+            -0.08
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.72,
+            2.58,
+            0.54
+          ]
+        },
+        {
+          "id": "ice-7",
+          "asset": "sweet-ice",
+          "position": [
+            0,
+            1.05,
+            0.1
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.84,
+            3.01,
+            0.63
+          ]
+        },
+        {
+          "id": "ice-8",
+          "asset": "sweet-ice",
+          "position": [
+            0,
+            2.36,
+            -0.15
+          ],
+          "scale": [
+            0.92,
+            0.92,
+            0.92
+          ],
+          "rotation": [
+            0.96,
+            3.44,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strawberry-soda",
+      "name": "Strawberry Soda",
+      "category": "drinks",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "ice": "none"
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "soda",
+          "asset": "sweet-soda",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.32,
+            0.16,
+            -0.29
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strawberry-soda",
+      "name": "Strawberry Soda",
+      "category": "drinks",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "ice": "regular"
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "soda",
+          "asset": "sweet-soda",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.3456,
+            0.1952,
+            -0.3132
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "ice-0",
+          "asset": "sweet-ice",
+          "position": [
+            -0.27,
+            2.562,
+            0.0216
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-1",
+          "asset": "sweet-ice",
+          "position": [
+            0.1188,
+            2.6717999999999997,
+            0.1728
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.12,
+            0.43,
+            0.09
+          ]
+        },
+        {
+          "id": "ice-2",
+          "asset": "sweet-ice",
+          "position": [
+            0.27,
+            2.44,
+            -0.19440000000000002
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.24,
+            0.86,
+            0.18
+          ]
+        },
+        {
+          "id": "ice-3",
+          "asset": "sweet-ice",
+          "position": [
+            -0.1296,
+            2.1593999999999998,
+            -0.21600000000000003
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.36,
+            1.29,
+            0.27
+          ]
+        },
+        {
+          "id": "ice-4",
+          "asset": "sweet-ice",
+          "position": [
+            0.15120000000000003,
+            2.013,
+            0.21600000000000003
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.48,
+            1.72,
+            0.36
+          ]
+        },
+        {
+          "id": "ice-5",
+          "asset": "sweet-ice",
+          "position": [
+            -0.3132,
+            1.7324,
+            0.054000000000000006
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.6,
+            2.15,
+            0.44999999999999996
+          ]
+        },
+        {
+          "id": "ice-6",
+          "asset": "sweet-ice",
+          "position": [
+            0.2376,
+            1.4884,
+            -0.0864
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.72,
+            2.58,
+            0.54
+          ]
+        },
+        {
+          "id": "ice-7",
+          "asset": "sweet-ice",
+          "position": [
+            0,
+            1.281,
+            0.10800000000000001
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.84,
+            3.01,
+            0.63
+          ]
+        },
+        {
+          "id": "ice-8",
+          "asset": "sweet-ice",
+          "position": [
+            0,
+            2.8792,
+            -0.162
+          ],
+          "scale": [
+            0.9936000000000001,
+            0.9936000000000001,
+            0.9936000000000001
+          ],
+          "rotation": [
+            0.96,
+            3.44,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "scoop": "vanilla",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            2.13,
+            0
+          ],
+          "scale": [
+            0.95,
+            0.95,
+            0.95
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.38,
+            0.16,
+            -0.24
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "scoop": "vanilla",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            2.13,
+            0
+          ],
+          "scale": [
+            0.95,
+            0.95,
+            0.95
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.38,
+            0.16,
+            -0.24
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "scoop": "chocolate",
+        "toppings": [
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-chocolate",
+          "position": [
+            0,
+            2.5986,
+            0
+          ],
+          "scale": [
+            1.026,
+            1.026,
+            1.026
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.41040000000000004,
+            0.1952,
+            -0.2592
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.0216,
+            3.333,
+            0.0216
+          ],
+          "scale": [
+            0.7776000000000001,
+            0.7776000000000001,
+            0.7776000000000001
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apple-pie",
+      "name": "Apple Pie à la Mode",
+      "category": "desserts",
+      "variant": "default",
+      "options": {
+        "toppings": [
+          "vanilla"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pie",
+          "asset": "sweet-apple-pie",
+          "position": [
+            -0.35,
+            0.09,
+            -0.12
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            1,
+            0.105,
+            0.55
+          ],
+          "scale": [
+            0.9,
+            0.9,
+            0.9
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apple-pie",
+      "name": "Apple Pie à la Mode",
+      "category": "desserts",
+      "variant": "minimal",
+      "options": {
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pie",
+          "asset": "sweet-apple-pie",
+          "position": [
+            -0.35,
+            0.09,
+            -0.12
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apple-pie",
+      "name": "Apple Pie à la Mode",
+      "category": "desserts",
+      "variant": "loaded",
+      "options": {
+        "toppings": [
+          "vanilla",
+          "whipped-cream",
+          "chocolate"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pie",
+          "asset": "sweet-apple-pie",
+          "position": [
+            -0.35,
+            0.09,
+            -0.12
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            1,
+            0.105,
+            0.55
+          ],
+          "scale": [
+            0.9,
+            0.9,
+            0.9
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            -0.42,
+            0.907,
+            -0.25
+          ],
+          "scale": [
+            0.65,
+            0.65,
+            0.65
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            1.01287,
+            0.5570790000000001,
+            0.5555800000000001
+          ],
+          "scale": [
+            0.9,
+            0.9,
+            0.9
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot-fudge-sundae",
+      "name": "Hot Fudge Sundae",
+      "category": "desserts",
+      "variant": "default",
+      "options": {
+        "toppings": [
+          "chocolate",
+          "whipped-cream",
+          "cherry"
+        ]
+      },
+      "layers": [
+        {
+          "id": "dessert-glass",
+          "asset": "sweet-sundae-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-0",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            -0.4,
+            0.66,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-1",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0.4,
+            0.68,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-2",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            1.22,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-0",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            -0.38570000000000004,
+            1.1623100000000002,
+            0.0462
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-1",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.4143,
+            1.1823100000000002,
+            0.0462
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-2",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.0143,
+            1.72231,
+            -0.09380000000000001
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            1.97,
+            -0.1
+          ],
+          "scale": [
+            0.77,
+            0.77,
+            0.77
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            2.43,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot-fudge-sundae",
+      "name": "Hot Fudge Sundae",
+      "category": "desserts",
+      "variant": "minimal",
+      "options": {
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "dessert-glass",
+          "asset": "sweet-sundae-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-0",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            -0.4,
+            0.66,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-1",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0.4,
+            0.68,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-2",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            1.22,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot-fudge-sundae",
+      "name": "Hot Fudge Sundae",
+      "category": "desserts",
+      "variant": "loaded",
+      "options": {
+        "toppings": [
+          "chocolate",
+          "whipped-cream",
+          "cherry",
+          "nuts"
+        ]
+      },
+      "layers": [
+        {
+          "id": "dessert-glass",
+          "asset": "sweet-sundae-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-0",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            -0.4,
+            0.66,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-1",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0.4,
+            0.68,
+            0.04
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream-2",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            1.22,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-0",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            -0.38570000000000004,
+            1.1623100000000002,
+            0.0462
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-1",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.4143,
+            1.1823100000000002,
+            0.0462
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fudge-2",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.0143,
+            1.72231,
+            -0.09380000000000001
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0,
+            1.97,
+            -0.1
+          ],
+          "scale": [
+            0.77,
+            0.77,
+            0.77
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry",
+          "asset": "sweet-cherry",
+          "position": [
+            0,
+            2.43,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "nuts",
+          "asset": "sweet-nuts",
+          "position": [
+            0,
+            1.7762,
+            -0.1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cherry-cheesecake",
+      "name": "Cherry Cheesecake",
+      "category": "desserts",
+      "variant": "default",
+      "options": {
+        "toppings": [
+          "cherry"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheesecake",
+          "asset": "sweet-cheesecake",
+          "position": [
+            0,
+            0.09,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry-compote",
+          "asset": "sweet-cherry-compote",
+          "position": [
+            0,
+            0.89,
+            -0.35
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cherry-cheesecake",
+      "name": "Cherry Cheesecake",
+      "category": "desserts",
+      "variant": "minimal",
+      "options": {
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheesecake",
+          "asset": "sweet-cheesecake",
+          "position": [
+            0,
+            0.09,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cherry-cheesecake",
+      "name": "Cherry Cheesecake",
+      "category": "desserts",
+      "variant": "loaded",
+      "options": {
+        "toppings": [
+          "cherry",
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sweet-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheesecake",
+          "asset": "sweet-cheesecake",
+          "position": [
+            0,
+            0.09,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cherry-compote",
+          "asset": "sweet-cherry-compote",
+          "position": [
+            0,
+            0.89,
+            -0.35
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.8,
+            0.083,
+            0.64
+          ],
+          "scale": [
+            0.75,
+            0.75,
+            0.75
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brownie-skillet",
+      "name": "Brownie Skillet",
+      "category": "desserts",
+      "variant": "default",
+      "options": {
+        "toppings": [
+          "vanilla",
+          "chocolate"
+        ]
+      },
+      "layers": [
+        {
+          "id": "skillet",
+          "asset": "sweet-skillet",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "brownie",
+          "asset": "sweet-brownie",
+          "position": [
+            0,
+            0.12,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0.1,
+            0.59,
+            0.02
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.11430000000000001,
+            1.09231,
+            0.0262
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brownie-skillet",
+      "name": "Brownie Skillet",
+      "category": "desserts",
+      "variant": "minimal",
+      "options": {
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "skillet",
+          "asset": "sweet-skillet",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "brownie",
+          "asset": "sweet-brownie",
+          "position": [
+            0,
+            0.12,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brownie-skillet",
+      "name": "Brownie Skillet",
+      "category": "desserts",
+      "variant": "loaded",
+      "options": {
+        "toppings": [
+          "vanilla",
+          "chocolate",
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "skillet",
+          "asset": "sweet-skillet",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "brownie",
+          "asset": "sweet-brownie",
+          "position": [
+            0,
+            0.12,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0.1,
+            0.59,
+            0.02
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chocolate",
+          "asset": "sweet-drizzle-scoop",
+          "position": [
+            0.11430000000000001,
+            1.09231,
+            0.0262
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            -0.56,
+            0.595,
+            -0.44
+          ],
+          "scale": [
+            0.57,
+            0.57,
+            0.57
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "vanilla-regular",
+      "options": {
+        "size": "regular",
+        "scoop": "vanilla",
+        "toppings": [
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            2.13,
+            0
+          ],
+          "scale": [
+            0.95,
+            0.95,
+            0.95
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.38,
+            0.16,
+            -0.24
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.02,
+            2.81,
+            0.02
+          ],
+          "scale": [
+            0.72,
+            0.72,
+            0.72
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "chocolate-regular",
+      "options": {
+        "size": "regular",
+        "scoop": "chocolate",
+        "toppings": [
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.15,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-chocolate",
+          "position": [
+            0,
+            2.13,
+            0
+          ],
+          "scale": [
+            0.95,
+            0.95,
+            0.95
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.38,
+            0.16,
+            -0.24
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.02,
+            2.81,
+            0.02
+          ],
+          "scale": [
+            0.72,
+            0.72,
+            0.72
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "vanilla-large",
+      "options": {
+        "size": "large",
+        "scoop": "vanilla",
+        "toppings": [
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-vanilla",
+          "position": [
+            0,
+            2.5986,
+            0
+          ],
+          "scale": [
+            1.026,
+            1.026,
+            1.026
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.41040000000000004,
+            0.1952,
+            -0.2592
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.0216,
+            3.333,
+            0.0216
+          ],
+          "scale": [
+            0.7776000000000001,
+            0.7776000000000001,
+            0.7776000000000001
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cold-brew-float",
+      "name": "Cold Brew Float",
+      "category": "drinks",
+      "variant": "chocolate-large",
+      "options": {
+        "size": "large",
+        "scoop": "chocolate",
+        "toppings": [
+          "whipped-cream"
+        ]
+      },
+      "layers": [
+        {
+          "id": "glass",
+          "asset": "sweet-glass",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "coffee",
+          "asset": "sweet-coldbrew",
+          "position": [
+            0,
+            0.183,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ice-cream",
+          "asset": "sweet-icecream-chocolate",
+          "position": [
+            0,
+            2.5986,
+            0
+          ],
+          "scale": [
+            1.026,
+            1.026,
+            1.026
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "straw",
+          "asset": "sweet-straw",
+          "position": [
+            0.41040000000000004,
+            0.1952,
+            -0.2592
+          ],
+          "scale": [
+            1.08,
+            1.22,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        {
+          "id": "whipped-cream",
+          "asset": "sweet-whipped-cream",
+          "position": [
+            0.0216,
+            3.333,
+            0.0216
+          ],
+          "scale": [
+            0.7776000000000001,
+            0.7776000000000001,
+            0.7776000000000001
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

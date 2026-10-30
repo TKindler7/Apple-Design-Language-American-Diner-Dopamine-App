@@ -1,0 +1,1183 @@
+{
+  "manifest": {
+    "version": 1,
+    "ingredients": {
+      "sides-plate": {
+        "url": "sides/sides-plate.glb",
+        "width": 3
+      },
+      "sides-bowl": {
+        "url": "sides/sides-bowl.glb",
+        "width": 2.5399999618530273
+      },
+      "sides-ramekin": {
+        "url": "sides/sides-ramekin.glb",
+        "width": 0.7200000286102295
+      },
+      "sides-fries": {
+        "url": "sides/sides-fries.glb",
+        "width": 2.5236423015594482
+      },
+      "sides-fries-large": {
+        "url": "sides/sides-fries-large.glb",
+        "width": 2.7080342769622803
+      },
+      "sides-chili": {
+        "url": "sides/sides-chili.glb",
+        "width": 1.7290223240852356
+      },
+      "sides-chili-large": {
+        "url": "sides/sides-chili-large.glb",
+        "width": 1.9491666555404663
+      },
+      "sides-cheese": {
+        "url": "sides/sides-cheese.glb",
+        "width": 1.5688489079475403
+      },
+      "sides-cheese-large": {
+        "url": "sides/sides-cheese-large.glb",
+        "width": 1.7713468670845032
+      },
+      "sides-cheese-chili": {
+        "url": "sides/sides-cheese-chili.glb",
+        "width": 1.5688488483428955
+      },
+      "sides-cheese-chili-large": {
+        "url": "sides/sides-cheese-chili-large.glb",
+        "width": 1.7713468670845032
+      },
+      "sides-onion": {
+        "url": "sides/sides-onion.glb",
+        "width": 1.494098424911499
+      },
+      "sides-pickle-spear": {
+        "url": "sides/sides-pickle-spear.glb",
+        "width": 1.6699999570846558
+      },
+      "sides-ranch": {
+        "url": "sides/sides-ranch.glb",
+        "width": 0.5854879319667816
+      },
+      "sides-house": {
+        "url": "sides/sides-house.glb",
+        "width": 0.5854879319667816
+      },
+      "sides-macaroni": {
+        "url": "sides/sides-macaroni.glb",
+        "width": 2.06553316116333
+      },
+      "sides-crumbs": {
+        "url": "sides/sides-crumbs.glb",
+        "width": 1.7502357363700867
+      },
+      "sides-bacon": {
+        "url": "sides/sides-bacon.glb",
+        "width": 1.6871660351753235
+      },
+      "sides-onion-large": {
+        "url": "sides/sides-onion-large.glb",
+        "width": 1.68502277135849
+      },
+      "sides-onion-chili": {
+        "url": "sides/sides-onion-chili.glb",
+        "width": 1.494098424911499
+      },
+      "sides-onion-chili-large": {
+        "url": "sides/sides-onion-chili-large.glb",
+        "width": 1.68502277135849
+      }
+    }
+  },
+  "dishes": [
+    {
+      "id": "golden-fries",
+      "name": "Golden Fries",
+      "category": "sides",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries",
+          "position": [
+            -0.0593797,
+            0.018911999999999998,
+            -0.0574092
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "golden-fries",
+      "name": "Golden Fries",
+      "category": "sides",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries",
+          "position": [
+            -0.0593797,
+            0.018911999999999998,
+            -0.0574092
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "golden-fries",
+      "name": "Golden Fries",
+      "category": "sides",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "cheese",
+          "chili"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries-large",
+          "position": [
+            -0.0489174,
+            0.018911999999999998,
+            -0.0301402
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chili",
+          "asset": "sides-chili-large",
+          "position": [
+            -0.0091676,
+            0.23994,
+            0.0111576
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheese",
+          "asset": "sides-cheese-chili-large",
+          "position": [
+            -0.0298599,
+            0.2647175,
+            0.016204
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chili-cheese-fries",
+      "name": "Chili Cheese Fries",
+      "category": "sides",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": [
+          "chili",
+          "cheese"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries",
+          "position": [
+            -0.0593797,
+            0.018911999999999998,
+            -0.0574092
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chili",
+          "asset": "sides-chili",
+          "position": [
+            -0.010161,
+            0.1673111,
+            0.009874
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheese",
+          "asset": "sides-cheese-chili",
+          "position": [
+            -0.0256852,
+            0.2104771,
+            0.0149604
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chili-cheese-fries",
+      "name": "Chili Cheese Fries",
+      "category": "sides",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries",
+          "position": [
+            -0.0593797,
+            0.018911999999999998,
+            -0.0574092
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chili-cheese-fries",
+      "name": "Chili Cheese Fries",
+      "category": "sides",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "chili",
+          "cheese",
+          "onion"
+        ]
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.08,
+            1.08,
+            1.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "fries",
+          "asset": "sides-fries-large",
+          "position": [
+            -0.0489174,
+            0.018911999999999998,
+            -0.0301402
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "chili",
+          "asset": "sides-chili-large",
+          "position": [
+            -0.0091676,
+            0.23994,
+            0.0111576
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "cheese",
+          "asset": "sides-cheese-chili-large",
+          "position": [
+            -0.0298599,
+            0.2647175,
+            0.016204
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "onion",
+          "asset": "sides-onion-chili-large",
+          "position": [
+            0.0577943,
+            0.3885174,
+            0.003456
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickle-spears",
+      "name": "Pickle Spears",
+      "category": "sides",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "dip": "ranch"
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "spear-0",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.76,
+            0.045,
+            -0.07
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.14250000000000002,
+            0
+          ]
+        },
+        {
+          "id": "spear-1",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.33,
+            0.045,
+            -0.19
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-2",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.1,
+            0.045,
+            -0.13
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-3",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.53,
+            0.045,
+            -0.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.14250000000000002,
+            0
+          ]
+        },
+        {
+          "id": "ramekin",
+          "asset": "sides-ramekin",
+          "position": [
+            0.94,
+            0.05,
+            0.72
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "dip",
+          "asset": "sides-ranch",
+          "position": [
+            0.94,
+            0.298,
+            0.72
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickle-spears",
+      "name": "Pickle Spears",
+      "category": "sides",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "dip": "none"
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "spear-0",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.76,
+            0.045,
+            -0.07
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.14250000000000002,
+            0
+          ]
+        },
+        {
+          "id": "spear-1",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.33,
+            0.045,
+            -0.19
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-2",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.1,
+            0.045,
+            -0.13
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-3",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.53,
+            0.045,
+            -0.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.14250000000000002,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickle-spears",
+      "name": "Pickle Spears",
+      "category": "sides",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "dip": "house"
+      },
+      "layers": [
+        {
+          "id": "plate",
+          "asset": "sides-plate",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "spear-0",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.76,
+            0.045,
+            -0.07
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.14250000000000002,
+            0
+          ]
+        },
+        {
+          "id": "spear-1",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.33,
+            0.045,
+            -0.19
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            -0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-2",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.1,
+            0.045,
+            -0.13
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.0475,
+            0
+          ]
+        },
+        {
+          "id": "spear-3",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.53,
+            0.045,
+            -0.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.14250000000000002,
+            0
+          ]
+        },
+        {
+          "id": "spear-4",
+          "asset": "sides-pickle-spear",
+          "position": [
+            -0.52,
+            0.24,
+            -0.13
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.2375,
+            0
+          ]
+        },
+        {
+          "id": "spear-5",
+          "asset": "sides-pickle-spear",
+          "position": [
+            0.22,
+            0.24,
+            -0.23
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0.3325,
+            0
+          ]
+        },
+        {
+          "id": "ramekin",
+          "asset": "sides-ramekin",
+          "position": [
+            1.02,
+            0.05,
+            0.72
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "dip",
+          "asset": "sides-house",
+          "position": [
+            1.02,
+            0.298,
+            0.72
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-cheese",
+      "name": "Mac & Cheese",
+      "category": "sides",
+      "variant": "default",
+      "options": {
+        "size": "regular",
+        "toppings": [
+          "crumbs"
+        ]
+      },
+      "layers": [
+        {
+          "id": "bowl",
+          "asset": "sides-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "macaroni",
+          "asset": "sides-macaroni",
+          "position": [
+            0.0077944,
+            0.3607132,
+            -0.02026
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "crumbs",
+          "asset": "sides-crumbs",
+          "position": [
+            -0.0837665,
+            0.41084410000000005,
+            0.0145664
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-cheese",
+      "name": "Mac & Cheese",
+      "category": "sides",
+      "variant": "minimal",
+      "options": {
+        "size": "regular",
+        "toppings": []
+      },
+      "layers": [
+        {
+          "id": "bowl",
+          "asset": "sides-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "macaroni",
+          "asset": "sides-macaroni",
+          "position": [
+            0.0077944,
+            0.3607132,
+            -0.02026
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-cheese",
+      "name": "Mac & Cheese",
+      "category": "sides",
+      "variant": "loaded",
+      "options": {
+        "size": "large",
+        "toppings": [
+          "crumbs",
+          "bacon"
+        ]
+      },
+      "layers": [
+        {
+          "id": "bowl",
+          "asset": "sides-bowl",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1.16,
+            1.16,
+            1.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "macaroni",
+          "asset": "sides-macaroni",
+          "position": [
+            0.009041503999999999,
+            0.418427312,
+            -0.023501599999999997
+          ],
+          "scale": [
+            1.16,
+            1.16,
+            1.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "crumbs",
+          "asset": "sides-crumbs",
+          "position": [
+            -0.09716913999999999,
+            0.476579156,
+            0.016897024
+          ],
+          "scale": [
+            1.16,
+            1.16,
+            1.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "bacon",
+          "asset": "sides-bacon",
+          "position": [
+            -0.113939608,
+            0.490338844,
+            -0.022202516
+          ],
+          "scale": [
+            1.16,
+            1.16,
+            1.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+[
+  {
+    "file": "sweet-apple-pie.glb",
+    "bytes": 1418440,
+    "meshes": 51,
+    "textures": 4,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-brownie.glb",
+    "bytes": 1162560,
+    "meshes": 2,
+    "textures": 4,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-cheesecake.glb",
+    "bytes": 1123280,
+    "meshes": 72,
+    "textures": 4,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-cherry-compote.glb",
+    "bytes": 248684,
+    "meshes": 9,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-cherry.glb",
+    "bytes": 80948,
+    "meshes": 2,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-coldbrew.glb",
+    "bytes": 31100,
+    "meshes": 1,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-drizzle-cream.glb",
+    "bytes": 84908,
+    "meshes": 4,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-drizzle-flat.glb",
+    "bytes": 87624,
+    "meshes": 4,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-drizzle-scoop.glb",
+    "bytes": 299808,
+    "meshes": 15,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-glass.glb",
+    "bytes": 80344,
+    "meshes": 1,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-ice.glb",
+    "bytes": 25692,
+    "meshes": 10,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-icecream-chocolate.glb",
+    "bytes": 392604,
+    "meshes": 1,
+    "textures": 2,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-icecream-vanilla.glb",
+    "bytes": 537328,
+    "meshes": 1,
+    "textures": 2,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-nuts.glb",
+    "bytes": 75424,
+    "meshes": 36,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-plate.glb",
+    "bytes": 52120,
+    "meshes": 1,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-shake-cherry.glb",
+    "bytes": 154952,
+    "meshes": 46,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-shake-chocolate.glb",
+    "bytes": 155600,
+    "meshes": 46,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-shake-vanilla.glb",
+    "bytes": 155584,
+    "meshes": 46,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-skillet.glb",
+    "bytes": 78720,
+    "meshes": 3,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-soda.glb",
+    "bytes": 160724,
+    "meshes": 63,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-straw.glb",
+    "bytes": 7012,
+    "meshes": 1,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-sundae-bowl.glb",
+    "bytes": 85988,
+    "meshes": 1,
+    "textures": 0,
+    "extensions": [
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  },
+  {
+    "file": "sweet-whipped-cream.glb",
+    "bytes": 810728,
+    "meshes": 2,
+    "textures": 2,
+    "extensions": [
+      "KHR_materials_specular",
+      "KHR_materials_ior"
+    ],
+    "external_references": false
+  }
+]

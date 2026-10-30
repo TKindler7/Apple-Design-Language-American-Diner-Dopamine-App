@@ -1,0 +1,22 @@
+{
+  "golden-fries": {
+    "configurations": 8,
+    "distinctVisibleRecipes": 8,
+    "maxLayers": 4
+  },
+  "chili-cheese-fries": {
+    "configurations": 16,
+    "distinctVisibleRecipes": 16,
+    "maxLayers": 5
+  },
+  "pickle-spears": {
+    "configurations": 6,
+    "distinctVisibleRecipes": 6,
+    "maxLayers": 9
+  },
+  "mac-cheese": {
+    "configurations": 8,
+    "distinctVisibleRecipes": 8,
+    "maxLayers": 4
+  }
+}

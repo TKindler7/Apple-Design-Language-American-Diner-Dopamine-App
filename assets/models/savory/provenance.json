@@ -1,0 +1,154 @@
+{
+  "method": "Original chat-generated food atlases and authored Blender geometry, locally baked/exported. No Hugging Face, downloaded food models, or paid generation API.",
+  "source_atlases": [
+    "sources/savory-griddle-atlas.png",
+    "sources/savory-vegetable-atlas.png"
+  ],
+  "reused_original_sources": [
+    "burger-pilot/textures/core-crumb-albedo.jpg",
+    "burger-pilot/textures/core-beef-albedo.jpg",
+    "burger-pilot/textures/core-brioche-albedo.jpg"
+  ],
+  "assets": [
+    {
+      "asset": "savory-plate",
+      "height": 0.1443722993579883,
+      "width": 4.6,
+      "bytes": 39208,
+      "triangles": 2108
+    },
+    {
+      "asset": "savory-sourdough",
+      "height": 0.2605828236420664,
+      "width": 2.4,
+      "bytes": 612932,
+      "triangles": 6332
+    },
+    {
+      "asset": "savory-rye",
+      "height": 0.2605828236420664,
+      "width": 2.4,
+      "bytes": 604904,
+      "triangles": 6332
+    },
+    {
+      "asset": "savory-french-toast",
+      "height": 0.37225316454583635,
+      "width": 2.4,
+      "bytes": 631020,
+      "triangles": 6332
+    },
+    {
+      "asset": "savory-pancake",
+      "height": 0.188721444112234,
+      "width": 2.4,
+      "bytes": 454752,
+      "triangles": 6332
+    },
+    {
+      "asset": "savory-crispy-chicken",
+      "height": 0.5145186929711985,
+      "width": 2.3,
+      "bytes": 905568,
+      "triangles": 8528
+    },
+    {
+      "asset": "savory-caramelized-onion",
+      "height": 0.14179786107775633,
+      "width": 2.12,
+      "bytes": 538144,
+      "triangles": 3920
+    },
+    {
+      "asset": "savory-mushroom",
+      "height": 0.2503104894982896,
+      "width": 2.05,
+      "bytes": 771672,
+      "triangles": 5012
+    },
+    {
+      "asset": "savory-pepper",
+      "height": 0.16344521483847552,
+      "width": 2.12,
+      "bytes": 597948,
+      "triangles": 1312
+    },
+    {
+      "asset": "savory-zucchini",
+      "height": 0.2443713588267744,
+      "width": 2.12,
+      "bytes": 650612,
+      "triangles": 14084
+    },
+    {
+      "asset": "savory-avocado",
+      "height": 0.2717214174429073,
+      "width": 1.65,
+      "bytes": 397512,
+      "triangles": 4940
+    },
+    {
+      "asset": "savory-butter",
+      "height": 0.10999999740849375,
+      "width": 0.46,
+      "bytes": 6156,
+      "triangles": 188
+    },
+    {
+      "asset": "savory-syrup",
+      "height": 0.007843950455777808,
+      "width": 1.86,
+      "bytes": 102140,
+      "triangles": 5596
+    },
+    {
+      "asset": "savory-blueberries",
+      "height": 0.33510786247665464,
+      "width": 1.15,
+      "bytes": 269524,
+      "triangles": 9000
+    },
+    {
+      "asset": "savory-chocolate-chips",
+      "height": 0.09824193469214539,
+      "width": 1.35,
+      "bytes": 278896,
+      "triangles": 15364
+    },
+    {
+      "asset": "savory-egg-sunny",
+      "height": 0.198531585188998,
+      "width": 1.65,
+      "bytes": 898156,
+      "triangles": 24364
+    },
+    {
+      "asset": "savory-eggs-scrambled",
+      "height": 0.24368892834789566,
+      "width": 1.65,
+      "bytes": 1520536,
+      "triangles": 47736
+    },
+    {
+      "asset": "savory-sausage",
+      "height": 0.32091781940218433,
+      "width": 1.45,
+      "bytes": 688680,
+      "triangles": 5556
+    },
+    {
+      "asset": "savory-potato",
+      "height": 0.3789364313066172,
+      "width": 1.48,
+      "bytes": 780300,
+      "triangles": 3572
+    },
+    {
+      "asset": "savory-cinnamon",
+      "height": 0.004103572133852183,
+      "width": 1.95,
+      "bytes": 372264,
+      "triangles": 9120
+    }
+  ]
+}

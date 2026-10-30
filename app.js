@@ -24,6 +24,10 @@ let scene = null;
 let sceneToken = 0;
 let previewMode = "3d";
 let previewFailed = false;
+let previewReady = false;
+let previewLoading = false;
+let builderSceneAbort = null;
+let kitchenSceneAbort = null;
 let kitchenScene = null;
 let kitchenToken = 0;
 let kitchenStage = 0;
@@ -125,11 +129,15 @@ function cleanupModal(dialog) {
   if (dialog) stopMotionWithin(dialog);
   if (dialog?.id === "builder-dialog") {
     sceneToken++;
+    builderSceneAbort?.abort();
+    builderSceneAbort = null;
     scene?.dispose();
     scene = null;
   }
   if (dialog?.id === "journey-dialog") {
     kitchenToken++;
+    kitchenSceneAbort?.abort();
+    kitchenSceneAbort = null;
     kitchenTimers.forEach(clearTimeout);
     kitchenTimers = [];
     kitchenScene?.dispose();
@@ -224,29 +232,48 @@ function updateBuilderTotal() {
   persist();
 }
 function setPreview(mode) {
-  if (previewFailed) mode = "photo";
   previewMode = mode;
-  const show3d = mode === "3d" && scene && !previewFailed;
+  const show3d = mode === "3d" && scene && previewReady && !previewFailed;
   $("#food-scene").style.visibility = show3d ? "visible" : "hidden";
+  $("#food-scene").setAttribute("aria-hidden", String(!show3d));
+  const canvas = $("#food-scene canvas");
+  if (canvas) { canvas.style.visibility = show3d ? "visible" : "hidden"; canvas.tabIndex = show3d ? 0 : -1; }
   $("#builder-photo").classList.toggle("is-hidden", Boolean(show3d));
+  $("#preview-loading").hidden = mode !== "3d" || !previewLoading;
   $("#preview-controls").hidden = !show3d;
   all("[data-preview]").forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.preview === mode)); button.disabled = previewFailed && button.dataset.preview === "3d"; });
   const subject = draft?.combo ? "Entrée preview. " : "";
-  $("#preview-caption").textContent = subject + (show3d ? "Drag to turn. Scroll to get closer. Or use the controls." : previewFailed ? "3D preview is unavailable here. Every option still works." : "Photo shows the original recipe. See your changes in 3D.");
+  $("#preview-caption").textContent = subject + (show3d ? "Your ingredients, in 3D. Drag to turn or use the controls." : previewLoading && mode === "3d" ? "Loading your ingredients. Photo shows the original recipe." : previewFailed ? "3D preview is unavailable here. Photo shows the original recipe; every option still works." : "Photo shows the original recipe. See your changes in 3D.");
 }
 async function startBuilderScene() {
   const token = ++sceneToken;
+  const initialItemId = draft.itemId;
+  const initialOptions = structuredClone(draft.options);
+  builderSceneAbort?.abort();
+  builderSceneAbort = new AbortController();
   previewFailed = false;
+  previewReady = false;
+  previewLoading = true;
   all("[data-preview]").forEach((button) => { button.disabled = false; });
   $("#preview-loading").hidden = false;
   $("#builder-photo").classList.remove("is-hidden");
   $("#preview-controls").hidden = true;
   $("#food-scene").style.visibility = "visible";
   const result = await createFoodScene($("#food-scene"), {
-    item: ITEM_BY_ID[draft.itemId], options: draft.options, reducedMotion: reducedMotion.matches,
+    item: ITEM_BY_ID[initialItemId], options: initialOptions, reducedMotion: reducedMotion.matches,
+    signal: builderSceneAbort.signal,
+    onState: ({ ready, loading }) => {
+      if (token !== sceneToken) return;
+      previewReady = ready;
+      previewLoading = loading;
+      previewFailed = !ready && !loading;
+      setPreview(previewMode);
+    },
     onFallback: () => {
       if (token !== sceneToken) return;
       previewFailed = true;
+      previewReady = false;
+      previewLoading = false;
       $("#preview-loading").hidden = true;
       setPreview("photo");
     },
@@ -254,7 +281,10 @@ async function startBuilderScene() {
   if (token !== sceneToken || currentModal?.id !== "builder-dialog") { result?.dispose(); return; }
   scene = result;
   $("#preview-loading").hidden = true;
-  if (scene) { scene.update(ITEM_BY_ID[draft.itemId], draft.options); setPreview(previewMode); }
+  if (scene) {
+    if (draft.itemId !== initialItemId || JSON.stringify(draft.options) !== JSON.stringify(initialOptions)) scene.update(ITEM_BY_ID[draft.itemId], draft.options);
+    setPreview(previewMode);
+  }
   else { previewFailed = true; setPreview("photo"); }
 }
 function openBuilder(itemId, { combo = false, special = false, resume = false } = {}) {
@@ -413,11 +443,12 @@ async function renderKitchen(order) {
   updateKitchen(reducedMotion.matches ? 3 : 0);
   if (!reducedMotion.matches) [[1800, 1], [4000, 2], [6400, 3]].forEach(([delay, stage]) => kitchenTimers.push(setTimeout(() => updateKitchen(stage), delay)));
   const token = ++kitchenToken;
+  kitchenSceneAbort?.abort();
+  kitchenSceneAbort = new AbortController();
   try {
-    const result = await createFoodScene($("#kitchen-scene"), { item: ITEM_BY_ID[first.itemId], options: first.options, reducedMotion: reducedMotion.matches, onFallback: () => { if (token === kitchenToken) $(".kitchen-preview")?.classList.remove("has-scene"); } });
+    const result = await createFoodScene($("#kitchen-scene"), { item: ITEM_BY_ID[first.itemId], options: first.options, reducedMotion: reducedMotion.matches, signal: kitchenSceneAbort.signal, onState: ({ ready }) => { if (token === kitchenToken) $(".kitchen-preview")?.classList.toggle("has-scene", ready); }, onFallback: () => { if (token === kitchenToken) $(".kitchen-preview")?.classList.remove("has-scene"); } });
     if (token !== kitchenToken || !$("#kitchen-scene") || currentModal?.id !== "journey-dialog") { result?.dispose(); return; }
     kitchenScene = result;
-    if (result) $(".kitchen-preview").classList.add("has-scene");
   } catch { /* The photograph remains a complete fallback. */ }
 }
 function confetti() {

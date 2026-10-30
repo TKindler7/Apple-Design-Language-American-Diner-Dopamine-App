@@ -1,0 +1,149 @@
+{
+  "sides-onion.glb": {
+    "triangles": 480,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 25536
+  },
+  "sides-house.glb": {
+    "triangles": 6400,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 142264
+  },
+  "sides-cheese-chili.glb": {
+    "triangles": 15944,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 508824
+  },
+  "sides-cheese-chili-large.glb": {
+    "triangles": 15944,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 508820
+  },
+  "sides-chili-large.glb": {
+    "triangles": 8760,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 999192
+  },
+  "sides-fries-large.glb": {
+    "triangles": 13168,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 935448
+  },
+  "sides-onion-large.glb": {
+    "triangles": 480,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 25536
+  },
+  "sides-macaroni.glb": {
+    "triangles": 65056,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 1588888
+  },
+  "sides-chili.glb": {
+    "triangles": 8760,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 999184
+  },
+  "sides-cheese.glb": {
+    "triangles": 15944,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 508820
+  },
+  "sides-pickle-spear.glb": {
+    "triangles": 788,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 1154636
+  },
+  "sides-onion-chili.glb": {
+    "triangles": 480,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 25536
+  },
+  "sides-bacon.glb": {
+    "triangles": 480,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 887044
+  },
+  "sides-onion-chili-large.glb": {
+    "triangles": 480,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 25536
+  },
+  "sides-plate.glb": {
+    "triangles": 1728,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 42440
+  },
+  "sides-ramekin.glb": {
+    "triangles": 1152,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 28800
+  },
+  "sides-ranch.glb": {
+    "triangles": 6760,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 187208
+  },
+  "sides-bowl.glb": {
+    "triangles": 2112,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 50956
+  },
+  "sides-fries.glb": {
+    "triangles": 9176,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 824776
+  },
+  "sides-cheese-large.glb": {
+    "triangles": 15944,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 508820
+  },
+  "sides-crumbs.glb": {
+    "triangles": 1600,
+    "degenerate": 0,
+    "consistentWinding": true,
+    "invertedClosedComponents": 0,
+    "bytes": 886288
+  }
+}

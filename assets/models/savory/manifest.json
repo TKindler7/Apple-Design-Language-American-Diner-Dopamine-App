@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "ingredients": {
+    "savory-plate": {
+      "url": "./savory-plate.glb",
+      "width": 4.6,
+      "height": 0.1443722993579883
+    },
+    "savory-sourdough": {
+      "url": "./savory-sourdough.glb",
+      "width": 2.4,
+      "height": 0.2605828236420664
+    },
+    "savory-rye": {
+      "url": "./savory-rye.glb",
+      "width": 2.4,
+      "height": 0.2605828236420664
+    },
+    "savory-french-toast": {
+      "url": "./savory-french-toast.glb",
+      "width": 2.4,
+      "height": 0.37225316454583635
+    },
+    "savory-pancake": {
+      "url": "./savory-pancake.glb",
+      "width": 2.4,
+      "height": 0.188721444112234
+    },
+    "savory-crispy-chicken": {
+      "url": "./savory-crispy-chicken.glb",
+      "width": 2.3,
+      "height": 0.5145186929711985
+    },
+    "savory-caramelized-onion": {
+      "url": "./savory-caramelized-onion.glb",
+      "width": 2.12,
+      "height": 0.14179786107775633
+    },
+    "savory-mushroom": {
+      "url": "./savory-mushroom.glb",
+      "width": 2.05,
+      "height": 0.2503104894982896
+    },
+    "savory-pepper": {
+      "url": "./savory-pepper.glb",
+      "width": 2.12,
+      "height": 0.16344521483847552
+    },
+    "savory-zucchini": {
+      "url": "./savory-zucchini.glb",
+      "width": 2.12,
+      "height": 0.2443713588267744
+    },
+    "savory-avocado": {
+      "url": "./savory-avocado.glb",
+      "width": 1.65,
+      "height": 0.2717214174429073
+    },
+    "savory-butter": {
+      "url": "./savory-butter.glb",
+      "width": 0.46,
+      "height": 0.10999999740849375
+    },
+    "savory-syrup": {
+      "url": "./savory-syrup.glb",
+      "width": 1.86,
+      "height": 0.007843950455777808
+    },
+    "savory-blueberries": {
+      "url": "./savory-blueberries.glb",
+      "width": 1.15,
+      "height": 0.33510786247665464
+    },
+    "savory-chocolate-chips": {
+      "url": "./savory-chocolate-chips.glb",
+      "width": 1.35,
+      "height": 0.09824193469214539
+    },
+    "savory-egg-sunny": {
+      "url": "./savory-egg-sunny.glb",
+      "width": 1.65,
+      "height": 0.198531585188998
+    },
+    "savory-eggs-scrambled": {
+      "url": "./savory-eggs-scrambled.glb",
+      "width": 1.65,
+      "height": 0.24368892834789566
+    },
+    "savory-sausage": {
+      "url": "./savory-sausage.glb",
+      "width": 1.45,
+      "height": 0.32091781940218433
+    },
+    "savory-potato": {
+      "url": "./savory-potato.glb",
+      "width": 1.48,
+      "height": 0.3789364313066172
+    },
+    "savory-cinnamon": {
+      "url": "./savory-cinnamon.glb",
+      "width": 1.95,
+      "height": 0.004103572133852183
+    }
+  }
+}

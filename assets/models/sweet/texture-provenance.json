@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-29",
+  "tool": "Built-in image_gen",
+  "mode": "generate",
+  "description": "Original generated food material sources; JPEG encoding, resolution reduction, normal baking, and chocolate color multiplication are material-production steps in Blender. No stock food assets or paid external service.",
+  "textures": [
+    {
+      "file": "textures/icecream-source.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: original PBR base-color texture for a 3D food model. Create a square seamless, tileable macro photograph of the surface of real vanilla-bean ice cream. The entire image is filled edge-to-edge with pale warm ivory dairy ice cream, microscopic soft granular frozen dairy crystals, very subtle natural scoop scrape striations, minuscule sparse dark vanilla specks. Fine detail; the full image represents about 12 centimeters. Perfectly flat front-facing texture view under completely even cross-polarized diffuse lighting, no directional shading, no highlights, no vignette, no background, no scoop silhouette, no bowl, no other food, no text. Real edible ice cream surface, not plastic, stone, foam, or illustration. This will be wrapped over irregular original 3D scoops; do not depict a whole scoop."
+    },
+    {
+      "file": "textures/brownie-source.png",
+      "prompt": "Create an original square seamless photorealistic PBR base-color texture for the thin flaky TOP crust of a dark chocolate fudge brownie. Edge-to-edge macro surface, fine crinkled papery shiny-dark-cocoa crust broken into irregular thin flakes and narrow cracks revealing dense chocolate brown crumb. Rich deep warm brown, not black, not orange. Tiny organic pores and subtle caramelized mottling. Full image represents a 12-centimeter square, not an entire brownie. Completely even diffuse cross-polarized lighting, no directional shadows, no glossy white highlights, no plate, no outline, no background, no nuts or other food, no text. Natural real bakery chocolate surface, not mud, stone, leather, plastic, cartoon, or illustration. All four edges tile seamlessly."
+    },
+    {
+      "file": "textures/pastry-source.png",
+      "prompt": "Create an original square seamless photorealistic PBR base-color texture of REAL FLAKY BAKED APPLE PIE pastry crust. The whole square edge-to-edge is fine laminated golden pastry, delicate small flakes, hairline cracks, lightly toasted amber patches and buttery pale-gold folds, a few tiny coarse sugar crystals. Fine natural bakery detail with modest color variation. The square represents 12 centimeters across. Orthographic straight-down macro under completely uniform diffuse cross-polarized light; no shadows, highlights, gradients, perspective, whole pie silhouette, plate, apple filling, background, garnish, lettering, or brands. This is a flat tileable food material map to wrap original 3D pastry geometry, not a finished food photograph."
+    },
+    {
+      "file": "textures/crumb-source.png",
+      "prompt": "Create an original square seamless photographic PBR color texture of a pressed baked graham-cracker cheesecake crust. Entire image filled edge-to-edge with natural warm golden tan biscuit crumbs of varied tiny sizes, fine porous irregular toasted sandy-biscuit particles densely pressed together with butter, some slightly darker toasted crumbs. Edible bakery crumb, not beach sand, soil, rock, or synthetic foam. Fine scale; full square represents 12 centimeters. Direct orthographic macro photograph with perfectly even diffuse cross-polarized lighting, no cast shadows, highlights, gradients, background, whole cake, plates, other objects or text. Seamlessly tileable on all edges."
+    },
+    {
+      "file": "textures/apple-source.png",
+      "prompt": "Create an original square photographic PBR food color texture showing a close-up cross-section of actual BAKED APPLE PIE FILLING, no crust. Entire image filled edge-to-edge with closely packed, irregular thin slices of softly cooked apple: translucent pale amber and golden beige flesh, delicate apple fibers, tiny cinnamon specks, glossy caramel brown syrup in narrow gaps. Slices overlap naturally in several directions, no perfect rows, no regular rectangles, no gaps showing background. A cut surface viewed straight-on, flat orthographic. Image represents about 14 centimeters across. Even cross-polarized diffuse lighting suitable as a 3D surface color map, no bright specular white highlights, no directional shadows, no perspective, plate, utensils, text or whole pie. Real food photography, not plastic or stylized rendering."
+    },
+    {
+      "file": "textures/cheesecake-source.png",
+      "prompt": "Create an original square seamless PBR food color texture of the cut creamy interior of a real New York cheesecake. Entire image filled edge-to-edge with warm pale ivory cream, extremely fine irregular microscopic dairy pores, a few tiny delicate air holes and faint natural spatula/cut striations. Dense velvety smooth cream cheese filling, not sponge cake, not bread, not foam, not plastic. Subtle neutral cream tonal variation only, no dark dots, vanilla specks, crust, fruit, frosting, whole cake, plate, background, text or decoration. Direct orthographic macro photography under completely even diffuse cross-polarized light, no cast shadows or directional highlights. The full square represents 12 centimeters. Seamless on all edges."
+    }
+  ]
+}

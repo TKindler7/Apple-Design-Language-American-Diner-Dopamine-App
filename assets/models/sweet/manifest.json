@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "ingredients": {
+    "sweet-glass": {
+      "url": "./sweet-glass.glb",
+      "width": 1.382
+    },
+    "sweet-shake-cherry": {
+      "url": "./sweet-shake-cherry.glb",
+      "width": 1.23
+    },
+    "sweet-shake-vanilla": {
+      "url": "./sweet-shake-vanilla.glb",
+      "width": 1.23
+    },
+    "sweet-shake-chocolate": {
+      "url": "./sweet-shake-chocolate.glb",
+      "width": 1.23
+    },
+    "sweet-soda": {
+      "url": "./sweet-soda.glb",
+      "width": 1.23
+    },
+    "sweet-coldbrew": {
+      "url": "./sweet-coldbrew.glb",
+      "width": 1.23
+    },
+    "sweet-ice": {
+      "url": "./sweet-ice.glb",
+      "width": 0.34
+    },
+    "sweet-straw": {
+      "url": "./sweet-straw.glb",
+      "width": 0.086
+    },
+    "sweet-icecream-vanilla": {
+      "url": "./sweet-icecream-vanilla.glb",
+      "width": 1.061823
+    },
+    "sweet-icecream-chocolate": {
+      "url": "./sweet-icecream-chocolate.glb",
+      "width": 1.061823
+    },
+    "sweet-whipped-cream": {
+      "url": "./sweet-whipped-cream.glb",
+      "width": 0.886224
+    },
+    "sweet-cherry": {
+      "url": "./sweet-cherry.glb",
+      "width": 0.301039
+    },
+    "sweet-drizzle-scoop": {
+      "url": "./sweet-drizzle-scoop.glb",
+      "width": 0.941773
+    },
+    "sweet-drizzle-flat": {
+      "url": "./sweet-drizzle-flat.glb",
+      "width": 0.989693
+    },
+    "sweet-drizzle-cream": {
+      "url": "./sweet-drizzle-cream.glb",
+      "width": 0.670434
+    },
+    "sweet-nuts": {
+      "url": "./sweet-nuts.glb",
+      "width": 1.007784
+    },
+    "sweet-sundae-bowl": {
+      "url": "./sweet-sundae-bowl.glb",
+      "width": 2.154
+    },
+    "sweet-plate": {
+      "url": "./sweet-plate.glb",
+      "width": 3.8
+    },
+    "sweet-apple-pie": {
+      "url": "./sweet-apple-pie.glb",
+      "width": 2.253468
+    },
+    "sweet-cheesecake": {
+      "url": "./sweet-cheesecake.glb",
+      "width": 2.209967
+    },
+    "sweet-cherry-compote": {
+      "url": "./sweet-cherry-compote.glb",
+      "width": 1.06953
+    },
+    "sweet-brownie": {
+      "url": "./sweet-brownie.glb",
+      "width": 1.77
+    },
+    "sweet-skillet": {
+      "url": "./sweet-skillet.glb",
+      "width": 3.47
+    }
+  }
+}

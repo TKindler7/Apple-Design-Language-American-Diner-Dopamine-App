@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "workflow": "Original authored Blender 4.5 geometry with original built-in ChatGPT image generation color textures. No stock meshes, stock photos, Hugging Face, external generation services, or downloaded AI checkpoints.",
+  "generator": "scripts/food-assets/sides.py",
+  "recipe": "food-recipes-sides.js",
+  "sources": [
+    {
+      "file": "source/fried-potato-v2.png",
+      "kind": "Original built-in imagegen texture replacing directional fry atlas",
+      "generatedFile": "/Users/teddykindler/.codex/generated_images/01a18a2b-c9ac-7992-ab58-3c5f862a2180/exec-6346b096-3da0-4d8f-ab27-247a042eb1ab.png",
+      "prompt": "Use case: photorealistic-natural. Asset: original diffuse color surface texture for a 3D French fry. Square extreme macro photograph of a naturally fried potato surface filling the entire image edge to edge. Warm pale golden yellow potato, tiny isotropic crisp starch pores and very fine random frying blisters, gentle irregular toasted golden brown specks. Low contrast, small natural variations with no directional pattern. Uniform cross-polarized diffuse illumination, no highlights or shadows, no perspective, no objects or edges, no plate. Avoid long wrinkles, wood grain, lines, stripes, scratches, dark veins, large brown patches, artificial noise, plastic sheen, repeating motifs. The texture should make a real freshly fried potato surface, delicate and dry-crisp, not a flaky pastry."
+    },
+    {
+      "file": "source/fried-surface-atlas.png",
+      "kind": "Original built-in imagegen texture",
+      "generatedFile": "/Users/teddykindler/.codex/generated_images/01a18a2b-c9ac-7992-ab58-3c5f862a2180/exec-70f9f08d-574d-436b-b8d6-e24053dc38a4.png",
+      "prompt": "Create one original photorealistic food material texture atlas, a square image divided exactly into TWO equal vertical halves, no border or gutter, no text. LEFT HALF: extreme macro of golden fried potato crust surface, appetizing warm yellow golden fries surface with naturally uneven pale potato areas, tiny fried pores, occasional light brown toasted specks, delicate lengthwise wrinkles running vertically, flat even illumination. RIGHT HALF: extreme macro of crisp toasted golden bread crumbs coating fried pickle spears, small irregular crunchy breadcrumb fragments of varying light golden and deeper amber browns, fine rough panko grains, no black burned pieces. Both material panels fill their half all the way to the edges, no actual whole fries or pickle silhouettes, no plate, no background, no props. Neutral diffuse cross-polarized illumination, no harsh shadows, no big specular highlights. These are detailed color textures for separate three-dimensional food surfaces, not a rendered plate of food. Real photographic materials, not CGI plastic, no repeating pattern."
+    },
+    {
+      "file": "source/chili-surface.png",
+      "kind": "Original built-in imagegen texture",
+      "generatedFile": "/Users/teddykindler/.codex/generated_images/01a18a2b-c9ac-7992-ab58-3c5f862a2180/exec-44699732-dae0-47d9-a4b4-8f4405509b33.png",
+      "prompt": "Original photorealistic food material texture, square extreme macro overhead image of thick American diner beef chili. Rich reddish brown tomato chili sauce with finely crumbled browned beef, small irregular red pepper and tomato pieces, tiny seasoning flecks and restrained moist sheen. No whole beans in this texture because beans will be separate modeled objects. No bowl, no garnish, no background, no shadows, no text. The thick chili food surface fills every pixel edge to edge. Neutral diffuse cross-polarized illumination, no white reflective highlights, no dramatic lighting. Appetizing real food texture with fine natural detail, suitable as an albedo surface texture for a 3D sauce model, not stylized or plastic."
+    },
+    {
+      "files": [
+        "../burger-pilot/textures/topping-cheddar-color.png",
+        "../burger-pilot/textures/topping-bacon-color.png",
+        "../burger-pilot/textures/topping-pickle-color.png"
+      ],
+      "kind": "Reused original burger pilot imagegen textures; original provenance in burger-pilot/toppings-provenance.json"
+    }
+  ],
+  "texturePreparation": "3D material encoding to 1024 JPEG color and 512 PNG normal maps. Normal maps baked from original color detail in Blender. Original source images retained.",
+  "geometry": "Individually irregular rounded square fries, fitted sauce surfaces, separate kidney beans and meat pieces, asymmetrical thin melted cheese pools with tapered runoffs, modeled breaded pickle spears with separate green end material, hollow curved elbow macaroni with inner walls in dense staggered supported layers, noodle-contact raycast garnish placement, lathed ceramic plate/bowl/ramekin. No image billboards.",
+  "customization": {
+    "golden-fries": [
+      "regular/large serving",
+      "cheese",
+      "chili"
+    ],
+    "chili-cheese-fries": [
+      "regular/large serving",
+      "chili",
+      "cheese",
+      "onion"
+    ],
+    "pickle-spears": [
+      "4 or 6 spears",
+      "ranch/house/no dip"
+    ],
+    "mac-cheese": [
+      "regular/large bowl and serving",
+      "crumbs",
+      "bacon"
+    ]
+  },
+  "review": "Actual exported GLBs rendered with exact JS recipe placements through isolated review_sides.py wrapper. CPU Cycles used due local Metal compile crash."
+}
