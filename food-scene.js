@@ -81,14 +81,14 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
   const allocated = new Set();
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   let reduce = reducedMotion || motion.matches;
-  let disposed = false, failed = false, request = 0, frame = 0;
+  let disposed = false, failed = false, request = 0, frame = 0, viewFrame = 0;
   let viewTarget = null;
   let layers = [], targetHeight = 1, distance = 7, homeDistance = 7, elevation = .42, homeElevation = .42, currentItemId = null;
   const pointers = new Map();
   let pinchDistance = 0;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   cleanups.push(() => {
-    disposed = true; request++; cancelAnimationFrame(frame);
+    disposed = true; request++; cancelAnimationFrame(frame); stopView();
     for (const object of allocated) disposeModel(object);
     allocated.clear(); templates.clear(); pointers.clear();
   });
@@ -116,9 +116,13 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     camera.lookAt(0, targetHeight, 0);
     renderer.render(scene, camera);
   }
+  function stopView() {
+    cancelAnimationFrame(viewFrame); viewFrame = 0;
+    viewTarget = null;
+  }
   function settle(draw = true) {
     cancelAnimationFrame(frame); frame = 0;
-    viewTarget = null;
+    stopView();
     for (const layer of layers) {
       layer.position.copy(layer.userData.restPosition);
       layer.scale.copy(layer.userData.restScale);
@@ -312,7 +316,7 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
   }
   function moveView(next, duration = 280) {
     const target = { rotation: turntable.rotation.y, distance, elevation, ...viewTarget, ...next };
-    settle();
+    stopView();
     const from = { rotation: turntable.rotation.y, distance, elevation };
     const apply = progress => {
       const eased = 1 - (1 - progress) ** 3;
@@ -328,10 +332,11 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
       if (disposed || failed) return;
       const progress = clamp((now - start) / duration, 0, 1);
       apply(progress);
-      if (progress < 1) frame = requestAnimationFrame(tick);
-      else { frame = 0; viewTarget = null; }
+      if (progress < 1) viewFrame = requestAnimationFrame(tick);
+      else { viewFrame = 0; viewTarget = null; }
     }
-    frame = requestAnimationFrame(tick);
+    // Camera easing and ingredient assembly have independent lifetimes.
+    viewFrame = requestAnimationFrame(tick);
   }
   function rotate(delta) { moveView({ rotation: (viewTarget?.rotation ?? turntable.rotation.y) + (Number(delta) || 0) }); }
   function zoom(delta) { moveView({ distance: clamp((viewTarget?.distance ?? distance) - (Number(delta) || 0), homeDistance * .55, homeDistance * 1.8) }); }
@@ -346,7 +351,7 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     render();
   }
   function pointerDown(event) {
-    settle(); canvas.setPointerCapture(event.pointerId);
+    stopView(); canvas.setPointerCapture(event.pointerId);
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     canvas.style.cursor = "grabbing";
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchDistance = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); }
@@ -367,7 +372,7 @@ async function createTexturedScene(container, { item, options = {}, reducedMotio
     if (actions[event.key]) { event.preventDefault(); actions[event.key](); }
   }
   function wheel(event) { event.preventDefault(); zoom(-event.deltaY * .004); }
-  function contextLost(event) { event.preventDefault(); failed = true; request++; cancelAnimationFrame(frame); canvas.style.visibility = "hidden"; canvas.tabIndex = -1; container.setAttribute("aria-busy", "false"); onState({ ready: false, loading: false }); onFallback(); }
+  function contextLost(event) { event.preventDefault(); failed = true; request++; cancelAnimationFrame(frame); stopView(); canvas.style.visibility = "hidden"; canvas.tabIndex = -1; container.setAttribute("aria-busy", "false"); onState({ ready: false, loading: false }); onFallback(); }
   function motionChanged(event) { reduce = event.matches; if (reduce) settle(); }
   const events = [["pointerdown", pointerDown], ["pointermove", pointerMove], ["pointerup", pointerUp], ["pointercancel", pointerUp], ["lostpointercapture", pointerUp], ["keydown", keyboard], ["webglcontextlost", contextLost]];
   for (const [name, handler] of events) canvas.addEventListener(name, handler);

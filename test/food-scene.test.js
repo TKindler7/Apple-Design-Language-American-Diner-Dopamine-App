@@ -9,17 +9,21 @@ import { loadFoodLibrary } from "../scripts/model-library.js";
 // Exercise the real scene lifecycle and Three.js transforms without a GPU.
 // Only rendering, model downloads, DOM sizing, and the animation clock are stubbed.
 test("the first ingredient entrance survives control-layout resize and slow first rendering", async () => {
-  let now = 0, nextFrame = 0, resize, renderedScene, readyPose;
+  let now = 0, nextFrame = 0, resize, renderedScene, renderedCamera, readyPose, slowRender = true;
   let height = 400;
   const frames = new Map();
   const media = { matches: false, addEventListener() {}, removeEventListener() {} };
-  const canvas = { style: {}, setAttribute() {}, addEventListener() {}, removeEventListener() {}, remove() {} };
+  const handlers = new Map();
+  const canvas = { style: {}, setAttribute() {}, setPointerCapture() {},
+    addEventListener(name, callback) { handlers.set(name, callback); },
+    removeEventListener(name) { handlers.delete(name); }, remove() {} };
+  const dispatch = (type, values = {}) => handlers.get(type)({ preventDefault() {}, ...values });
   const container = { dataset: {}, append() {}, setAttribute() {}, getBoundingClientRect: () => ({ width: 500, height }) };
   const renderBoundary = {
     WebGLRenderer: class {
       constructor() { this.domElement = canvas; this.shadowMap = {}; this.capabilities = { getMaxAnisotropy: () => 1 }; }
       setPixelRatio() {} setSize() {} dispose() {} forceContextLoss() {}
-      render(scene) { renderedScene = scene; now += 1400; }
+      render(scene, camera) { renderedScene = scene; renderedCamera = camera; if (slowRender) now += 1400; }
     },
     PMREMGenerator: class { fromScene() { return { texture: new THREE.Texture(), dispose() {} }; } dispose() {} },
     GLTFLoader: class { async loadAsync() { return { scene: new THREE.Mesh(new THREE.BoxGeometry(1, .2, 1), new THREE.MeshStandardMaterial()) }; } },
@@ -45,7 +49,7 @@ test("the first ingredient entrance survives control-layout resize and slow firs
     if (context.parentURL?.endsWith("/food-scene.js") && source[specifier]) return { url: `data:text/javascript,${encodeURIComponent(source[specifier])}`, shortCircuit: true };
     return next(specifier, context);
   } });
-  const tick = time => { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); };
+  const tick = time => { now = time; const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); };
   const layers = () => renderedScene.children.find(node => node.isGroup).children;
   let scene;
   try {
@@ -53,6 +57,7 @@ test("the first ingredient entrance survives control-layout resize and slow firs
       if (state.ready) readyPose = layers().map(layer => layer.position.y - layer.userData.restPosition.y);
     }, onFallback: error => { throw error; } });
     assert.ok(scene);
+    slowRender = false;
     assert.ok(readyPose.every(y => y >= .64), "arrival pose must be rendered before ready handoff");
     assert.equal(layers().filter(layer => layer.visible).length, 1, "only the first ingredient starts visible");
     const initial = layers().map(layer => layer.position.clone());
@@ -75,12 +80,47 @@ test("the first ingredient entrance survives control-layout resize and slow firs
     tick(10000 + layers().length * 460);
     assert.equal(frames.size, 0);
     assert.ok(layers().every(layer => layer.position.distanceTo(layer.userData.restPosition) < 1e-9));
-    scene.assemble();
-    assert.equal(frames.size, 1);
-    scene.rotate(.2);
-    assert.ok(layers().every(layer => layer.visible), "view controls reveal the finished dish when interrupting assembly");
-    assert.ok(layers().every(layer => layer.position.distanceTo(layer.userData.restPosition) < 1e-9));
-    scene.assemble();
+    const turntable = () => renderedScene.children.find(node => node.isGroup);
+    const controls = [
+      ["rotate", () => scene.rotate(.3)],
+      ["zoom", () => scene.zoom(.4)],
+      ["reset", () => scene.reset()],
+      ["keyboard", () => dispatch("keydown", { key: "ArrowLeft" })],
+      ["wheel", () => dispatch("wheel", { deltaY: -80 })],
+      ["drag", () => {
+        dispatch("pointerdown", { pointerId: 1, clientX: 100, clientY: 100 });
+        dispatch("pointermove", { pointerId: 1, clientX: 150, clientY: 110 });
+        dispatch("pointerup", { pointerId: 1 });
+      }],
+      ["pinch", () => {
+        dispatch("pointerdown", { pointerId: 1, clientX: 100, clientY: 100 });
+        dispatch("pointerdown", { pointerId: 2, clientX: 150, clientY: 100 });
+        dispatch("pointermove", { pointerId: 2, clientX: 180, clientY: 100 });
+        dispatch("pointerup", { pointerId: 1 }); dispatch("pointerup", { pointerId: 2 });
+      }],
+    ];
+    for (const [index, [name, control]] of controls.entries()) {
+      const start = 20000 + index * 10000;
+      scene.assemble(); tick(start); tick(start + 100);
+      const before = layers().map(layer => ({ position: layer.position.clone(), visible: layer.visible }));
+      const rotation = turntable().rotation.y, cameraPosition = renderedCamera.position.clone();
+      control();
+      assert.ok(layers().every((layer, i) => layer.position.equals(before[i].position) && layer.visible === before[i].visible), `${name} must preserve the current assembly pose`);
+      tick(start + 200);
+      assert.ok(turntable().rotation.y !== rotation || !renderedCamera.position.equals(cameraPosition), `${name} must actually move the view during assembly`);
+      assert.ok(layers()[0].position.y < before[0].position.y, `${name} must let the falling ingredient continue`);
+      assert.ok(layers().slice(1).every(layer => !layer.visible), `${name} must not expose future ingredients`);
+      tick(start + 460);
+      assert.equal(layers()[1].visible, true, `${name} must preserve the next arrival time`);
+      tick(start + layers().length * 460);
+      assert.equal(frames.size, 0);
+      assert.ok(layers().every(layer => layer.visible && layer.position.distanceTo(layer.userData.restPosition) < 1e-9));
+    }
+    scene.assemble(); scene.rotate(.3);
+    assert.equal(frames.size, 2, "assembly and camera each keep their own scheduled frame");
+    dispatch("pointerdown", { pointerId: 1, clientX: 100, clientY: 100 });
+    assert.equal(frames.size, 1, "drag interrupts camera easing only");
+    scene.zoom(.2);
     scene.dispose(); scene = null;
     assert.equal(frames.size, 0, "closing must cancel the remaining entrance");
 

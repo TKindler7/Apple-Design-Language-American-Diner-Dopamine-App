@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-30 — Move the view during assembly
+
+- Separated camera easing from ingredient assembly so dragging, pinching, wheel zoom, keyboard controls, and reset no longer finish the food animation early.
+- Direct gestures cancel only pending camera easing; ingredient timing, visibility, and landing bounces continue. Closing, model replacement, reduced motion, and context loss still clean up both animation loops.
+- Extended scene lifecycle coverage to exercise each camera control during a partial assembly, verify continued ingredient motion and timed arrival, and confirm both loops stop on disposal.
+
 ## 2026-10-29 — Sequential assembly and 3D-first opening
 
 - Ingredients now appear one at a time, accelerate down, and make a small upward rebound before the next ingredient starts. Each drop and landing takes 460 ms; customization changes retain quicker settling.
